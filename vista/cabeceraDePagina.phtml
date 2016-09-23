@@ -1,0 +1,87 @@
+<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h4 class="navbar-brand">Laboratorion de Geotecnia</h4>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+            <?php if(!isset($_SESSION["idUser"])){?>
+                <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicio">Inicio</a></li>
+                <li><a href="<?php echo Conexion::ruta(); ?>?accion=acercaDeGeotecnia">Acerca de Geotecnia</a></li>
+            <?php }else{?>
+                <?php if($_SESSION["idRol"] == 2){?>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioDirector">Inicio</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoDirector">Proyecto</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowDirector">Workflow</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=imprimirReporte">Imprimir Reporte</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=solicitudPendiente">Solicitud Pendiente</a></li>
+                <?php }?>
+                <?php if($_SESSION["idRol"] == 3){?>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioContador">Inicio</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoContador">Proyecto</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowContador">Workflow</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Solisitud <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=nuevaSolicitud">Nueva solicitud</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=listaSolicitud">Lista de solisitudes</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Registro <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=resgistroLaboratirio">Registro de cliente (ensayo de laboratorio)</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroGeotecnico">Registro de cliente (estudio geotecnico)</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroPago">Registro de pago de proyecto</a></li>
+                        </ul>
+                    </li>
+                <?php }?>
+                <?php if($_SESSION["idRol"] == 4){?>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioIngeniero">Inicio</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoIngeniero">Proyecto</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowIngeniero">Workflow</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=informeIngeniero">Informe Final</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Ensayo Laboratorio <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroEnsayo">Registro de ensayo para un proyecto</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroMuestra">Rgistro de muestra para un proyecto</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=detalleEnsayo">Detalle de un ensayo de un proyecto</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroResultadoEL">Rgistro de resultados (ensayo de laboratorio)</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Estudio Geotecnico<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=crearAlcanceProyecto">Crear alcance para un proyecto</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=alcanceProyecto">Ver alcance para un proyecto</a></li>
+                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroResultadoTP">Rgistro de resultados (trabajo de campo)</a></li>
+                        </ul>
+                    </li>
+                <?php }?>
+                <?php if($_SESSION["idRol"] == 5){?>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioAuxiliar">Inicio</a></li>
+                <?php }?>
+                <?php if($_SESSION["idRol"] == 6){?>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioTecnico">Inicio</a></li>
+                <?php }?>
+                <li><a href="<?php echo Conexion::ruta(); ?>?accion=terminarSesion">Terminar Sesión</a></li>
+            <?php }?>
+            </ul>
+        </div>
+    </div>
+</header>

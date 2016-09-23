@@ -1,0 +1,30 @@
+<?php
+if(!isset($_SESSION["idUser"]))
+{
+    header("Location: ".Conexion::ruta()."?accion=inicio");
+}
+?>
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <?php include_once("componentesHead.phtml");?>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <?php include_once ("cabeceraDePagina.phtml");?>
+        <section class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <?php include_once ("calendario.phtml");?>
+                </div>
+                <div class="center gap">
+                    <div class="col-md-4">
+                        <h2>Ultimos 10</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <?php include_once ("pieDePagina.phtml");?>
+        <?php include_once ("scripts.phtml");?>
+    </body>
+</html>

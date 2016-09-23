@@ -1,0 +1,41 @@
+<h2>Iniciar Sesion</h2>
+                    
+<div id="admin_wrapper">
+    <?php
+    if (isset($_GET["m"]))
+    {
+        switch ($_GET["m"])
+        {
+            case '1':
+                ?>
+                <div class="error"><h4>Campos vacíos, no son validos.<h4></div>
+                <?php
+                break;
+            case '2':
+                ?>
+                <div class="error"><h4>Los datos ingresados no son correctos<h4></div>
+                <?php
+                break;
+            case '3':
+                ?>
+                <div class="correcto"><h4>Ha cerrado su sesión correctamente.</h4></div>
+                <?php
+                break;
+        }
+    }
+    ?>
+    <form action="" method="post" name="form">
+        <div class="form-group">
+            <label>E-mail:</label>
+            <input type = "email" class = "form-control" name = "email" placeholder="Correo electronico"/>
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type = "password" class="form-control" name = "passwd" placeholder="Contraseña"/>
+        </div>
+        <p>
+            <input type="hidden" name="grabar" value="si" />
+            <input type="button" value="Ingresar"  class="btn btn-default" onclick="document.form.submit();"/>
+        </p>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+<?php
+require_once ("modulo/calendario/modelo/calendarioModelo.php");
+
+$calendario = new Calendario();
+$contador = 0;
+$arregloFecha = $calendario->getFecha();
+?>
+<script>
+
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: '<?php echo date('Y-m-d'); ?>',
+            editable: false,
+            events: [
+                {
+                    title: 'Long Event',
+                    url: '#=<?php echo "3"; ?>&t=<?php echo "1"; ?>',
+                    start: '2014-06-07',
+                    end: '2014-06-10'
+                },
+                <?php
+                //$contador = 0;
+                while ($contador <= sizeof($arregloFecha) - 1) {
+                ?>
+                {
+                    title: 'Proyecto: <?php echo $arregloFecha[$contador + 2]; ?> - <?php echo $arregloFecha[$contador + 3]; ?>',
+                    url: '#=<?php echo $arregloFecha[$contador + 4]; ?>&t=1',
+                    start: '<?php echo $arregloFecha[$contador]; ?>',
+                    end: '<?php echo $arregloFecha[$contador + 1]; ?>'
+                },
+                <?php
+                $contador = $contador + 5;
+                }
+                ?>
+                {
+                    title: 'Click for Google',
+                    url: 'http://google.com/',
+                    start: '2014-06-28'
+                }
+            ]
+        });
+    });
+</script>
