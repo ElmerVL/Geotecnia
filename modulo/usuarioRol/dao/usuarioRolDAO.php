@@ -1,21 +1,30 @@
 <?php
+
+/**
+ * Class UsuarioRolDAO
+ */
 class UsuarioRolDAO extends Conexion
 {
-    public function getIdRolDAO($idUsuario)
+
+    /**
+     * Esto sirve para obtener el codigo del rol a partir de la tabla usuario_rol
+     *
+     * @param UsuarioRolModelo $usuarioRol
+     * @return mixed $codRol
+     */
+    public function getCodRolDAO(UsuarioRolModelo $usuarioRol)
     {
-        $valor = array();
+        $codRol = array();
+        $idUsuario = $usuarioRol->getUsuarioIdUsuario();
         parent::conectar();
-        $sql = sprintf
-        (
-            "SELECT rol_codrol FROM user_rol WHERE usuario_idusuario = %s",
-            parent::comillas_inteligentes($idUsuario)
-        );
+        $sql = <<<SQL
+SELECT rol_codrol FROM user_rol 
+WHERE usuario_idusuario = '$idUsuario'
+SQL;
         $resultado = pg_query($sql);
-        while ($fila = pg_fetch_assoc($resultado))
-        {
-            $valor[] = $fila;
+        while ($fila = pg_fetch_assoc($resultado)) {
+            $codRol[] = $fila;
         }
-        return $valor[0]["rol_codrol"];
+        return $codRol[0]['rol_codrol'];
     }
 }
-?>

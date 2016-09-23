@@ -1,37 +1,55 @@
 <?php
+
+/**
+ * Class UsuarioDAO
+ */
 class UsuarioDAO extends Conexion
 {
-    public function iniciarSesionUsuarioDAO(UsuarioModelo $usuario)
+    /**
+     * Esto sirve para verificar la existencia del usuario en la tabla usuario
+     *
+     * @param UsuarioModelo $usuario
+     * @return int
+     */
+    public function verificarExistenciaUsuarioDAO(UsuarioModelo $usuario)
     {
+        $login = $usuario->getLogin();
+        $password = $usuario->getPassword();
+        $estado =  $usuario->getEstado();
         parent::conectar();
-        $sql = sprintf
-        (
-            "SELECT * FROM usuario WHERE login = %s AND passwd = %s AND habilitada = %s",
-            parent::comillas_inteligentes($usuario->getLogin()),
-            parent::comillas_inteligentes($usuario->getPassword()),
-            parent::comillas_inteligentes($usuario->getEstado())
-        );
+        $sql = <<<SQL
+SELECT * FROM usuario 
+WHERE login = '$login' 
+AND passwd = '$password' 
+AND habilitada = '$estado'
+SQL;
         $resultado = pg_query($sql);
         return pg_num_rows($resultado);
     }
 
-    public function getIdUsuarioDAO($email, $password, $estado)
+    /**
+     * Esto sirve para obtener el id del usuario a partir de la tabla usuario
+     *
+     * @param UsuarioModelo $usuario
+     * @return mixed idUsuario
+     */
+    public function getIdUsuarioDAO(UsuarioModelo $usuario)
     {
-        $valor = array();
+        $idUsuario = array();
+        $login = $usuario->getLogin();
+        $password = $usuario->getPassword();
+        $estado =  $usuario->getEstado();
         parent::conectar();
-        $sql = sprintf
-        (
-            "SELECT idusuario FROM usuario WHERE login = %s AND passwd = %s AND habilitada = %s",
-            parent::comillas_inteligentes($email),
-            parent::comillas_inteligentes($password),
-            parent::comillas_inteligentes($estado)
-        );
+        $sql = <<<SQL
+SELECT idusuario FROM usuario 
+WHERE login = '$login' 
+AND passwd = '$password' 
+AND habilitada = '$estado'
+SQL;
         $resultado = pg_query($sql);
-        while ($fila = pg_fetch_assoc($resultado))
-        {
-            $valor[] = $fila;
+        while ($fila = pg_fetch_assoc($resultado)) {
+            $idUsuario[] = $fila;
         }
-        return $valor[0]["idusuario"];
+        return $idUsuario[0]['idusuario'];
     }
 }
-?>

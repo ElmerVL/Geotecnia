@@ -1,3 +1,3 @@
 <?php
-require_once ("vista/inicioContador.phtml");
+require_once ('vista/inicioContador.phtml');
 ?>

@@ -1,3 +1,3 @@
 <?php
-require_once ("vista/workflow.phtml");
+require_once ('vista/workflow.phtml');
 ?>

@@ -1,15 +1,64 @@
 <?php
-require_once ("modulo/usuarioRol/dao/usuarioRolDAO.php");
-class UsuarioRol extends UsuarioRolDAO
-{
-    public function __construct()
-    {
 
+/**
+ * Class UsuarioRolModelo
+ */
+class UsuarioRolModelo
+{
+    /**@var  codUsuarioRol */
+    private $codUsuarioRol;
+
+    /**@var rolCodRol */
+    private $rolCodRol;
+
+    /**@var usuarioIdUsuario */
+    private $usuarioIdUsuario;
+    
+    /**
+     * @return codUsuarioRol
+     */
+    public function getCodUsuarioRol()
+    {
+        return $this->codUsuarioRol;
     }
 
-    public function getIdRol($idUsuario)
+    /**
+     * @param codUsuarioRol $codUsuarioRol
+     */
+    public function setCodUsuarioRol($codUsuarioRol)
     {
-        return parent::getIdRolDAO($idUsuario);
+        $this->codUsuarioRol = $codUsuarioRol;
+    }
+
+    /**
+     * @return rolCodRol
+     */
+    public function getRolCodRol()
+    {
+        return $this->rolCodRol;
+    }
+
+    /**
+     * @param rolCodRol $rolCodRol
+     */
+    public function setRolCodRol($rolCodRol)
+    {
+        $this->rolCodRol = $rolCodRol;
+    }
+
+    /**
+     * @return usuarioIdUsuario
+     */
+    public function getUsuarioIdUsuario()
+    {
+        return $this->usuarioIdUsuario;
+    }
+
+    /**
+     * @param usuarioIdUsuario $usuarioIdUsuario
+     */
+    public function setUsuarioIdUsuario($usuarioIdUsuario)
+    {
+        $this->usuarioIdUsuario = $usuarioIdUsuario;
     }
 }
-?>

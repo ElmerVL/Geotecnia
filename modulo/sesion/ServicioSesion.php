@@ -1,36 +1,34 @@
 <?php
-require_once ("modulo/usuario/modelo/usuarioModelo.php");
-require_once ("modulo/usuario/dao/usuarioDAO.php");
-require_once ("modulo/rol/modelo/rolModelo.php");
-require_once ("modulo/usuarioRol/modelo/usuarioRolModelo.php");
-require_once ("modulo/sesion/ServicioSesion.php");
+require_once ('modulo/usuario/modelo/UsuarioModelo.php');
+require_once ('modulo/rol/modelo/RolModelo.php');
+require_once ('modulo/usuarioRol/modelo/UsuarioRolModelo.php');
 
 /**
  * Este servicio se encarga de iniciar sesion
  */
 class ServicioSesion
 {
-    /** @var UsuarioDAO */
-    private $usuarioDao;
+    /** @var usuarioDAO */
+    private $usuarioDAO;
 
-    /** @var UsuarioRol */
-    private $usuarioRol;
+    /** @var usuarioRolDAO */
+    private $usuarioRolDAO;
 
-    /** @var Rol */
-    private $rol;
+    /** @var rolDAO */
+    private $rolDAO;
 
     /**
      * Constructor de la sesion.
      *
      * @param UsuarioDAO $usuario
-     * @param UsuarioRol $usuarioRol
-     * @param Rol $rol
+     * @param UsuarioRolDAO $usuarioRol
+     * @param RolDAO $rol
      */
-    public function __construct(UsuarioDAO $usuario, UsuarioRol $usuarioRol, Rol $rol)
+    public function __construct(UsuarioDAO $usuario, UsuarioRolDAO $usuarioRol, RolDAO $rol)
     {
-        $this->usuarioDao = $usuario;
-        $this->usuarioRol = $usuarioRol;
-        $this->rol = $rol;
+        $this->usuarioDAO = $usuario;
+        $this->usuarioRolDAO = $usuarioRol;
+        $this->rolDAO = $rol;
     }
 
     /**
@@ -39,23 +37,36 @@ class ServicioSesion
      * @param string $login
      * @param string $password
      */
-    public function iniciar($login, $password){
+    public function iniciar($login, $password)
+    {
         $usuario = new UsuarioModelo();
         $usuario->setLogin($login);
         $usuario->setPassword($password);
         $usuario->setEstado(true);
 
-        if ($this->usuarioDao->iniciarSesionUsuarioDAO($usuario) == 1)
-        {
-            $idUsuario = $this->usuarioDao->getIdUsuarioDAO($_POST["email"], $_POST["passwd"], true);
-            $idRol = $this->usuarioRol->getIdRol($this->usuarioDao->getIdUsuarioDAO($_POST["email"], $_POST["passwd"], true));
-            $_SESSION["idUser"] = $idUsuario;
-            $_SESSION["idRol"] = $idRol;
-            header("Location: ".Conexion::ruta()."?accion=inicio".$this->rol->getTipoRol($idRol));exit;
+        if ($this->usuarioDAO->verificarExistenciaUsuarioDAO($usuario) == 1) {
+            $this->crearSesion($usuario);
+        } else {
+            header('Location: '.Conexion::ruta().'?accion=inicio&m=2');exit;
         }
-        else
-        {
-            header("Location: ".Conexion::ruta()."?accion=inicio&m=2");exit;
-        }
+    }
+
+    /**
+     * Esto sirve para crear la sesion con el uso del id del usuario y el codigo del rol
+     *
+     * @param UsuarioModelo $usuario
+     */
+    public function crearSesion(UsuarioModelo $usuario)
+    {
+        $idUsuario = $this->usuarioDAO->getIdUsuarioDAO($usuario);
+        $usuarioRol = new UsuarioRolModelo();
+        $usuarioRol->setUsuarioIdUsuario($idUsuario);
+        $codRol = $this->usuarioRolDAO->getCodRolDAO($usuarioRol);
+        $rol = new RolModelo();
+        $rol->setCodRol($codRol);
+        session_start();
+        $_SESSION['idUsuario'] = $idUsuario;
+        $_SESSION['codRol'] = $codRol;
+        header('Location: '.Conexion::ruta().'?accion=inicio'.$this->rolDAO->getTipoRolDAO($rol));exit;
     }
 }

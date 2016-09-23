@@ -1,12 +1,20 @@
 <?php
+
+/**
+ * Class UsuarioModelo
+ */
 class UsuarioModelo
 {
+    /** @var idUsuario */
     private $idUsuario;
-
+    
+    /** @var login */
     private $login;
-
+    
+    /** @var password */
     private $password;
-
+    
+    /** @var estado */
     private $estado;
 
     /**

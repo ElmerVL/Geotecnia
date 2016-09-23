@@ -1,21 +1,21 @@
 <?php
-if(!isset($_SESSION["idUser"]))
+if(!isset($_SESSION['idUsuario']))
 {
-    header("Location: ".Conexion::ruta()."?accion=inicio");
+    header('Location: '.Conexion::ruta().'?accion=inicio');
 }
 ?>
 <!DOCTYPE HTML>
 <html lang="es">
     <head>
-        <?php include_once("componentesHead.phtml");?>
+        <?php include_once('componentesHead.phtml');?>
     </head>
     <body>
         <div id="fb-root"></div>
-        <?php include_once ("cabeceraDePagina.phtml");?>
+        <?php include_once ('cabeceraDePagina.phtml');?>
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
-                    espacion 1
+                    <?php require_once ('calendario.phtml');?>
                 </div>
                 <div class="center gap">
                     <div class="col-md-4">
@@ -24,7 +24,7 @@ if(!isset($_SESSION["idUser"]))
                 </div>
             </div>
         </section>
-        <?php include_once ("pieDePagina.phtml");?>
-        <?php include_once ("scripts.phtml");?>
+        <?php include_once ('pieDePagina.phtml');?>
+        <?php include_once ('scripts.phtml');?>
     </body>
 </html>

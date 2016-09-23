@@ -1,21 +1,29 @@
 <?php
+
+/**
+ * Class RolDAO
+ */
 class RolDAO extends Conexion
 {
-    public function getTipoRolDAO($idRol)
+    /**
+     * Esto sirve para obtener el tipo de rol a partir de la tabla rol
+     * 
+     * @param RolModelo $codRol
+     * @return mixed tipoRol
+     */
+    public function getTipoRolDAO(RolModelo $rol)
     {
-        $valor = array();
+        $tipoRol = array();
+        $codRol = $rol->getCodRol();
         parent::conectar();
-        $sql = sprintf
-        (
-            "SELECT tiporol FROM rol WHERE codrol = %s",
-            parent::comillas_inteligentes($idRol)
-        );
+        $sql = <<<SQL
+SELECT tiporol FROM rol 
+WHERE codrol = '$codRol'
+SQL;
         $resultado = pg_query($sql);
-        while ($fila = pg_fetch_assoc($resultado))
-        {
-            $valor[] = $fila;
+        while ($fila = pg_fetch_assoc($resultado)) {
+            $tipoRol[] = $fila;
         }
-        return $valor[0]["tiporol"];
+        return $tipoRol[0]['tiporol'];
     }
 }
-?>

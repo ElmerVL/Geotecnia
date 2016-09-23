@@ -1,15 +1,45 @@
 <?php
-require_once ("modulo/rol/dao/rolDAO.php");
-class Rol extends RolDAO
-{
-    public function __construct()
-    {
 
+/**
+ * Class Rol
+ */
+class RolModelo
+{
+    /**@var codRol */
+    private $codRol;
+
+    /**@var tipoRol */
+    private $tipoRol;
+
+    /**
+     * @return tipoRol
+     */
+    public function getTipoRol()
+    {
+        return $this->tipoRol;
     }
 
-    public function getTipoRol($idRol)
+    /**
+     * @param string $tipoRol
+     */
+    public function setTipoRol($tipoRol)
     {
-        return parent::getTipoRolDAO($idRol);
+        $this->tipoRol = $tipoRol;
+    }
+
+    /**
+     * @return codRol
+     */
+    public function getCodRol()
+    {
+        return $this->codRol;
+    }
+
+    /**
+     * @param int $codRol
+     */
+    public function setCodRol($codRol)
+    {
+        $this->codRol = $codRol;
     }
 }
-?>

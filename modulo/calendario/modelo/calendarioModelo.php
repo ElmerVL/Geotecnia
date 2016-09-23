@@ -1,15 +1,28 @@
 <?php
-require_once ("modulo/calendario/dao/calendarioDAO.php");
-class Calendario extends CalendarioDAO
+
+class CalendarioModelo
 {
-    public function __construct()
-    {
+    /**@var idCalendario */
+    private $idCalendario;
 
-    }
+    /**@var fechaFin */
+    private $fechaFin;
 
-    public function getFecha()
-    {
-        return parent::getFechaDAO();
-    }
+    /** @var  fechaInicio */
+    private $fechaInicio;
+
+    /**@var solicitudDirectorIdDirector */
+    private $solicitudDirectorIdDirector;
+
+    /**@var solicitudDirectorUsuarioIdUsuario */
+    private $solicitudDirectorUsuarioIdUsuario;
+
+    /**@var solicitudIdSolicitud */
+    private $solicitudIdSolicitud;
+
+    /**@var solicitudIngenieroIdIngeniero */
+    private $solicitudIngenieroIdIngeniero;
+
+    /**@var solicitudIngenieroUsuarioIdUsuario */
+    private $solicitudIngenieroUsuarioIdUsuario;
 }
-?>

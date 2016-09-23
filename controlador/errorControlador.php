@@ -1,3 +1,3 @@
 <?php
-require_once ("vista/error.phtml");
+require_once ('vista/error.phtml');
 ?>

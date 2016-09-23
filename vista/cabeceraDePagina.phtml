@@ -11,18 +11,18 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-            <?php if(!isset($_SESSION["idUser"])){?>
+            <?php if (!isset($_SESSION['idUsuario'])) {?>
                 <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicio">Inicio</a></li>
                 <li><a href="<?php echo Conexion::ruta(); ?>?accion=acercaDeGeotecnia">Acerca de Geotecnia</a></li>
-            <?php }else{?>
-                <?php if($_SESSION["idRol"] == 2){?>
+            <?php } else {?>
+                <?php if ($_SESSION['codRol'] == 2) {?>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioDirector">Inicio</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoDirector">Proyecto</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowDirector">Workflow</a></li>
+                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflow" data-toggle="modal" data-target="#.bs-example-modal-lg">Workflow</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=imprimirReporte">Imprimir Reporte</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=solicitudPendiente">Solicitud Pendiente</a></li>
                 <?php }?>
-                <?php if($_SESSION["idRol"] == 3){?>
+                <?php if ($_SESSION['codRol'] == 3) {?>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioContador">Inicio</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoContador">Proyecto</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowContador">Workflow</a></li>
@@ -46,7 +46,7 @@
                         </ul>
                     </li>
                 <?php }?>
-                <?php if($_SESSION["idRol"] == 4){?>
+                <?php if ($_SESSION['codRol'] == 4) {?>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioIngeniero">Inicio</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoIngeniero">Proyecto</a></li>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowIngeniero">Workflow</a></li>
@@ -73,10 +73,10 @@
                         </ul>
                     </li>
                 <?php }?>
-                <?php if($_SESSION["idRol"] == 5){?>
+                <?php if ($_SESSION['codRol'] == 5) {?>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioAuxiliar">Inicio</a></li>
                 <?php }?>
-                <?php if($_SESSION["idRol"] == 6){?>
+                <?php if ($_SESSION['codRol'] == 6) {?>
                     <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioTecnico">Inicio</a></li>
                 <?php }?>
                 <li><a href="<?php echo Conexion::ruta(); ?>?accion=terminarSesion">Terminar Sesión</a></li>
