@@ -76,7 +76,7 @@ class UsuarioModelo
     /**
      * @return boolean
      */
-    public function isEstado()
+    public function getEstado()
     {
         return $this->estado;
     }
