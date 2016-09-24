@@ -5,17 +5,23 @@
  */
 class UsuarioRolModelo
 {
-    /**@var  codUsuarioRol */
+    /**
+     * @var int $codUsuarioRol
+     */
     private $codUsuarioRol;
 
-    /**@var rolCodRol */
+    /**
+     * @var int $rolCodRol
+     */
     private $rolCodRol;
 
-    /**@var usuarioIdUsuario */
-    private $usuarioIdUsuario;
-    
     /**
-     * @return codUsuarioRol
+     * @var int $usuarioIdUsuario
+     */
+    private $usuarioIdUsuario;
+
+    /**
+     * @return int
      */
     public function getCodUsuarioRol()
     {
@@ -23,7 +29,7 @@ class UsuarioRolModelo
     }
 
     /**
-     * @param codUsuarioRol $codUsuarioRol
+     * @param int $codUsuarioRol
      */
     public function setCodUsuarioRol($codUsuarioRol)
     {
@@ -31,7 +37,7 @@ class UsuarioRolModelo
     }
 
     /**
-     * @return rolCodRol
+     * @return int
      */
     public function getRolCodRol()
     {
@@ -39,7 +45,7 @@ class UsuarioRolModelo
     }
 
     /**
-     * @param rolCodRol $rolCodRol
+     * @param int $rolCodRol
      */
     public function setRolCodRol($rolCodRol)
     {
@@ -47,7 +53,7 @@ class UsuarioRolModelo
     }
 
     /**
-     * @return usuarioIdUsuario
+     * @return int
      */
     public function getUsuarioIdUsuario()
     {
@@ -55,7 +61,7 @@ class UsuarioRolModelo
     }
 
     /**
-     * @param usuarioIdUsuario $usuarioIdUsuario
+     * @param int $usuarioIdUsuario
      */
     public function setUsuarioIdUsuario($usuarioIdUsuario)
     {

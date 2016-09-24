@@ -5,30 +5,14 @@
  */
 class RolModelo
 {
-    /**@var codRol */
+    /**@var int $codRol */
     private $codRol;
 
-    /**@var tipoRol */
+    /**@var string $tipoRol */
     private $tipoRol;
 
     /**
-     * @return tipoRol
-     */
-    public function getTipoRol()
-    {
-        return $this->tipoRol;
-    }
-
-    /**
-     * @param string $tipoRol
-     */
-    public function setTipoRol($tipoRol)
-    {
-        $this->tipoRol = $tipoRol;
-    }
-
-    /**
-     * @return codRol
+     * @return int
      */
     public function getCodRol()
     {
@@ -41,5 +25,21 @@ class RolModelo
     public function setCodRol($codRol)
     {
         $this->codRol = $codRol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTipoRol()
+    {
+        return $this->tipoRol;
+    }
+
+    /**
+     * @param string $tipoRol
+     */
+    public function setTipoRol($tipoRol)
+    {
+        $this->tipoRol = $tipoRol;
     }
 }

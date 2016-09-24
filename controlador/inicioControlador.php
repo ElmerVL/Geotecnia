@@ -18,4 +18,3 @@ if(isset($_POST['grabar']) and $_POST['grabar'] == 'si'){
     exit;
 }
 require_once ('vista/inicio.phtml');
-?>

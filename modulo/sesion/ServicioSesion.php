@@ -1,10 +1,11 @@
 <?php
+
 require_once ('modulo/usuario/modelo/UsuarioModelo.php');
 require_once ('modulo/rol/modelo/RolModelo.php');
 require_once ('modulo/usuarioRol/modelo/UsuarioRolModelo.php');
 
 /**
- * Este servicio se encarga de iniciar sesion
+ * Este servicio se encarga de iniciar sesión
  */
 class ServicioSesion
 {
@@ -32,7 +33,7 @@ class ServicioSesion
     }
 
     /**
-     * Esto sirve para iniciar sesion
+     * Función para iniciar sesion
      *
      * @param string $login
      * @param string $password
@@ -52,21 +53,27 @@ class ServicioSesion
     }
 
     /**
-     * Esto sirve para crear la sesion con el uso del id del usuario y el codigo del rol
+     * Crear la sesión usando el id del usuario y el codigo del rol
      *
      * @param UsuarioModelo $usuario
      */
     public function crearSesion(UsuarioModelo $usuario)
     {
         $idUsuario = $this->usuarioDAO->getIdUsuarioDAO($usuario);
+
         $usuarioRol = new UsuarioRolModelo();
         $usuarioRol->setUsuarioIdUsuario($idUsuario);
+
         $codRol = $this->usuarioRolDAO->getCodRolDAO($usuarioRol);
+
         $rol = new RolModelo();
         $rol->setCodRol($codRol);
+
         session_start();
+
         $_SESSION['idUsuario'] = $idUsuario;
         $_SESSION['codRol'] = $codRol;
+
         header('Location: '.Conexion::ruta().'?accion=inicio'.$this->rolDAO->getTipoRolDAO($rol));exit;
     }
 }

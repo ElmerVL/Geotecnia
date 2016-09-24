@@ -5,52 +5,28 @@
  */
 class UsuarioModelo
 {
-    /** @var idUsuario */
+    /**
+     * @var int $idUsuario
+     */
     private $idUsuario;
-    
-    /** @var login */
+
+    /**
+     * @var string $login
+     */
     private $login;
-    
-    /** @var password */
+
+    /**
+     * @var string $password
+     */
     private $password;
-    
-    /** @var estado */
+
+    /**
+     * @var boolean $estado
+     */
     private $estado;
 
     /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    /**
-     * @param mixed $estado
-     */
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
-    }
-
-    /**
-     * @return mixed
+     * @return int
      */
     public function getIdUsuario()
     {
@@ -58,7 +34,7 @@ class UsuarioModelo
     }
 
     /**
-     * @param mixed $idUsuario
+     * @param int $idUsuario
      */
     public function setIdUsuario($idUsuario)
     {
@@ -66,7 +42,7 @@ class UsuarioModelo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getLogin()
     {
@@ -74,10 +50,42 @@ class UsuarioModelo
     }
 
     /**
-     * @param mixed $login
+     * @param string $login
      */
     public function setLogin($login)
     {
         $this->login = $login;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param boolean $estado
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
     }
 }
