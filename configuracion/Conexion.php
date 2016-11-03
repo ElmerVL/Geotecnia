@@ -27,21 +27,4 @@ class Conexion
     {
         return 'http://localhost/Geotecnia/';
     }
-
-    public function addComillasSimples($valor)
-    {
-        // Retirar las barras
-        if (get_magic_quotes_gpc()){
-                $valor = stripslashes($valor);
-        }
-        // Colocar comillas si no es entero
-        if (!is_numeric($valor)){
-                $valor = "'". pg_escape_string($valor) ."'";
-        }
-        //Colocar comillas si es entero (pgSQL)
-        if (is_numeric($valor)){
-            $valor = "'". pg_escape_string($valor) ."'";
-        }
-        return $valor;
-    }
 }

@@ -11,23 +11,23 @@ class RolDAO extends Conexion
      * @param RolModelo $rol
      * @return mixed tipoRol
      */
-    public function getTipoRolDAO(RolModelo $rol)
+    public function getDescripcionDAO(RolModelo $rol)
     {
-        $tipoRol = array();
-        $codRol = $rol->getCodRol();
+        $descripcion = array();
+        $idRol = $rol->getIdRol();
 
         parent::conectar();
 
         $sql = <<<SQL
-SELECT tiporol FROM rol 
-WHERE codrol = '$codRol'
+SELECT descripcion FROM rol 
+WHERE idrol = '$idRol'
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_assoc($resultado)) {
-            $tipoRol[] = $fila;
+        while ($fila = pg_fetch_object($resultado)) {
+            $descripcion[] = $fila->descripcion;
         }
 
-        return $tipoRol[0]['tiporol'];
+        return $descripcion[0];
     }
 }

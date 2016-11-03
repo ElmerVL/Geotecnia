@@ -1,0 +1,54 @@
+
+<div class="modal fade" id="ventanaSolicitudPendiente" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Solicitud</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Lista de solicitudes pendientes para su habilitacion:</h4>
+                <?php include_once('tablaSolicitudPendienteHabilitar.phtml'); ?>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ventanaSolicitud" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ver lista de solicitudes</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Lista de solicitudes:</h4>
+                <?php include_once('tablaSolicitud.phtml'); ?>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="nuevaSolicitud" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Registrar nueva solicitud</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Formulario para registrar una nueva solicitud:</h4>
+                <?php include_once('formularioNuevaSolicitud.phtml'); ?>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

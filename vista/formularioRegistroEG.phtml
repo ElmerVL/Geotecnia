@@ -1,0 +1,18 @@
+<div id="admin_wrapper">
+    <form action="" method="post" name="formTC">
+        <div class="form-group">
+            <label>Proyecto:</label>
+            <select class="form-control" name="proyectoTC">
+                <?php for ($i = 0; $i < sizeof($listaProyectoTCSinCliente); $i = $i + 7) {?>
+                    <option value="<?php echo $listaProyectoTCSinCliente[$i]; ?>">
+                        <?php echo $listaProyectoTCSinCliente[$i + 2].' - '.$listaProyectoTCSinCliente[$i + 1]; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
+        <p>
+            <input type="hidden" name="grabarTC" value="si" />
+            <input type="button" value="Aceptar"  class="btn btn-default" onclick="document.formTC.submit();"/>
+        </p>
+    </form>
+</div>

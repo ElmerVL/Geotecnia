@@ -1,0 +1,31 @@
+<div id="admin_wrapper">
+    <form action="" method="post" name="formNuevaSolicitud">
+        <div class="form-group">
+            <label>Nombre del proyecto:</label>
+            <input type = "text" class = "form-control" name = "nombreP" placeholder = "Este nombre sera usado durante todo el tratamiento del proyecto"/>
+        </div>
+        <div class="form-group">
+            <label>Ubicacion del proyecto:</label>
+            <input type = "text" class = "form-control" name = "ubicacionP" placeholder = "Ubicación general del proyecto"/>
+        </div>
+        <div class="form-group">
+            <label>Tipo de proyecto:</label>
+            <select class="form-control"  name="proyecto">
+                <option value="Ensayo de laboratorio">Ensayo de laboratorio</option>
+                <option value="Trabajo de campo">Trabajo de campo</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Responsable:</label>
+            <select class="form-control" name="responsable">
+                <?php for ($i = 0; $i < sizeof($listaIngeniero); $i = $i + 2) {?>
+                <option value="<?php echo $listaIngeniero[$i + 1]; ?>"><?php echo $listaIngeniero[$i + 1]; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <p>
+            <input type="hidden" name="grabarS" value="si" />
+            <input type="button" value="Registrar solicitud"  class="btn btn-default" onclick="document.formNuevaSolicitud.submit();"/>
+        </p>
+    </form>
+</div>

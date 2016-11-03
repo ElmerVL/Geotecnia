@@ -15,15 +15,15 @@ class UsuarioDAO extends Conexion
     {
         $login = $usuario->getLogin();
         $password = $usuario->getPassword();
-        $estado =  $usuario->getEstado();
+        $habilitado =  $usuario->getHabilitado();
 
         parent::conectar();
 
         $sql = <<<SQL
 SELECT * FROM usuario 
 WHERE login = '$login' 
-AND passwd = '$password' 
-AND habilitada = '$estado'
+AND password = '$password' 
+AND habilitado = '$habilitado'
 SQL;
         $resultado = pg_query($sql);
 
@@ -41,22 +41,22 @@ SQL;
         $idUsuario = array();
         $login = $usuario->getLogin();
         $password = $usuario->getPassword();
-        $estado =  $usuario->getEstado();
+        $habilitado =  $usuario->getHabilitado();
 
         parent::conectar();
 
         $sql = <<<SQL
 SELECT idusuario FROM usuario 
 WHERE login = '$login' 
-AND passwd = '$password' 
-AND habilitada = '$estado'
+AND password = '$password' 
+AND habilitado = '$habilitado'
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_assoc($resultado)) {
-            $idUsuario[] = $fila;
+        while ($fila = pg_fetch_object($resultado)) {
+            $idUsuario[] = $fila->idusuario;
         }
 
-        return $idUsuario[0]['idusuario'];
+        return $idUsuario[0];
     }
 }

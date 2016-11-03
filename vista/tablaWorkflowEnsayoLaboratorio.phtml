@@ -1,0 +1,40 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr class="success">
+            <th>Codigo solicitud</th>
+            <th>Fecha solicitud</th>
+            <th>Responsable</th>
+            <th>Nombre proyecto</th>
+            <th>Habilitado</th>
+            <th>Codigo proyecto</th>
+            <th>Muestra registrada</th>
+            <th>Ensayo registrado</th>
+            <th>Ensayo</th>
+            <th>Anticipo cancelado</th>
+            <th>Resultado cargado</th>
+            <th>Saldo cancelado</th>
+            <th>Informe entregado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php for ($i = 0; $i < sizeof($listaSeguimientoEL); $i = $i + 12) {?>
+        <tr>
+            <td><?php echo $listaSeguimientoEL[$i + 1]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 2]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 3]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 4]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 5]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 6]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 7]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 8]; ?></td>
+            <td></td>
+            <td><?php echo $listaSeguimientoEL[$i + 9]; ?></td>
+            <td></td>
+            <td><?php echo $listaSeguimientoEL[$i + 10]; ?></td>
+            <td><?php echo $listaSeguimientoEL[$i + 11]; ?></td>
+        </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

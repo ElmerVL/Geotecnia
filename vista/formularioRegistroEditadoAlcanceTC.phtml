@@ -1,0 +1,62 @@
+<script src="<?php echo Conexion::ruta();?>vista/textos2/ckeditor.js"></script>
+
+<h2>Formulario para editar un alcance:</h2>
+<div id="admin_wrapper">
+    <form action="" method="post" name="formRegistroEditarAlcanceTC">
+        <div class="form-group">
+            <input type="text" class="form-control" name="idTrabajoCampo" value="<?php echo $idTrabajoCampo; ?>" disabled/>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="idAlcance" value="<?php echo $idAlcance; ?>" disabled/>
+        </div>
+        <div class="form-group">
+            <label>1. ANTECEDENTES:</label>
+            <textarea class="form-control ckeditor" rows="10" name="antecedente"></textarea>
+        </div>
+        <div class="form-group">
+            <label>2. OBJETIVO:</label>
+            <textarea class="form-control" rows="3" name="objetivo"></textarea>
+        </div>
+        <div class="form-group">
+            <label>3. TRABAJOS A REALIZAR:</label>
+            <label class="checkbox">
+                <input name="trabajoCampo" class="form-group" type="checkbox" value="Trabajo de campo">Trabajo de campo
+            </label>
+            <textarea class="form-control ckeditor" rows="10" name="trabajoRealizadoTC"></textarea>
+            <label class="checkbox">
+                <input name="trabajoLaboratorio" class="form-group" type="checkbox" value="Trabajo de laboratorio">Trabajo de laboratorio
+            </label>
+            <textarea class="form-control ckeditor" rows="10" name="trabajoRealizadoTL"></textarea>
+            <label class="checkbox">
+                <input name="trabajoGabinete" class="form-group" type="checkbox" value="Trabajo de gabinete">Trabajo de gabinete
+            </label>
+            <textarea class="form-control ckeditor" rows="10" name="trabajoRealizadoTG"></textarea>
+        </div>
+        <div class="form-group">
+            <label>4. DURACION DEL ESTUDIO:</label>
+            <div class="input-group">
+                <input type = "number" class = "form-control" name = "duracionEstudio"/>
+                <span class="input-group-addon" id="basic-addon2">Dias</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>5. PRECIO DE ESTUDIO:</label>
+            <div class="input-group">
+                <input type = "number" class = "form-control" name = "precioEstudio" />
+                <span class="input-group-addon" id="basic-addon2">Bolivianos</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>6. FORMA DE PAGO</label>
+            <textarea class="form-control" rows="3" name="formaPago"></textarea>
+        </div>
+        <div class="form-group">
+            <label>7. REQUERIMIENTOS ADICIONALES:</label>
+            <textarea class="form-control ckeditor" rows="10" name="requerimientoAdicional"></textarea>
+        </div>
+        <p>
+            <input type="hidden" name="grabarRegistroEditarAlcanceTC" value="si" />
+            <input type="button" value="Registrar alcance"  class="btn btn-default" onclick="document.formRegistroEditarAlcanceTC.submit();"/>
+        </p>
+    </form>
+</div>

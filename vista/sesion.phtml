@@ -1,0 +1,18 @@
+<?php
+if (isset($_SESSION['idUsuario'])) {
+    if ($_SESSION['idRol'] == 2) {
+        header('Location: ' . Conexion::ruta() . '?accion=inicioDirector');
+    }
+    if ($_SESSION['idRol'] == 3) {
+        header('Location: ' . Conexion::ruta() . '?accion=inicioContador');
+    }
+    if ($_SESSION['idRol'] == 4) {
+        header('Location: ' . Conexion::ruta() . '?accion=inicioIngeniero');
+    }
+    if ($_SESSION['idRol'] == 5) {
+        header('Location: ' . Conexion::ruta() . '?accion=inicioAuxiliar');
+    }
+    if ($_SESSION['idRol'] == 6) {
+        header('Location: ' . Conexion::ruta() . '?accion=inicioTecnico');
+    }
+}

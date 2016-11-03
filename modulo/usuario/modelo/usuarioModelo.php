@@ -21,9 +21,19 @@ class UsuarioModelo
     private $password;
 
     /**
-     * @var boolean $estado
+     * @var string $habilitado
      */
-    private $estado;
+    private $habilitado;
+
+    /**
+     * @var string $nombre
+     */
+    private $nombre;
+
+    /**
+     * @var string $apellido
+     */
+    private $apellido;
 
     /**
      * @return int
@@ -74,18 +84,50 @@ class UsuarioModelo
     }
 
     /**
-     * @return boolean
+     * @return string
      */
-    public function getEstado()
+    public function getHabilitado()
     {
-        return $this->estado;
+        return $this->habilitado;
     }
 
     /**
-     * @param boolean $estado
+     * @param string $habilitado
      */
-    public function setEstado($estado)
+    public function setHabilitado($habilitado)
     {
-        $this->estado = $estado;
+        $this->habilitado = $habilitado;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * @param string $nombre
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApellido()
+    {
+        return $this->apellido;
+    }
+
+    /**
+     * @param string $apellido
+     */
+    public function setApellido($apellido)
+    {
+        $this->apellido = $apellido;
     }
 }

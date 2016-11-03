@@ -7,32 +7,96 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <h4 class="navbar-brand">Laboratorion de Geotecnia</h4>
+                <h4 class="navbar-brand">Laboratorio de Geotecnia</h4>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
             <?php if (!isset($_SESSION['idUsuario'])) {?>
-                <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicio">Inicio</a></li>
-                <li><a href="<?php echo Conexion::ruta(); ?>?accion=acercaDeGeotecnia">Acerca de Geotecnia</a></li>
+                <li>
+                    <a href='<?php echo Conexion::ruta(); ?>?accion=inicio'>Inicio</a>
+                </li>
+                <li>
+                    <a href='<?php echo Conexion::ruta(); ?>?accion=acercaDeGeotecnia'>Acerca de Geotecnia</a>
+                </li>
             <?php } else {?>
-                <?php if ($_SESSION['codRol'] == 2) {?>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioDirector">Inicio</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoDirector">Proyecto</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflow" data-toggle="modal" data-target="#.bs-example-modal-lg">Workflow</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=imprimirReporte">Imprimir Reporte</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=solicitudPendiente">Solicitud Pendiente</a></li>
+                <?php if ($_SESSION['idRol'] == 2) {?>
+                    <li>
+                        <a href='<?php echo Conexion::ruta(); ?>?accion=inicioDirector'>Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Proyecto<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaTodo">Ver todos los Proyectos</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEnsayoLaboratorio">Ver ensayos de laboratorio</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEstudioGeotecnico">Ver estudios geotecnicos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Reporte<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaImprimirReporte">Imprimir Reporte</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Solicitud<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaSolicitudPendiente">Ver solicitudes pendiente para su habilitacion</a>
+                            </li>
+                        </ul>
+                    </li>
                 <?php }?>
-                <?php if ($_SESSION['codRol'] == 3) {?>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioContador">Inicio</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoContador">Proyecto</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowContador">Workflow</a></li>
+                <?php if ($_SESSION['idRol'] == 3) {?>
+                    <li>
+                        <a href="<?php echo Conexion::ruta(); ?>?accion=inicioContador">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Proyecto<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaTodo">Ver todos los Proyectos</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEnsayoLaboratorio">Ver ensayos de laboratorio</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEstudioGeotecnico">Ver estudios geotecnicos</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             Solisitud <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=nuevaSolicitud">Nueva solicitud</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=listaSolicitud">Lista de solisitudes</a></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#nuevaSolicitud">Registrar nueva solicitud</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaSolicitud">Ver lista de solicitudes</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -40,46 +104,97 @@
                             Registro <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=resgistroLaboratirio">Registro de cliente (ensayo de laboratorio)</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroGeotecnico">Registro de cliente (estudio geotecnico)</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroPago">Registro de pago de proyecto</a></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroEL">Registro de cliente (ensayo de laboratorio)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroEG">Registro de cliente (estudio geotecnico)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroPagoTodo">Registro de pago de proyecto</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaVerFormularioTodo">Ver formulario</a>
+                            </li>
                         </ul>
                     </li>
                 <?php }?>
-                <?php if ($_SESSION['codRol'] == 4) {?>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioIngeniero">Inicio</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=proyectoIngeniero">Proyecto</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=workflowIngeniero">Workflow</a></li>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=informeIngeniero">Informe Final</a></li>
+                <?php if ($_SESSION['idRol'] == 4) {?>
+                    <li>
+                        <a href="<?php echo Conexion::ruta(); ?>?accion=inicioIngeniero">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Ensayo Laboratorio <span class="caret"></span>
+                            Proyecto<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroEnsayo">Registro de ensayo para un proyecto</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroMuestra">Rgistro de muestra para un proyecto</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=detalleEnsayo">Detalle de un ensayo de un proyecto</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroResultadoEL">Rgistro de resultados (ensayo de laboratorio)</a></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaTodo">Ver todos los Proyectos</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEnsayoLaboratorio">Ver ensayos de laboratorio</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEstudioGeotecnico">Ver estudios geotecnicos</a>
+                            </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#ventanaInformeFinal">Informe Final</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Estudio Geotecnico<span class="caret"></span>
+                            Proyecto (EL y TC)<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=crearAlcanceProyecto">Crear alcance para un proyecto</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=alcanceProyecto">Ver alcance para un proyecto</a></li>
-                            <li><a href="<?php echo Conexion::ruta(); ?>?accion=registroResultadoTP">Rgistro de resultados (trabajo de campo)</a></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroDetalleEnsayo">Registro de ensayo (Ensayo de laboratorio)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroMuestra">Registro de muestra (Ensayo de laboratorio)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaVerDetalleEnsayo">Ver detalle de ensayos (Ensayo de laboratorio)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroResultadoEL">Registro de resultados (Ensayo de laboratorio)</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroAlcance">Registro alcance (Trabajo de campo)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaEditarAlcance">Editar alcance (Trabajo de campo)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaVerAlcance">Ver alcance (Trabajo de campo)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroResultadoTC">Registro de resultados (Trabajo de campo)</a>
+                            </li>
                         </ul>
                     </li>
                 <?php }?>
-                <?php if ($_SESSION['codRol'] == 5) {?>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioAuxiliar">Inicio</a></li>
+                <?php if ($_SESSION['idRol'] == 5) {?>
+                    <li>
+                        <a href="<?php echo Conexion::ruta(); ?>?accion=inicioAuxiliar">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
+                    </li>
                 <?php }?>
-                <?php if ($_SESSION['codRol'] == 6) {?>
-                    <li><a href="<?php echo Conexion::ruta(); ?>?accion=inicioTecnico">Inicio</a></li>
+                <?php if ($_SESSION['idRol'] == 6) {?>
+                    <li>
+                        <a href="<?php echo Conexion::ruta(); ?>?accion=inicioTecnico">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
+                    </li>
                 <?php }?>
-                <li><a href="<?php echo Conexion::ruta(); ?>?accion=terminarSesion">Terminar Sesión</a></li>
+                <li><a href="<?php echo Conexion::ruta(); ?>?accion=terminarSesion">Terminar Sesion</a></li>
             <?php }?>
             </ul>
         </div>

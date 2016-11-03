@@ -1,0 +1,59 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr class="success">
+            <th>Codigo</th>
+            <th>Nombre del proyecto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php for ($i = 0; $i < sizeof($listaProyectoELSinEnsayo); $i = $i + 7) {?>
+            <tr>
+                <td>
+                    <a class="btn-default" role="button" data-toggle="collapse"
+                       href="#collapseProyectoEL<?php echo $listaProyectoELSinEnsayo[$i]; ?>" aria-expanded="false" aria-controls="collapseExample">
+                        <?php echo $listaProyectoELSinEnsayo[$i + 1]; ?>
+                    </a>
+                    <div class="collapse" id="collapseProyectoEL<?php echo $listaProyectoELSinEnsayo[$i]; ?>">
+                        <div class="well">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr class="success">
+                                        <th>Codigo</th>
+                                        <th>Tipo</th>
+                                        <th>Categoría</th>
+                                        <th>Nombre ensayo</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio (Bs)</th>
+                                        <th>Precio unitario</th>
+                                        <th>Tiempo aproximado (Dias)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php for ($j = 0; $j < sizeof($listaDetalleEnsayo); $j = $j + 9) {?>
+                                        <?php if ($listaDetalleEnsayo[$j] == $listaProyectoEL[$i]) {?>
+                                    <tr>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 1]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 2]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 3]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 4]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 5]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 6]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 7]; ?></td>
+                                        <td><?php echo $listaDetalleEnsayo[$j + 8]; ?></td>
+                                    </tr>
+                                        <?php } ?>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><?php echo $listaProyectoELSinEnsayo[$i + 2]; ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

@@ -1,8 +1,23 @@
-<h1>Aqui el Workflow</h1>
-<div class="modal fade bs-example-modal-lg" id=".bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+<div class="modal fade" id="ventanaWorkflow" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            ...
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Workflow del departamento de Geotecnia</h4>
+            </div>
+            <div class="modal-body">
+                <h4>A QUI VA EL WORKFLOW</h4>
+                <br>
+                <h4>Seguimiento de ensayos de laboratorio:</h4>
+                <?php include_once('tablaWorkflowEnsayoLaboratorio.phtml'); ?>
+                <br>
+                <h4>Seguimiento de trabajos de campo:</h4>
+                <?php include_once('tablaWorkflowTrabajoCampo.phtml'); ?>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
+

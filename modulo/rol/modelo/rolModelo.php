@@ -5,41 +5,41 @@
  */
 class RolModelo
 {
-    /**@var int $codRol */
-    private $codRol;
+    /**@var int $idRol */
+    private $idRol;
 
-    /**@var string $tipoRol */
-    private $tipoRol;
+    /**@var string $descripcion */
+    private $descripcion;
 
     /**
      * @return int
      */
-    public function getCodRol()
+    public function getIdRol()
     {
-        return $this->codRol;
+        return $this->idRol;
     }
 
     /**
-     * @param int $codRol
+     * @param int $idRol
      */
-    public function setCodRol($codRol)
+    public function setIdRol($idRol)
     {
-        $this->codRol = $codRol;
+        $this->idRol = $idRol;
     }
 
     /**
      * @return string
      */
-    public function getTipoRol()
+    public function getDescripcion()
     {
-        return $this->tipoRol;
+        return $this->descripcion;
     }
 
     /**
-     * @param string $tipoRol
+     * @param string $descripcion
      */
-    public function setTipoRol($tipoRol)
+    public function setDescripcion($descripcion)
     {
-        $this->tipoRol = $tipoRol;
+        $this->descripcion = $descripcion;
     }
 }

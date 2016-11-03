@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class CalendarioModelo
+ */
 class CalendarioModelo
 {
     /** @var int $idCalendario */

@@ -1,0 +1,18 @@
+<div id="admin_wrapper">
+    <form action="" method="post" name="formResultadoEL">
+        <div class="form-group">
+            <label>Proyecto:</label>
+            <select class="form-control" name="proyectoEL">
+                <?php for ($i = 0; $i < sizeof($listaProyectoEL); $i = $i + 7) {?>
+                    <option value="<?php echo $listaProyectoEL[$i]; ?>">
+                        <?php echo $listaProyectoEL[$i + 2].' - '.$listaProyectoEL[$i + 1]; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
+        <p>
+            <input type="hidden" name="grabarResultadoEL" value="si" />
+            <input type="button" value="Aceptar" class="btn btn-default" onclick="document.formResultadoEL.submit();"/>
+        </p>
+    </form>
+</div>

@@ -1,0 +1,425 @@
+<h2>Formulario de registro un ensayo de tipo roca:</h2>
+<div id="admin_wrapper">
+    <form action="" method="post" name="formRegistroRoca">
+        <div class="form-group">
+            <input type="text" class="form-control" name="idEnsayoLaboratorio" value="<?php echo $idEnsayoSolicitud; ?>" disabled/>
+        </div>
+        <label>Caracterización:</label>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th width="35%"></th>
+                    <th width="20%"></th>
+                    <th width="45%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR01">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR01">[LR01]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Identificación de rocas</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR02">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR02">[LR02]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Dureza Shore</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR03">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR03">[LR03]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Contenido de humedad en rocas</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR04">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR04">[LR04]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Densidad y porosidad(saturación y calibrador)</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR05">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR05">[LR05]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Densidad y porosidad(saturación y flotación)</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR06">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR06">[LR06]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Densidad y porosidad(mercurio)</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR07">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR07">[LR07]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Indice de vac?os</h5>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <label>Durabilidad:</label>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th width="35%"></th>
+                    <th width="20%"></th>
+                    <th width="45%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR08">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR08">[LR08]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Desleimiento</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR09">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR09">[LR09]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Ensayo de sulfato de sodio en roca</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR10">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR10">[LR10]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Ensayo de secado y mojado</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR11">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR11">[LR11]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Control de erosion a partir de la gravedad</h5>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <label>Resistencia:</label>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th width="35%"></th>
+                    <th width="20%"></th>
+                    <th width="45%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR12">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR12">[LR12]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Comprensión uniaxial (UCS)</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR13">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR13">[LR13]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Carga puntual (PLT)</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR14">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR14">[LR14]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Estimación de comprensión uniaxial y módulo de deformación con esclerometro de Shore</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR15">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR15">[LR15]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Estimación de comprensión uniaxial y módulo de deformación con martillo de Schmidt de laboratorio</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR16">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR16">[LR16]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Martillo de Schmidt de laboratorio</h5>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <label>Resistencia al corte:</label>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th width="35%"></th>
+                    <th width="20%"></th>
+                    <th width="45%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" name="cantidadLR17">
+                                <?php for ($i = 1; $i <= 50; $i++) {?>
+                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="LR17">[LR17]
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <h5>Corte directo sobre fisura determinada</h5>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <input type="hidden" name="grabarRegistroSueloRoca" value="si" />
+            <input type="button" value="Registrar suelo"  class="btn btn-default" onclick="document.formRegistroRoca.submit();"/>
+        </p>
+    </form>
+</div>

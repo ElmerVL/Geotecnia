@@ -1,0 +1,18 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr class="success">
+            <th>Nombre del archivo</th>
+            <th>Descripcion del archivo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php for ($i = 0; $i < sizeof($listaResultado); $i = $i + 3) {?>
+            <tr>
+                <td><?php echo $listaResultado[$i + 1]; ?></td>
+                <td><?php echo $listaResultado[$i + 2]; ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

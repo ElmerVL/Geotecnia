@@ -1,0 +1,76 @@
+<h2>Formulario de registro del cliente:</h2>
+<div id="admin_wrapper">
+    <form action="" method="post" name="formRegistroCTC">
+        <div class="form-group">
+            <input type="text" class="form-control" name="idEnsayoLaboratorio" value="<?php echo $idTrabajoCampo; ?>" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Nombre del proyecto:</label>
+            <input type="text" class="form-control" name="nombrePro" value="<?php echo $nombreProyectoTC; ?>" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Tipo de institucion:</label>
+            <select class="form-control" name="tipoCliente">
+                <option value="Privada">Privada</option>
+                <option value="Estatal">Estatal</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Facturación a nombre de:</label>
+            <input type = "text" class = "form-control" name = "nombreFactura" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>N° de NIT o N° de CI:</label>
+            <input type = "number" class = "form-control" name = "nitCI" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>Nombre de la persona de contacto:</label>
+            <input type = "text" class = "form-control" name = "nombreContacto" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>CI de la persona de contacto:</label>
+            <input type = "number" class = "form-control" name = "ciContacto" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>N° de telefono fijo:</label>
+            <input type = "number" class = "form-control" name = "telefonoFijo" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>N° de telefono celular:</label>
+            <input type = "number" class = "form-control" name = "telefonoCelular" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>Correo electrónico de contacto:</label>
+            <input type = "email" class = "form-control" name = "correo" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>Direccion fiscal:</label>
+            <input type = "email" class = "form-control" name = "direccionFiscal" placeholder = ""/>
+        </div>
+        <div class="form-group">
+            <label>Fecha de la solicitud:</label>
+            <?php
+            $dia = date("d", strtotime($fechaProyectoTC));
+            $mes = date("F", strtotime($fechaProyectoTC));
+            if ($mes == "January") { $mes = "Enero"; }
+            if ($mes == "February") { $mes = "Febrero"; }
+            if ($mes == "March") { $mes = "Marzo"; }
+            if ($mes == "April") { $mes = "Abril"; }
+            if ($mes == "May") { $mes = "Mayo"; }
+            if ($mes == "June") { $mes = "Junio"; }
+            if ($mes == "July") {$mes = "Julio"; }
+            if ($mes == "August") { $mes = "Agosto"; }
+            if ($mes == "September") { $mes = "Septiembre"; }
+            if ($mes == "October") { $mes = "Octubre"; }
+            if ($mes == "November") { $mes = "Noviembre"; }
+            if ($mes == "December") { $mes = "Diciembre"; }
+            $anio = date("Y", strtotime($fechaProyectoTC));
+            ?>
+            <input type="text" class="form-control" name="nombrePro" value="<?php echo $dia . " de " . $mes . ", " . $anio ?>" disabled/>
+        </div>
+        <p>
+            <input type="hidden" name="grabarRCTC" value="si" />
+            <input type="button" value="Registrar cliente"  class="btn btn-default" onclick="document.formRegistroCTC.submit();"/>
+        </p>
+    </form>
+</div>

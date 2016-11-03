@@ -1,0 +1,54 @@
+
+<div class="modal fade" id="ventanaTodo" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ver todo los proyectos</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Lista de proyectos:</h4>
+                <?php include_once('tablaProyectoTodoProyecto.phtml'); ?>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ventanaEnsayoLaboratorio" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ver ensayos de laboratorio</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Lista de ensayos de laboratorio:</h4>
+                <?php include_once('tablaProyectoEnsayoLaboratorio.phtml'); ?>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ventanaEstudioGeotecnico" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ver estudios geotecnicos</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Lista de estudios geotecnicos:</h4>
+                <?php include_once('tablaProyectoEstudioGeotecnico.phtml'); ?>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

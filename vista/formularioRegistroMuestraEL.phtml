@@ -1,0 +1,18 @@
+<div id="admin_wrapper">
+    <form action="" method="post" name="formMuestra">
+        <div class="form-group">
+            <label>Proyecto:</label>
+            <select class="form-control" name="proyectoEL">
+                <?php for ($i = 0; $i < sizeof($listaProyectoELSinMuestra); $i = $i + 7) {?>
+                    <option value="<?php echo $listaProyectoELSinMuestra[$i]; ?>">
+                        <?php echo $listaProyectoELSinMuestra[$i + 2].' - '.$listaProyectoELSinMuestra[$i + 1]; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
+        <p>
+            <input type="hidden" name="grabarMuestra" value="si" />
+            <input type="button" value="Aceptar" class="btn btn-default" onclick="document.formMuestra.submit();"/>
+        </p>
+    </form>
+</div>

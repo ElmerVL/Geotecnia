@@ -6,14 +6,9 @@
 class UsuarioRolModelo
 {
     /**
-     * @var int $codUsuarioRol
-     */
-    private $codUsuarioRol;
-
-    /**
      * @var int $rolCodRol
      */
-    private $rolCodRol;
+    private $rolIdRol;
 
     /**
      * @var int $usuarioIdUsuario
@@ -23,33 +18,17 @@ class UsuarioRolModelo
     /**
      * @return int
      */
-    public function getCodUsuarioRol()
+    public function getRolIdRol()
     {
-        return $this->codUsuarioRol;
+        return $this->rolIdRol;
     }
 
     /**
-     * @param int $codUsuarioRol
+     * @param int $rolIdRol
      */
-    public function setCodUsuarioRol($codUsuarioRol)
+    public function setRolIdRol($rolIdRol)
     {
-        $this->codUsuarioRol = $codUsuarioRol;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRolCodRol()
-    {
-        return $this->rolCodRol;
-    }
-
-    /**
-     * @param int $rolCodRol
-     */
-    public function setRolCodRol($rolCodRol)
-    {
-        $this->rolCodRol = $rolCodRol;
+        $this->rolIdRol = $rolIdRol;
     }
 
     /**
@@ -67,4 +46,5 @@ class UsuarioRolModelo
     {
         $this->usuarioIdUsuario = $usuarioIdUsuario;
     }
+    
 }

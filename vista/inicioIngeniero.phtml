@@ -2,6 +2,11 @@
 if(!isset($_SESSION['idUsuario']))
 {
     header('Location: '.Conexion::ruta().'?accion=inicio');
+} else {
+    if ($_SESSION['idRol'] != 4) {
+        session_destroy();
+        header('Location: '.Conexion::ruta().'?accion=inicio');
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -9,17 +14,47 @@ if(!isset($_SESSION['idUsuario']))
     <head>
         <?php include_once('componentesHead.phtml');?>
     </head>
-    <body>
+    <body onload="document.forms.reset();document.forms.email.focus();">
         <div id="fb-root"></div>
         <?php include_once ('cabeceraDePagina.phtml');?>
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <?php require_once ('calendario.phtml');?>
+                    <?php include_once ('calendario.phtml'); ?>
+                    <?php include_once ('workflow.phtml'); ?>
+                    <?php include_once ('proyecto.phtml'); ?>
+                    <?php include_once  ('informeFinal.phtml'); ?>
+                    <?php include_once  ('proyectoELyTC.phtml'); ?>
                 </div>
-                <div class="center gap">
+                <div class="">
                     <div class="col-md-4">
-                        <h2>Ultimos 10</h2>
+                        <?php if ( false == $informeFinal and ' ' == $tipoEnsayo and false == $muestra and false == $resultadoEL and false == $alcanceTC and false == $editarAlcanceTC and false == $resultadoTC) {?>
+                            <?php include_once ('ultimasDiez.phtml')?>
+                        <?php } ?>
+                        <?php if (true == $informeFinal) {?>
+                            <?php include_once ('formularioCargarInformeFinal.phtml'); ?>
+                        <?php } ?>
+                        <?php if ('Suelo' == $tipoEnsayo) {?>
+                            <?php include_once('formularioRegistroTipoSueloEnsayo.phtml'); ?>
+                        <?php } ?>
+                        <?php if ('Roca' == $tipoEnsayo) {?>
+                            <?php include_once('formularioRegistroTipoRocaEnsayo.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $muestra) {?>
+                            <?php include_once('formularioRegistroMuestra.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $resultadoEL) {?>
+                            <?php include_once('formularioCargarResultadoEL.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $alcanceTC) {?>
+                            <?php include_once('formularioRegistroAlcanceTC.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $editarAlcanceTC) {?>
+                            <?php include_once('formularioRegistroEditadoAlcanceTC.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $resultadoTC) {?>
+                            <?php include_once('formularioCargarResultadoTC.phtml'); ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

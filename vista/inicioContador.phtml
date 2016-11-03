@@ -2,6 +2,11 @@
 if(!isset($_SESSION['idUsuario']))
 {
     header('Location: '.Conexion::ruta().'?accion=inicio');
+} else {
+    if ($_SESSION['idRol'] != 3) {
+        session_destroy();
+        header('Location: '.Conexion::ruta().'?accion=inicio');
+    }
 }
 ?>
 <!DOCTYPE HTML>
@@ -9,17 +14,30 @@ if(!isset($_SESSION['idUsuario']))
     <head>
         <?php include_once('componentesHead.phtml');?>
     </head>
-    <body>
-        <div id="fb-root"></div>
+    <body onload="document.forms.reset();document.forms.email.focus();">
         <?php include_once ('cabeceraDePagina.phtml');?>
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <?php require_once ('calendario.phtml');?>
+                    <?php include_once ('calendario.phtml'); ?>
+                    <?php include_once ('workflow.phtml'); ?>
+                    <?php include_once ('proyecto.phtml'); ?>
+                    <?php include_once ('solicitud.phtml'); ?>
+                    <?php include_once ('registro.phtml'); ?>
                 </div>
                 <div class="center gap">
                     <div class="col-md-4">
-                        <h2>Ultimos 10</h2>
+                        <?php if (false == $formularioRegistroClienteEL and false == $formularioRegistroClienteEG and false == $formularioRegistroPago) {?>
+                            <?php include_once ('ultimasDiez.phtml')?>
+                        <?php } if (true == $formularioRegistroClienteEL) {?>
+                            <?php include_once ('formularioRegistroClienteEL.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $formularioRegistroClienteEG) {?>
+                            <?php include_once ('formularioRegistroClienteEG.phtml'); ?>
+                        <?php } ?>
+                        <?php if (true == $formularioRegistroPago) {?>
+                            <?php include_once ('formularioRegistroPagoProyecto.phtml'); ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

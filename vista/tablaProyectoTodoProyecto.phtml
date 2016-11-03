@@ -1,0 +1,94 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr class="success">
+            <th>Codigo</th>
+            <th>Responsable</th>
+            <th>Nombre del proyecto</th>
+            <th>Tipo de proyecto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php for ($i = 0; $i < sizeof($listaProyectoEL); $i = $i + 7) {?>
+            <tr>
+                <td>
+                    <a class="btn-default" role="button" data-toggle="collapse"
+                       href="#collapseTEL<?php echo $listaProyectoEL[$i]; ?>" aria-expanded="false" aria-controls="collapseExample">
+                        <?php echo $listaProyectoEL[$i + 1]; ?>
+                    </a>
+                    <div class="collapse" id="collapseTEL<?php echo $listaProyectoEL[$i]; ?>">
+                        <div class="well">
+                            Nombre del proyecto: <?php echo $listaProyectoEL[$i + 2]; ?><br>
+                            Ubicacion: <?php echo $listaProyectoEL[$i + 4]; ?><br>
+                            Tipo de proyecto: <?php echo $listaProyectoEL[$i + 3]; ?><br>
+                            Responsable: <?php echo $listaProyectoEL[$i + 5]; ?><br>
+                            Fecha:
+                            <?php
+                            $dia = date("d", strtotime($listaProyectoEL[$i + 6]));
+                            $mes = date("F", strtotime($listaProyectoEL[$i + 6]));
+                            if ($mes == "January") { $mes = "Enero"; }
+                            if ($mes == "February") { $mes = "Febrero"; }
+                            if ($mes == "March") { $mes = "Marzo"; }
+                            if ($mes == "April") { $mes = "Abril"; }
+                            if ($mes == "May") { $mes = "Mayo"; }
+                            if ($mes == "June") { $mes = "Junio"; }
+                            if ($mes == "July") {$mes = "Julio"; }
+                            if ($mes == "August") { $mes = "Agosto"; }
+                            if ($mes == "September") { $mes = "Septiembre"; }
+                            if ($mes == "October") { $mes = "Octubre"; }
+                            if ($mes == "November") { $mes = "Noviembre"; }
+                            if ($mes == "December") { $mes = "Diciembre"; }
+                            $anio = date("Y", strtotime($listaProyectoEL[$i + 6]));
+                            ?>
+                            <?php echo $dia." de ".$mes.", ".$anio ?>
+                        </div>
+                    </div>
+                </td>
+                <td><?php echo $listaProyectoEL[$i + 5]; ?></td>
+                <td><?php echo $listaProyectoEL[$i + 2]; ?></td>
+                <td><?php echo $listaProyectoEL[$i + 3]; ?></td>
+            </tr>
+        <?php } ?>
+        <?php for ($i = 0; $i < sizeof($listaProyectoTC); $i = $i + 7) {?>
+            <tr>
+                <td>
+                    <a class="btn-default" role="button" data-toggle="collapse"
+                       href="#collapseTTC<?php echo $listaProyectoTC[$i]; ?>" aria-expanded="false" aria-controls="collapseExample">
+                        <?php echo $listaProyectoTC[$i + 1]; ?>
+                    </a>
+                    <div class="collapse" id="collapseTTC<?php echo $listaProyectoTC[$i]; ?>">
+                        <div class="well">
+                            Nombre del proyecto: <?php echo $listaProyectoTC[$i + 2]; ?><br>
+                            Ubicacion: <?php echo $listaProyectoTC[$i + 4]; ?><br>
+                            Tipo de proyecto: <?php echo $listaProyectoTC[$i + 3]; ?><br>
+                            Responsable: <?php echo $listaProyectoTC[$i + 5]; ?><br>
+                            Fecha:
+                            <?php
+                            $dia = date("d", strtotime($listaProyectoTC[$i + 6]));
+                            $mes = date("F", strtotime($listaProyectoTC[$i + 6]));
+                            if ($mes == "January") { $mes = "Enero"; }
+                            if ($mes == "February") { $mes = "Febrero"; }
+                            if ($mes == "March") { $mes = "Marzo"; }
+                            if ($mes == "April") { $mes = "Abril"; }
+                            if ($mes == "May") { $mes = "Mayo"; }
+                            if ($mes == "June") { $mes = "Junio"; }
+                            if ($mes == "July") {$mes = "Julio"; }
+                            if ($mes == "August") { $mes = "Agosto"; }
+                            if ($mes == "September") { $mes = "Septiembre"; }
+                            if ($mes == "October") { $mes = "Octubre"; }
+                            if ($mes == "November") { $mes = "Noviembre"; }
+                            if ($mes == "December") { $mes = "Diciembre"; }
+                            $anio = date("Y", strtotime($listaProyectoTC[$i + 6]));
+                            ?>
+                            <?php echo $dia." de ".$mes.", ".$anio ?>
+                        </div>
+                    </div>
+                </td>
+                <td><?php echo $listaProyectoTC[$i + 5]; ?></td>
+                <td><?php echo $listaProyectoTC[$i + 2]; ?></td>
+                <td><?php echo $listaProyectoTC[$i + 3]; ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

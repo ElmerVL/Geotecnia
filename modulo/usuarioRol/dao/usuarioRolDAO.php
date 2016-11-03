@@ -11,23 +11,23 @@ class UsuarioRolDAO extends Conexion
      * @param UsuarioRolModelo $usuarioRol
      * @return mixed $codRol
      */
-    public function getCodRolDAO(UsuarioRolModelo $usuarioRol)
+    public function getIdRolDAO(UsuarioRolModelo $usuarioRol)
     {
-        $codRol = array();
+        $idRol = array();
         $idUsuario = $usuarioRol->getUsuarioIdUsuario();
 
         parent::conectar();
 
         $sql = <<<SQL
-SELECT rol_codrol FROM user_rol 
+SELECT rol_idrol FROM usuario_rol 
 WHERE usuario_idusuario = '$idUsuario'
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_assoc($resultado)) {
-            $codRol[] = $fila;
+        while ($fila = pg_fetch_object($resultado)) {
+            $idRol[] = $fila->rol_idrol;
         }
 
-        return $codRol[0]['rol_codrol'];
+        return $idRol[0];
     }
 }

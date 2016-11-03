@@ -1,0 +1,18 @@
+<div id="admin_wrapper">
+    <form action="" method="post" name="formResultadoTC">
+        <div class="form-group">
+            <label>Proyecto:</label>
+            <select class="form-control" name="proyectoTC">
+                <?php for ($i = 0; $i < sizeof($listaProyectoTC); $i = $i + 7) {?>
+                    <option value="<?php echo $listaProyectoTC[$i]; ?>">
+                        <?php echo $listaProyectoTC[$i + 2].' - '.$listaProyectoTC[$i + 1]; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
+        <p>
+            <input type="hidden" name="grabarResultadoTC" value="si" />
+            <input type="button" value="Aceptar" class="btn btn-default" onclick="document.formResultadoTC.submit();"/>
+        </p>
+    </form>
+</div>

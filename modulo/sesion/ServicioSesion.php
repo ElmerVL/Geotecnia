@@ -43,7 +43,7 @@ class ServicioSesion
         $usuario = new UsuarioModelo();
         $usuario->setLogin($login);
         $usuario->setPassword($password);
-        $usuario->setEstado(true);
+        $usuario->setHabilitado('true');
 
         if ($this->usuarioDAO->verificarExistenciaUsuarioDAO($usuario) == 1) {
             $this->crearSesion($usuario);
@@ -64,16 +64,16 @@ class ServicioSesion
         $usuarioRol = new UsuarioRolModelo();
         $usuarioRol->setUsuarioIdUsuario($idUsuario);
 
-        $codRol = $this->usuarioRolDAO->getCodRolDAO($usuarioRol);
+        $idRol = $this->usuarioRolDAO->getIdRolDAO($usuarioRol);
 
         $rol = new RolModelo();
-        $rol->setCodRol($codRol);
+        $rol->setIdRol($idRol);
 
         session_start();
 
         $_SESSION['idUsuario'] = $idUsuario;
-        $_SESSION['codRol'] = $codRol;
+        $_SESSION['idRol'] = $idRol;
 
-        header('Location: '.Conexion::ruta().'?accion=inicio'.$this->rolDAO->getTipoRolDAO($rol));exit;
+        header('Location: '.Conexion::ruta().'?accion=inicio'.$this->rolDAO->getDescripcionDAO($rol));exit;
     }
 }

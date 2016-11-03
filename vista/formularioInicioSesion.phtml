@@ -2,8 +2,8 @@
                     
 <div id="admin_wrapper">
     <?php
-    if (isset($_GET["m"])){
-        switch ($_GET["m"]){
+    if (isset($_GET['m'])){
+        switch ($_GET['m']){
             case '1':
                 ?>
                 <div class="alert alert-danger" role="alert"><h5>Campos vacíos, no son validos.<h5></div>
@@ -25,11 +25,11 @@
     <form action="" method="post" name="form">
         <div class="form-group">
             <label>E-mail:</label>
-            <input type = "email" class = "form-control" name = "login" placeholder="Nombre de cuenta"/>
+            <input type = "email" class = "form-control" name = "login" placeholder = "Nombre de cuenta"/>
         </div>
         <div class="form-group">
             <label>Password:</label>
-            <input type = "password" class="form-control" name = "passwd" placeholder="Contraseña"/>
+            <input type = "password" class = "form-control" name = "passwd" placeholder = "Contraseña"/>
         </div>
         <p>
             <input type="hidden" name="grabar" value="si" />
