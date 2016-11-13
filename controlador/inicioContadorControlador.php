@@ -6,7 +6,7 @@ require_once ('modulo/solicitud/dao/SolicitudDAO.php');
 require_once ('modulo/solicitudUsuario/dao/SolicitudUsuarioDAO.php');
 require_once ('modulo/usuario/dao/UsuarioDAO.php');
 require_once ('modulo/ingeniero/dao/IngenieroDAO.php');
-require_once ('modulo/registro/ServicioRegistroSolicitud.php');
+require_once ('modulo/registro/ServicioRegistroSolicitudEL.php');
 require_once ('modulo/registro/ServicioRegistroCliente.php');
 require_once ('modulo/registro/ServicioRegistroPago.php');
 require_once ('modulo/cliente/dao/ClienteDAO.php');

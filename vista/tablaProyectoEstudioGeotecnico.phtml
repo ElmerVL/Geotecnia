@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" xmlns="http://www.w3.org/1999/html">
     <table class="table">
         <thead>
         <tr class="success">
@@ -18,11 +18,11 @@
                     </a>
                     <div class="collapse" id="collapseTC<?php echo $listaProyectoTC[$i]; ?>">
                         <div class="well">
-                            Nombre del proyecto: <?php echo $listaProyectoTC[$i + 2]; ?><br>
-                            Ubicacion: <?php echo $listaProyectoTC[$i + 4]; ?><br>
-                            Tipo de proyecto: <?php echo $listaProyectoTC[$i + 3]; ?><br>
-                            Responsable: <?php echo $listaProyectoTC[$i + 5]; ?><br>
-                            Fecha:
+                            <ins>Nombre del proyecto:</ins> <?php echo $listaProyectoTC[$i + 2]; ?><br>
+                            <ins>Ubicacion:</ins> <?php echo $listaProyectoTC[$i + 4]; ?><br>
+                            <ins>Tipo de proyecto:</ins> <?php echo $listaProyectoTC[$i + 3]; ?><br>
+                            <ins>Responsable:</ins> <?php echo $listaProyectoTC[$i + 5]; ?><br>
+                            <ins>Fecha:</ins>
                             <?php
                             $dia = date("d", strtotime($listaProyectoTC[$i + 6]));
                             $mes = date("F", strtotime($listaProyectoTC[$i + 6]));

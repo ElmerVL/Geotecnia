@@ -19,11 +19,11 @@
                     </a>
                     <div class="collapse" id="collapseS<?php echo $listaSolicitud[$i]; ?>">
                         <div class="well">
-                            Nombre del proyecto: <?php echo $listaSolicitud[$i + 2]; ?><br>
-                            Ubicacion: <?php echo $listaSolicitud[$i + 4]; ?><br>
-                            Tipo de proyecto: <?php echo $listaSolicitud[$i + 3]; ?><br>
-                            Responsable: <?php echo $listaSolicitud[$i + 5]; ?><br>
-                            Fecha:
+                            <ins>Nombre del proyecto:</ins> <?php echo $listaSolicitud[$i + 2]; ?><br>
+                            <ins>Ubicacion:</ins> <?php echo $listaSolicitud[$i + 4]; ?><br>
+                            <ins>Tipo de proyecto:</ins> <?php echo $listaSolicitud[$i + 3]; ?><br>
+                            <ins>Responsable:</ins> <?php echo $listaSolicitud[$i + 5]; ?><br>
+                            <ins>Fecha:</ins>
                             <?php
                             $dia = date("d", strtotime($listaSolicitud[$i + 6]));
                             $mes = date("F", strtotime($listaSolicitud[$i + 6]));

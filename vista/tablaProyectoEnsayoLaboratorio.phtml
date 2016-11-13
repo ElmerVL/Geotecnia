@@ -18,11 +18,11 @@
                     </a>
                     <div class="collapse" id="collapseEL<?php echo $listaProyectoEL[$i]; ?>">
                         <div class="well">
-                            Nombre del proyecto: <?php echo $listaProyectoEL[$i + 2]; ?><br>
-                            Ubicacion: <?php echo $listaProyectoEL[$i + 4]; ?><br>
-                            Tipo de proyecto: <?php echo $listaProyectoEL[$i + 3]; ?><br>
-                            Responsable: <?php echo $listaProyectoEL[$i + 5]; ?><br>
-                            Fecha:
+                            <ins>Nombre del proyecto:</ins> <?php echo $listaProyectoEL[$i + 2]; ?><br>
+                            <ins>Ubicacion:</ins> <?php echo $listaProyectoEL[$i + 4]; ?><br>
+                            <ins>Tipo de proyecto:</ins> <?php echo $listaProyectoEL[$i + 3]; ?><br>
+                            <ins>Responsable:</ins> <?php echo $listaProyectoEL[$i + 5]; ?><br>
+                            <ins>Fecha:</ins>
                             <?php
                             $dia = date("d", strtotime($listaProyectoEL[$i + 6]));
                             $mes = date("F", strtotime($listaProyectoEL[$i + 6]));

@@ -49,7 +49,12 @@ $alcanceDAO = new AlcanceDAO();
 
 $informeFinal = false;
 
+//******************************* Informe final ************************************************************************
 if(isset($_POST['grabarInformeFinal']) and $_POST['grabarInformeFinal'] == 'si') {
+    if(empty($_POST['proyecto'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idSolicitud = intval($_POST['proyecto']);
 
     $resultado = new ResultadoModelo();
@@ -95,6 +100,10 @@ if(isset($_POST['grabarSubirInformeFinal']) and $_POST['grabarSubirInformeFinal'
 $tipoEnsayo = ' ';
 
 if(isset($_POST['grabarDetalleEnsayo']) and $_POST['grabarDetalleEnsayo'] == 'si') {
+    if(empty($_POST['proyectoEL'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idEnsayoSolicitud = intval($_POST['proyectoEL']);
 
     if ('Suelo' == $_POST['tipoEnsayo']) {
@@ -105,7 +114,7 @@ if(isset($_POST['grabarDetalleEnsayo']) and $_POST['grabarDetalleEnsayo'] == 'si
 }
 
 if(isset($_POST['grabarRegistroSueloRoca']) and $_POST['grabarRegistroSueloRoca'] == 'si') {
-    $registro = new ServicioRegistroSuelo($ensayoDAO, $ensayoLaboratorioDAO, $detalleEnsayoDAO);
+    $registro = new ServicioRegistroSueloRoca($ensayoDAO, $ensayoLaboratorioDAO, $detalleEnsayoDAO);
 
     $listaCodigoEnsayo = array();
 
@@ -126,6 +135,10 @@ if(isset($_POST['grabarRegistroSueloRoca']) and $_POST['grabarRegistroSueloRoca'
 $muestra = false;
 
 if(isset($_POST['grabarMuestra']) and $_POST['grabarMuestra'] == 'si') {
+    if(empty($_POST['proyectoEL'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idEnsayoSolicitud = intval($_POST['proyectoEL']);
 
     $muestra = true;
@@ -137,8 +150,6 @@ if(isset($_POST['grabarRegistroMuestra']) and $_POST['grabarRegistroMuestra'] ==
         // A qui un mensaje desplegable para este control
         header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
     }
-    
-
 
     $registro = new ServicioRegistroMuestra($muestraDAO, $ensayoLaboratorioDAO, $bitacoraDAO);
     $registro->registrar($_POST['idEnsayoLaboratorio'],
@@ -157,6 +168,10 @@ if(isset($_POST['grabarRegistroMuestra']) and $_POST['grabarRegistroMuestra'] ==
 $resultadoEL = false;
 
 if(isset($_POST['grabarResultadoEL']) and $_POST['grabarResultadoEL'] == 'si') {
+    if(empty($_POST['proyectoEL'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idSolicitud = intval($_POST['proyectoEL']);
 
     $resultado = new ResultadoModelo();
@@ -202,6 +217,10 @@ if(isset($_POST['grabarSubirResultadoEL']) and $_POST['grabarSubirResultadoEL'] 
 $alcanceTC = false;
 
 if(isset($_POST['grabarAlcanceTC']) and $_POST['grabarAlcanceTC'] == 'si') {
+    if(empty($_POST['proyectoTC'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idTrabajoCampo = intval($_POST['proyectoTC']);
 
     $alcanceTC = true;
@@ -253,8 +272,6 @@ if(isset($_POST['grabarRegistroAlcanceTC']) and $_POST['grabarRegistroAlcanceTC'
     } else {
         $trabajoRealizadoTG = 'NINGUNO';
     }
-    
-
 
     $registro = new ServicioRegistroAlcance($alcanceDAO, $trabajoCampoDAO);
     $registro->registrar($_POST['idTrabajoCampo'],
@@ -275,6 +292,10 @@ if(isset($_POST['grabarRegistroAlcanceTC']) and $_POST['grabarRegistroAlcanceTC'
 $editarAlcanceTC = false;
 
 if(isset($_POST['grabarEditarAlcanceTC']) and $_POST['grabarEditarAlcanceTC'] == 'si') {
+    if(empty($_POST['proyectoTC'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idTrabajoCampo = intval($_POST['proyectoTC']);
 
     $alcance = new AlcanceModelo();
@@ -349,8 +370,11 @@ if(isset($_POST['grabarRegistroEditarAlcanceTC']) and $_POST['grabarRegistroEdit
     header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
 }
 //******************************* Ver alcance en .pdf ******************************************************************
-
 if(isset($_POST['grabarVerAlcanceTC']) and $_POST['grabarVerAlcanceTC'] == 'si') {
+    if(empty($_POST['proyectoTC'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idTrabajoCampo = intval($_POST['proyectoTC']);
 
     $pdf = new ServicioPDFAlcance($alcanceDAO);
@@ -360,6 +384,10 @@ if(isset($_POST['grabarVerAlcanceTC']) and $_POST['grabarVerAlcanceTC'] == 'si')
 $resultadoTC = false;
 
 if(isset($_POST['grabarResultadoTC']) and $_POST['grabarResultadoTC'] == 'si') {
+    if(empty($_POST['proyectoTC'])) {
+        // A qui un mensaje desplegable para este control
+        header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
+    }
     $idSolicitud = intval($_POST['proyectoTC']);
 
     $resultado = new ResultadoModelo();

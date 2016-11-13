@@ -83,7 +83,7 @@ class ServicioRegistroSolicitud
         
         $this->solicitudUsuarioDAO->insertarSolicitudUsuarioDAO($solicitudUsuario);
         
-        if ('Ensayo Laboratorio' == $tipoProyecto) {
+        if ('Ensayo de laboratorio' == $tipoProyecto) {
             $ensayoLaboratorio = new EnsayoLaboratorioModelo();
             $ensayoLaboratorio->setSolicitudIdSolicitud($idSolicitud);
             $ensayoLaboratorio->setMuestraRegistrada('false');
