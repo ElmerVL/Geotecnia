@@ -51,8 +51,8 @@ SQL;
         $sql = <<<SQL
 INSERT INTO public.muestra(idmuestra, ensayo_laboratorio_solicitud_idsolicitud, ubicacion_general, ubicacion_especifica,
 profundidad, fecha_toma_muestra, metodo_extraccion, punto, tipo, descripcion, codigo)
-VALUES ('$idMuestra', '$ensayoLaboratorioSolicitudIdSolicitud', '$ubicacionGeneral', '$ubicacionEspecifico', '$profundidad',
-'$fechaTomaMuestra', '$metodoExtraccion', '$punto', '$tipo', '$descripcion', '$codigo');
+VALUES ('$idMuestra', '$ensayoLaboratorioSolicitudIdSolicitud', '$ubicacionGeneral', '$ubicacionEspecifico',
+'$profundidad', '$fechaTomaMuestra', '$metodoExtraccion', '$punto', '$tipo', '$descripcion', '$codigo');
 SQL;
         pg_query($sql);
 
@@ -60,7 +60,7 @@ SQL;
     }
 
     /**
-     * 
+     *
      *
      * @param MuestraModelo $muestra
      * @return mixed

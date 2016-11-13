@@ -79,8 +79,9 @@ SQL;
 INSERT INTO public.alcance(idalcance, trabajo_campo_solicitud_idsolicitud, antecedente, objetivo,
 trabajo_campo, trabajo_gabinete, trabajo_laboratorio, duracion, precio, forma_pago, 
 requerimiento_adicional, observacion, conobservacion)
-VALUES ('$idAlcance', '$trabajoCampoSolicitudIdSolicitud', '$antecedente', '$objetivo', '$duracion', '$precio', '$formaPago',
-'$requerimientoAdicional', '$trabajoCampo', '$trabajoLaboratorio', '$trabajoGabinete', '$observacion', '$conObservacion');
+VALUES ('$idAlcance', '$trabajoCampoSolicitudIdSolicitud', '$antecedente', '$objetivo', '$duracion', '$precio',
+'$formaPago', '$requerimientoAdicional', '$trabajoCampo', '$trabajoLaboratorio', '$trabajoGabinete', '$observacion',
+'$conObservacion');
 SQL;
         pg_query($sql);
 

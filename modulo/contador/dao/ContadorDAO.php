@@ -7,7 +7,7 @@ class ContadorDAO extends Conexion
 {
     /**
      * Función para obtener el id del contador de la tabla contador.
-     * 
+     *
      * @param ContadorModelo $contador
      * @return int
      */

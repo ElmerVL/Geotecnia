@@ -1,0 +1,38 @@
+<?php
+if(!isset($_SESSION['idUsuario']))
+{
+    header('Location: '.Conexion::ruta().'?accion=inicio');
+}
+?>
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+    <?php include_once('componentesHead.phtml');?>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+</head>
+<body>
+<div id="fb-root"></div>
+<?php include_once ('cabeceraDePagina.phtml');?>
+
+<section class="container">
+    <h4>Workflow</h4>
+    <div class="row">
+        <div class="col-md-8" style="width: 100%">
+            <div id="cy" style="
+                height: 780px;
+              width: 100%;
+              left: 0;
+              top: 0;"></div>
+            <?php include_once ('workflow.phtml'); ?>
+            <?php include_once ('proyecto.phtml'); ?>
+            <?php include_once ('reporte.phtml'); ?>
+            <?php include_once ('solicitud.phtml'); ?>
+        </div>
+    </div>
+</section>
+<br />
+
+<?php include_once ('pieDePagina.phtml');?>
+<?php include_once ('scripts.phtml');?>
+</body>
+</html>

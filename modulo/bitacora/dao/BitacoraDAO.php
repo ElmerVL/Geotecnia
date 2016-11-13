@@ -15,11 +15,7 @@ FROM bitacora;
 SQL;
         $resultado = pg_query($sql);
 
-        $fila = pg_fetch_object($resultado);
-
-        $idBitacora = $fila->count;
-
-        return $idBitacora;
+        return pg_fetch_object($resultado)->count;
     }
 
     /**
@@ -32,7 +28,8 @@ SQL;
         parent::conectar();
 
         $sql = <<<SQL
-SELECT idbitacora, solicitud_idsolicitud, actividad, fecha_bitacora, nombre, tipo, ubicacion, responsable, solicitud.fecha
+SELECT idbitacora, solicitud_idsolicitud, actividad, fecha_bitacora, nombre, tipo, ubicacion, responsable,
+solicitud.fecha
 FROM bitacora, solicitud 
 WHERE bitacora.solicitud_idsolicitud = solicitud.idsolicitud 
 ORDER BY bitacora.fecha_bitacora DESC LIMIT 10 OFFSET 0;

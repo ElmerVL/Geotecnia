@@ -1,7 +1,7 @@
 <?php
 
-require_once ('modulo/alcance/modelo/AlcanceModelo.php');
-require_once ('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
+require_once('modulo/alcance/modelo/AlcanceModelo.php');
+require_once('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
 
 
 /**
@@ -21,7 +21,7 @@ class ServicioRegistroAlcance
 
     /**
      * ServicioRegistroAlcance constructor.
-     * 
+     *
      * @param AlcanceDAO $alcance
      * @param TrabajoCampoDAO $trabajoCampo
      */
@@ -43,8 +43,18 @@ class ServicioRegistroAlcance
      * @param $trabajoRealizadoTL
      * @param $trabajoRealizadoTG
      */
-    public function registrar($idTrabajoCampo, $antecedente, $objetivo, $duracionEstudio, $precioEstudio, $formaPago, $requerimientoAdicional, $trabajoRealizadoTC, $trabajoRealizadoTL, $trabajoRealizadoTG)
-    {
+    public function registrar(
+        $idTrabajoCampo,
+        $antecedente,
+        $objetivo,
+        $duracionEstudio,
+        $precioEstudio,
+        $formaPago,
+        $requerimientoAdicional,
+        $trabajoRealizadoTC,
+        $trabajoRealizadoTL,
+        $trabajoRealizadoTG
+    ) {
         $idAlcance = $this->alcanceDAO->getIdAlcanceParaInsertarDAO() + 1;
         
         $alcance = new AlcanceModelo();

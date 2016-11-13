@@ -207,7 +207,8 @@ SQL;
         $sql = <<<SQL
 SELECT nombre
 FROM solicitud, trabajo_campo
-WHERE  idsolicitud = trabajo_campo.solicitud_idsolicitud AND trabajo_campo.solicitud_idsolicitud = '$solicitudIdSolicitud';
+WHERE  idsolicitud = trabajo_campo.solicitud_idsolicitud
+AND trabajo_campo.solicitud_idsolicitud = '$solicitudIdSolicitud';
 SQL;
         $resultado = pg_query($sql);
 
@@ -234,7 +235,8 @@ SQL;
         $sql = <<<SQL
 SELECT fecha
 FROM solicitud, trabajo_campo
-WHERE  idsolicitud = trabajo_campo.solicitud_idsolicitud AND trabajo_campo.solicitud_idsolicitud = '$solicitudIdSolicitud';
+WHERE  idsolicitud = trabajo_campo.solicitud_idsolicitud
+AND trabajo_campo.solicitud_idsolicitud = '$solicitudIdSolicitud';
 SQL;
         $resultado = pg_query($sql);
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once ('modulo/muestra/modelo/MuestraModelo.php');
-require_once ('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorio.php');
+require_once('modulo/muestra/modelo/MuestraModelo.php');
+require_once('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorio.php');
 
 /**
  * Class ServicioRegistroMuestra
@@ -36,11 +36,27 @@ class ServicioRegistroMuestra
         $this->bitacoraDAO = $bitacora;
     }
 
-    public function registrar($idEnsayoLaboratorio, $tipoMuestra, $ubicacionGeneral, $ubicacionEspecifica, $profundidad, $fechaTomaMuestra, $metodoExtraccion, $puntoExtraccion, $descripcion)
-    {
+    public function registrar(
+        $idEnsayoLaboratorio,
+        $tipoMuestra,
+        $ubicacionGeneral,
+        $ubicacionEspecifica,
+        $profundidad,
+        $fechaTomaMuestra,
+        $metodoExtraccion,
+        $puntoExtraccion,
+        $descripcion
+    ) {
         $idMuestra= $this->muestraDAO->getIdMuestraParaInsertarDAO() + 1;
 
-        $codigo = $this->generarCodigo($idEnsayoLaboratorio, $metodoExtraccion, $puntoExtraccion, $tipoMuestra, $profundidad, $descripcion);
+        $codigo = $this->generarCodigo(
+            $idEnsayoLaboratorio,
+            $metodoExtraccion,
+            $puntoExtraccion,
+            $tipoMuestra,
+            $profundidad,
+            $descripcion
+        );
         
         $muestra = new MuestraModelo();
         $muestra->setIdMuestra($idMuestra);
@@ -67,8 +83,14 @@ class ServicioRegistroMuestra
         $registroBitacora->registrar($idEnsayoLaboratorio, 'Nueva muestra');
     }
 
-    public function generarCodigo($idEnsayoLaboratorio, $metodoExtraccion, $puntoExtraccion, $tipoMuestra, $profundidad, $descripcion)
-    {
+    public function generarCodigo(
+        $idEnsayoLaboratorio,
+        $metodoExtraccion,
+        $puntoExtraccion,
+        $tipoMuestra,
+        $profundidad,
+        $descripcion
+    ) {
         $muestra = new MuestraModelo();
         $muestra->setEnsayoLaboratorioSolicitudIdSolicitud($idEnsayoLaboratorio);
         
@@ -90,31 +112,66 @@ class ServicioRegistroMuestra
 
     public function codigoMetodoExtraccion($metodoExtraccion)
     {
-        if ('Cuchara bipartita' == $metodoExtraccion) { $codigo = "TZG"; }
-        if ('Tubo shelby' == $metodoExtraccion) { $codigo = "SHB"; }
-        if ('Manual' == $metodoExtraccion) { $codigo = "HND"; }
-        if ('Mostap' == $metodoExtraccion) { $codigo = "MTP"; }
-        if ('Extraccion nucleo rocas' == $metodoExtraccion) { $codigo = "ENR"; }
+        $codigo = "NaN";
+
+        if ('Cuchara bipartita' === $metodoExtraccion) {
+            $codigo = "TZG";
+        }
+        if ('Tubo shelby' === $metodoExtraccion) {
+            $codigo = "SHB";
+        }
+        if ('Manual' === $metodoExtraccion) {
+            $codigo = "HND";
+        }
+        if ('Mostap' === $metodoExtraccion) {
+            $codigo = "MTP";
+        }
+        if ('Extraccion nucleo rocas' === $metodoExtraccion) {
+            $codigo = "ENR";
+        }
 
         return $codigo;
     }
 
     public function codigoTipoMuestra($tipoMuestra)
     {
-        if ('Disturbada' == $tipoMuestra) { $codigo = "D"; }
-        if ('No disturbada' == $tipoMuestra) { $codigo = "U"; }
+        $codigo = "NaN";
+
+        if ('Disturbada' === $tipoMuestra) {
+            $codigo = "D";
+        }
+        if ('No disturbada' === $tipoMuestra) {
+            $codigo = "U";
+        }
 
         return $codigo;
     }
 
-    public function codigoDescripcion($descripcion) {
-        if ('Organico' == $descripcion) { $codigo = "O"; }
-        if ('Arcilla' == $descripcion) { $codigo = "C"; }
-        if ('Limo' == $descripcion) { $codigo = "M"; }
-        if ('Grava' == $descripcion) { $codigo = "G"; }
-        if ('Bolones' == $descripcion) { $codigo = "B"; }
-        if ('Rocas' == $descripcion) { $codigo = "R"; }
-        if ('Arena' == $descripcion) { $codigo = "S"; }
+    public function codigoDescripcion($descripcion)
+    {
+        $codigo = "NaN";
+
+        if ('Organico' === $descripcion) {
+            $codigo = "O";
+        }
+        if ('Arcilla' === $descripcion) {
+            $codigo = "C";
+        }
+        if ('Limo' === $descripcion) {
+            $codigo = "M";
+        }
+        if ('Grava' === $descripcion) {
+            $codigo = "G";
+        }
+        if ('Bolones' === $descripcion) {
+            $codigo = "B";
+        }
+        if ('Rocas' === $descripcion) {
+            $codigo = "R";
+        }
+        if ('Arena' === $descripcion) {
+            $codigo = "S";
+        }
 
         return $codigo;
     }

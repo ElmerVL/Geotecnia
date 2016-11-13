@@ -46,5 +46,4 @@ class UsuarioRolModelo
     {
         $this->usuarioIdUsuario = $usuarioIdUsuario;
     }
-    
 }

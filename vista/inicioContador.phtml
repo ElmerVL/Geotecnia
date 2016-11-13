@@ -26,7 +26,7 @@ if(!isset($_SESSION['idUsuario']))
                     <?php include_once ('registro.phtml'); ?>
                 </div>
                 <div class="center gap">
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="margin-top: 10%">
                         <?php if (false == $formularioRegistroClienteEL and false == $formularioRegistroClienteEG and false == $formularioRegistroPago) {?>
                             <?php include_once ('ultimasDiez.phtml')?>
                         <?php } if (true == $formularioRegistroClienteEL) {?>

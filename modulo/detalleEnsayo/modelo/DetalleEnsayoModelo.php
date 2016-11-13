@@ -136,5 +136,5 @@ class DetalleEnsayoModelo
     public function setTiempoUnitario($tiempoUnitario)
     {
         $this->tiempoUnitario = $tiempoUnitario;
-    }    
+    }
 }

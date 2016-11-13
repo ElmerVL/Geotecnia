@@ -76,8 +76,10 @@ SQL;
         parent::conectar();
 
         $sql = <<<SQL
-INSERT INTO public.resultado(idresultado, solicitud_idsolicitud, nombre_archivo, descripcion, informe_final, resultado_proyecto)
-VALUES ('$idResultado', '$solicitudIdSolicitud', '$nombreArchivo', '$descripcion', '$informeFinal', '$resultadoProyecto');
+INSERT INTO public.resultado(idresultado, solicitud_idsolicitud, nombre_archivo, descripcion, informe_final,
+resultado_proyecto)
+VALUES ('$idResultado', '$solicitudIdSolicitud', '$nombreArchivo', '$descripcion', '$informeFinal',
+'$resultadoProyecto');
 SQL;
         pg_query($sql);
 

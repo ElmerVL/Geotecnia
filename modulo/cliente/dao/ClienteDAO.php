@@ -28,8 +28,8 @@ class ClienteDAO extends Conexion
         $sql = <<<SQL
 INSERT INTO public.cliente(idcliente, nombre_factura, nit_ci, nombre_contacto, telefono_fijo, 
                            telefono_celular, direccion_fiscal, correo, tipo, ci_contacto)
-VALUES ('$idCliente', '$nombreFactura', '$nitCI', '$nombreContacto', '$telefonoFijo', '$telefonoCelular', '$direccionFiscal',
-'$correo', '$tipoCliente', '$ciContacto');
+VALUES ('$idCliente', '$nombreFactura', '$nitCI', '$nombreContacto', '$telefonoFijo', '$telefonoCelular',
+'$direccionFiscal', '$correo', '$tipoCliente', '$ciContacto');
 SQL;
         pg_query($sql);
 

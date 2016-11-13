@@ -27,17 +27,17 @@ if(!isset($_SESSION['idUsuario']))
                     <?php include_once  ('proyectoELyTC.phtml'); ?>
                 </div>
                 <div class="">
-                    <div class="col-md-4">
-                        <?php if ( false == $informeFinal and ' ' == $tipoEnsayo and false == $muestra and false == $resultadoEL and false == $alcanceTC and false == $editarAlcanceTC and false == $resultadoTC) {?>
+                    <div class="col-md-4" style="margin-top: 10%">
+                        <?php if (false == $informeFinal and ' ' === $tipoEnsayo and false == $muestra and false == $resultadoEL and false == $alcanceTC and false == $editarAlcanceTC and false == $resultadoTC) {?>
                             <?php include_once ('ultimasDiez.phtml')?>
                         <?php } ?>
                         <?php if (true == $informeFinal) {?>
                             <?php include_once ('formularioCargarInformeFinal.phtml'); ?>
                         <?php } ?>
-                        <?php if ('Suelo' == $tipoEnsayo) {?>
+                        <?php if ('Suelo' === $tipoEnsayo) {?>
                             <?php include_once('formularioRegistroTipoSueloEnsayo.phtml'); ?>
                         <?php } ?>
-                        <?php if ('Roca' == $tipoEnsayo) {?>
+                        <?php if ('Roca' === $tipoEnsayo) {?>
                             <?php include_once('formularioRegistroTipoRocaEnsayo.phtml'); ?>
                         <?php } ?>
                         <?php if (true == $muestra) {?>

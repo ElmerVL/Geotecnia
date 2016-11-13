@@ -21,8 +21,10 @@ class SolicitudPagoDAO extends Conexion
         parent::conectar();
 
         $sql = <<<SQL
-INSERT INTO public.solicitud_pago(pago_idpago, solicitud_idsolicitud, porcentaje_anticipo, anticipo_pagado, porcentaje_saldo, saldo_pagado)
-VALUES ('$solicitudIdSolicitud', '$pagoIdPago', '$porcentajeAnticipo', '$anticipoPagado', '$porcentajeSaldo', '$saldoPagado');
+INSERT INTO public.solicitud_pago(pago_idpago, solicitud_idsolicitud, porcentaje_anticipo, anticipo_pagado,
+porcentaje_saldo, saldo_pagado)
+VALUES ('$solicitudIdSolicitud', '$pagoIdPago', '$porcentajeAnticipo', '$anticipoPagado', '$porcentajeSaldo',
+'$saldoPagado');
 SQL;
         pg_query($sql);
 

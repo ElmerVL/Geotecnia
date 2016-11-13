@@ -13,8 +13,14 @@
 <?php if(isset ($_SESSION['idUsuario'])) {?>
         <link href="<?php echo Conexion::ruta();?>calendario/fullcalendar.css" rel="stylesheet">
         <link href="<?php echo Conexion::ruta();?>calendario/fullcalendar.print.css" rel="stylesheet" media="print">
+        <link href="<?php echo Conexion::ruta();?>css/jquery.qtip.min.css" rel="stylesheet" type="text/css" />
         <script src="<?php echo Conexion::ruta();?>calendario/lib/moment.min.js"></script>
         <script src="<?php echo Conexion::ruta();?>calendario/lib/jquery.min.js"></script>
         <script src="<?php echo Conexion::ruta();?>calendario/lib/jquery-ui.custom.min.js"></script>
         <script src="<?php echo Conexion::ruta();?>calendario/fullcalendar.min.js"></script>
+        <script src="<?php echo Conexion::ruta();?>js/cytoscape.min.js"></script>
+        <script src="<?php echo Conexion::ruta();?>js/jquery.qtip.min.js"></script>
+        <script src="<?php echo Conexion::ruta();?>js/cytoscape-qtip.js"></script>
+        <script src="<?php echo Conexion::ruta();?>js/workflow-script.js"></script>
+
 <?php }?>

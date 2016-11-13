@@ -1,6 +1,6 @@
 <?php
 
-require_once ('modulo/solicitud/modelo/SolicitudModelo.php');
+require_once('modulo/solicitud/modelo/SolicitudModelo.php');
 
 /**
  * Class SolicitudDAO
@@ -142,7 +142,7 @@ SQL;
 
     /**
      * Función para obtener las solicitudes ordenados por un determinado año.
-     * 
+     *
      * @param $anio
      * @return array $solicitud
      */
@@ -329,7 +329,7 @@ SQL;
 
     /**
      * Función para obtener el id de la solicitud a partir de la tabla solicitud.
-     * 
+     *
      * @return mixed idSolicitud
      */
     public function getIdSolicitudParaInsertarDAO()

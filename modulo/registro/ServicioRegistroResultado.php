@@ -1,6 +1,6 @@
 <?php
 
-require_once ('modulo/resultado/modelo/ResultadoModelo.php');
+require_once('modulo/resultado/modelo/ResultadoModelo.php');
 
 /**
  * Class ServicioRegistroResultado

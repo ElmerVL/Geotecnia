@@ -57,10 +57,10 @@ SQL;
         parent::conectar();
 
         $sql = <<<SQL
-INSERT INTO public.detalle_ensayo(ensayo_idensayo, ensayo_laboratorio_solicitud_idsolicitud, cantidad_ensayo, precio_total, 
-precio_unitario, tiempo_total, tiempo_unidad)
-VALUES ('$ensayoIdEnsayo', '$ensayoLaboratorioSolicitudIdSolicitud', '$cantidadEnsayo', '$precioTotal', '$precioUnitario',
-'$tiempoTotal', '$tiempoUnitario');
+INSERT INTO public.detalle_ensayo(ensayo_idensayo, ensayo_laboratorio_solicitud_idsolicitud, cantidad_ensayo,
+precio_total, precio_unitario, tiempo_total, tiempo_unidad)
+VALUES ('$ensayoIdEnsayo', '$ensayoLaboratorioSolicitudIdSolicitud', '$cantidadEnsayo', '$precioTotal',
+'$precioUnitario', '$tiempoTotal', '$tiempoUnitario');
 SQL;
         pg_query($sql);
 

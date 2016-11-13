@@ -5,15 +5,15 @@
  */
 class AuxiliarModelo
 {
-    /**@var apellido */
+    /**@var string $apellido */
     private $apellido;
 
-    /**@var idAuxiliar */
+    /**@var int $idAuxiliar */
     private $idAuxiliar;
 
-    /** @var  nombre */
+    /** @var string $nombre */
     private $nombre;
 
-    /**@var usuarioIdUsuario */
+    /**@var int $usuarioIdUsuario */
     private $usuarioIdUsuario;
 }

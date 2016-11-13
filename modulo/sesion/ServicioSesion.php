@@ -1,8 +1,8 @@
 <?php
 
-require_once ('modulo/usuario/modelo/UsuarioModelo.php');
-require_once ('modulo/rol/modelo/RolModelo.php');
-require_once ('modulo/usuarioRol/modelo/UsuarioRolModelo.php');
+require_once('modulo/usuario/modelo/UsuarioModelo.php');
+require_once('modulo/rol/modelo/RolModelo.php');
+require_once('modulo/usuarioRol/modelo/UsuarioRolModelo.php');
 
 /**
  * Este servicio se encarga de iniciar sesión
@@ -48,7 +48,8 @@ class ServicioSesion
         if ($this->usuarioDAO->verificarExistenciaUsuarioDAO($usuario) == 1) {
             $this->crearSesion($usuario);
         } else {
-            header('Location: '.Conexion::ruta().'?accion=inicio&m=2');exit;
+            header('Location: '.Conexion::ruta().'?accion=inicio&m=2');
+            exit;
         }
     }
 
@@ -74,6 +75,7 @@ class ServicioSesion
         $_SESSION['idUsuario'] = $idUsuario;
         $_SESSION['idRol'] = $idRol;
 
-        header('Location: '.Conexion::ruta().'?accion=inicio'.$this->rolDAO->getDescripcionDAO($rol));exit;
+        header('Location: '.Conexion::ruta().'?accion=inicio'.$this->rolDAO->getDescripcionDAO($rol));
+        exit;
     }
 }

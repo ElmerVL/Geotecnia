@@ -1,8 +1,8 @@
 <?php
 
-require_once ('modulo/cliente/modelo/ClienteModelo.php');
-require_once ('modulo/formularioEL/modelo/FormularioELModelo.php');
-require_once ('modulo/formularioTC/modelo/FormularioTCModelo.php');
+require_once('modulo/cliente/modelo/ClienteModelo.php');
+require_once('modulo/formularioEL/modelo/FormularioELModelo.php');
+require_once('modulo/formularioTC/modelo/FormularioTCModelo.php');
 
 /**
  * Class ServicioRegistroClienteEL
@@ -36,8 +36,12 @@ class ServicioRegistroCliente
      * @param FormularioTCDAO $formularioTC
      * @param SolicitudDAO $solicitud
      */
-    public function __construct( ClienteDAO $cliente, FormularioELDAO $formularioEL, FormularioTCDAO $formularioTC, SolicitudDAO $solicitud)
-    {
+    public function __construct(
+        ClienteDAO $cliente,
+        FormularioELDAO $formularioEL,
+        FormularioTCDAO $formularioTC,
+        SolicitudDAO $solicitud
+    ) {
         $this->clienteDAO = $cliente;
         $this->formularioELDAO = $formularioEL;
         $this->formularioTCDAO = $formularioTC;
@@ -57,8 +61,19 @@ class ServicioRegistroCliente
      * @param string $correo
      * @param string $direccionFiscal
      */
-    public function registrar($idEnsayoLaboratorio, $nombreFactura, $tipoCliente, $nombreFactura, $nitCI, $nombreContacto, $ciContacto, $telefonoFijo, $telefonoCelular, $correo, $direccionFiscal)
-    {
+    public function registrar(
+        $idEnsayoLaboratorio,
+        $nombreFactura,
+        $tipoCliente,
+        $nombreFactura,
+        $nitCI,
+        $nombreContacto,
+        $ciContacto,
+        $telefonoFijo,
+        $telefonoCelular,
+        $correo,
+        $direccionFiscal
+    ) {
         $idCliente = $this->clienteDAO->getIdClienteParaInsertarDAO() + 1;
         
         $cliente = new ClienteModelo();
@@ -83,7 +98,7 @@ class ServicioRegistroCliente
 
         $tipoSolicitud = $this->solicitudDAO->getTipoSolicitudDAO($solicitud);
 
-        if ('Ensayo Laboratorio' == $tipoSolicitud) {
+        if ('Ensayo Laboratorio' === $tipoSolicitud) {
             $formularioEL = new FormularioELModelo();
             $formularioEL->setClienteIdCliente($idCliente);
             $formularioEL->setELSolicitudIdSolicitud($idEnsayoLaboratorio);

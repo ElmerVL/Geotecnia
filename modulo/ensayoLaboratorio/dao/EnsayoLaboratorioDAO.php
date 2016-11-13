@@ -131,7 +131,7 @@ SQL;
     /**
      * Función para obtener el seguimiento de ensayos de laboratorio
      * a partir de la tabla solicitud, ensayo_laboratorio y solicitud_pago.
-     * 
+     *
      * @return array $seguimientoEL
      */
     public function getSeguimientoEnsayoLaboratorioDAO()
@@ -184,7 +184,8 @@ SQL;
         $sql = <<<SQL
 SELECT nombre
 FROM solicitud, ensayo_laboratorio
-WHERE  idsolicitud = ensayo_laboratorio.solicitud_idsolicitud AND ensayo_laboratorio.solicitud_idsolicitud = '$solicitudIdSolicitud';
+WHERE  idsolicitud = ensayo_laboratorio.solicitud_idsolicitud
+AND ensayo_laboratorio.solicitud_idsolicitud = '$solicitudIdSolicitud';
 SQL;
         $resultado = pg_query($sql);
 
@@ -211,7 +212,8 @@ SQL;
         $sql = <<<SQL
 SELECT fecha
 FROM solicitud, ensayo_laboratorio
-WHERE  idsolicitud = ensayo_laboratorio.solicitud_idsolicitud AND ensayo_laboratorio.solicitud_idsolicitud = '$solicitudIdSolicitud';
+WHERE  idsolicitud = ensayo_laboratorio.solicitud_idsolicitud
+AND ensayo_laboratorio.solicitud_idsolicitud = '$solicitudIdSolicitud';
 SQL;
         $resultado = pg_query($sql);
 

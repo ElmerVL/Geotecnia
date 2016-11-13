@@ -1,1 +1,54 @@
-<h1>A qui el calendario</h1>
+<div class="contenedor-calendario">
+    <h1>Calendario</h1>
+
+    <div id='calendar'></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next',
+                center: 'title',
+                right: ''
+            },
+            defaultDate: '<?php echo date('Y-m-d'); ?>',
+            editable: false,
+            events: [
+                {
+                    title: 'Proyecto Uno',
+                    url: 'http://google.com/',
+                    start: '2016-11-07',
+                    end: '2016-11-10'
+                },
+                {
+                    title: 'Proyecto Test Dos',
+                    url: 'http://google.com/',
+                    start: '2016-11-07'
+                }
+            ]
+        });
+
+    });
+
+</script>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        font-size: 14px;
+    }
+
+    .contenedor-calendario {
+        margin-top: 10%;
+        margin-right: 10%;
+    }
+
+    #calendar {
+        width: 90%;
+    }
+
+</style>

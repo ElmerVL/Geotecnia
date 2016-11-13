@@ -1,7 +1,7 @@
 <?php
 
-require_once ('modulo/alcance/modelo/AlcanceModelo.php');
-require_once ('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
+require_once('modulo/alcance/modelo/AlcanceModelo.php');
+require_once('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
 
 
 /**
@@ -44,8 +44,19 @@ class ServicioEditarAlcance
      * @param $trabajoRealizadoTL
      * @param $trabajoRealizadoTG
      */
-    public function editar($idTrabajoCampo, $idAlcance, $antecedente, $objetivo, $duracionEstudio, $precioEstudio, $formaPago, $requerimientoAdicional, $trabajoRealizadoTC, $trabajoRealizadoTL, $trabajoRealizadoTG)
-    {
+    public function editar(
+        $idTrabajoCampo,
+        $idAlcance,
+        $antecedente,
+        $objetivo,
+        $duracionEstudio,
+        $precioEstudio,
+        $formaPago,
+        $requerimientoAdicional,
+        $trabajoRealizadoTC,
+        $trabajoRealizadoTL,
+        $trabajoRealizadoTG
+    ) {
         $alcance = new AlcanceModelo();
         $alcance->setIdAlcance($idAlcance);
         $alcance->setTrabajoCampoSolicitudIdSolicitud($idTrabajoCampo);

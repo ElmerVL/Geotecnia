@@ -7,7 +7,7 @@ class RolDAO extends Conexion
 {
     /**
      * Función para obtener el tipo de rol a partir de la tabla rol
-     * 
+     *
      * @param RolModelo $rol
      * @return mixed tipoRol
      */

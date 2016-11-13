@@ -1,9 +1,10 @@
 <?php
 
-require_once ('modulo/solicitud/modelo/SolicitudModelo.php');
-require_once ('modulo/solicitudUsuario/modelo/SolicitudUsuarioModelo.php');
-require_once ('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorioModelo.php');
-require_once ('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
+require_once('modulo/solicitud/modelo/SolicitudModelo.php');
+require_once('modulo/solicitudUsuario/modelo/SolicitudUsuarioModelo.php');
+require_once('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorioModelo.php');
+require_once('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
+require_once('modulo/registro/ServicioRegistroBitacora.php');
 
 /**
  * Este servicio se encarga de registrar una solicitud.
@@ -38,8 +39,14 @@ class ServicioRegistroSolicitud
      * @param TrabajoCampoDAO $trabajoCampo
      * @param BitacoraDAO $bitacora
      */
-    public function __construct(SolicitudDAO $solicitud, SolicitudUsuarioDAO $solicitudUsuario, UsuarioDAO $usuario, EnsayoLaboratorioDAO $ensayoLaboratorio, TrabajoCampoDAO $trabajoCampo, BitacoraDAO $bitacora)
-    {
+    public function __construct(
+        SolicitudDAO $solicitud,
+        SolicitudUsuarioDAO $solicitudUsuario,
+        UsuarioDAO $usuario,
+        EnsayoLaboratorioDAO $ensayoLaboratorio,
+        TrabajoCampoDAO $trabajoCampo,
+        BitacoraDAO $bitacora
+    ) {
         $this->solicitudDAO = $solicitud;
         $this->solicitudUsuarioDAO = $solicitudUsuario;
         $this->usuarioDAO = $usuario;

@@ -1,6 +1,6 @@
 <?php
 
-include_once ('modulo/bitacora/modelo/BitacoraModelo.php');
+include_once('modulo/bitacora/modelo/BitacoraModelo.php');
 
 /**
  * Class ServicioRegistroBitacora
@@ -28,7 +28,7 @@ class ServicioRegistroBitacora
         $bitacora->setIdBitacora($idBitacora);
         $bitacora->setSolicitudIdSolicitud($idSolicitud);
         $bitacora->setActividad($actividad);
-        $fecha = date('Y-m-d').' '.date('H:i:s',strtotime('now')+21600);
+        $fecha = date('Y-m-d').' '.date('H:i:s', strtotime('now')+21600);
         $bitacora->setFechaBitacora($fecha);
         
         $this->bitacoraDAO->insertarBitacoraDAO($bitacora);

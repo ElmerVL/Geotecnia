@@ -39,8 +39,10 @@ SQL;
         parent::conectar();
 
         $sql = <<<SQL
-SELECT nombre, nombre_factura, nit_ci, nombre_contacto, fecha, precio, cliente.tipo, anticipo_pagado, saldo_pagado, solicitud.tipo
-FROM public.formulario_tc, public.cliente, public.trabajo_campo, public.solicitud, public.solicitud_pago, public.alcance
+SELECT nombre, nombre_factura, nit_ci, nombre_contacto, fecha, precio, cliente.tipo, anticipo_pagado, saldo_pagado,
+solicitud.tipo
+FROM public.formulario_tc, public.cliente, public.trabajo_campo, public.solicitud, public.solicitud_pago,
+public.alcance
 WHERE formulario_tc.cliente_idcliente = cliente.idcliente 
 AND formulario_tc.trabajo_campo_solicitud_idsolicitud = trabajo_campo.solicitud_idsolicitud
 AND trabajo_campo.solicitud_idsolicitud = solicitud.idsolicitud
