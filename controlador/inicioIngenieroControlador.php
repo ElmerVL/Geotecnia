@@ -16,6 +16,8 @@ require_once ('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
 require_once ('modulo/solicitud/modelo/SolicitudModelo.php');
 require_once ('modulo/resultado/modelo/ResultadoModelo.php');
 require_once ('modulo/alcance/modelo/AlcanceModelo.php');
+require_once ('modulo/registro/ServicioRegistroAlcance.php');
+require_once ('modulo/pdf/ServicioPDFAlcance.php');
 
 
 $bitacoraDAO = new BitacoraDAO();

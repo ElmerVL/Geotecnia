@@ -1,5 +1,7 @@
 <?php
 
+require_once ('modulo/alcance/modelo/AlcanceModelo.php');
+
 /**
  * Class AlcanceDAO
  */
@@ -76,15 +78,48 @@ SQL;
         parent::conectar();
 
         $sql = <<<SQL
-INSERT INTO public.alcance(idalcance, trabajo_campo_solicitud_idsolicitud, antecedente, objetivo,
-trabajo_campo, trabajo_gabinete, trabajo_laboratorio, duracion, precio, forma_pago, 
-requerimiento_adicional, observacion, conobservacion)
-VALUES ('$idAlcance', '$trabajoCampoSolicitudIdSolicitud', '$antecedente', '$objetivo', '$duracion', '$precio',
+INSERT INTO public.alcance(idalcance, trabajo_campo_solicitud_idsolicitud, antecedente, objetivo, duracion, precio,
+forma_pago, requerimiento_adicional, trabajo_campo, trabajo_gabinete, trabajo_laboratorio, observacion, conobservacion)
+VALUES ($idAlcance, $trabajoCampoSolicitudIdSolicitud, '$antecedente', '$objetivo', $duracion, '$precio',
 '$formaPago', '$requerimientoAdicional', '$trabajoCampo', '$trabajoLaboratorio', '$trabajoGabinete', '$observacion',
 '$conObservacion');
 SQL;
         pg_query($sql);
 
         pg_close();
+    }
+
+    /**
+     *
+     *
+     * @param int $idTrabajoCampo
+     * @return AlcanceModelo
+     */
+    public function recuperarAlcanceDAO($idTrabajoCampo)
+    {
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT * FROM public.alcance WHERE trabajo_campo_solicitud_idsolicitud = $idTrabajoCampo
+SQL;
+        $resultado = pg_query($sql);
+
+        $fila = pg_fetch_object($resultado);
+
+        $alcanceModelo = new AlcanceModelo();
+        $alcanceModelo->setAntecedente($fila->antecedente);
+        $alcanceModelo->setConObservacion($fila->conobservacion);
+        $alcanceModelo->setDuracion($fila->duracion);
+        $alcanceModelo->setFormaPago($fila->forma_pago);
+        $alcanceModelo->setPrecio($fila->precio);
+        $alcanceModelo->setObjetivo($fila->objetivo);
+        $alcanceModelo->setObservacion($fila->observacion);
+        $alcanceModelo->setTrabajoCampo($fila->trabajo_campo);
+        $alcanceModelo->setTrabajoGabinete($fila->trabajo_gabinete);
+        $alcanceModelo->setTrabajoLaboratorio($fila->trabajo_laboratorio);
+        $alcanceModelo->setRequerimientoAdicional($fila->requerimiento_adicional);
+        $alcanceModelo->setTrabajoCampoSolicitudIdSolicitud($fila->trabajo_campo_solicitud_idsolicitud);
+        pg_close();
+        return $alcanceModelo;
     }
 }
