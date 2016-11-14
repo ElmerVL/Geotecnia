@@ -10,6 +10,7 @@ require_once ('modulo/detalleEnsayo/dao/DetalleEnsayoDAO.php');
 require_once ('modulo/alcance/dao/AlcanceDAO.php');
 require_once ('modulo/bitacora/dao/BitacoraDAO.php');
 require_once ('modulo/registro/ServicioRegistroSueloRoca.php');
+require_once ('modulo/registro/ServicioRegistroResultado.php');
 
 require_once ('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorioModelo.php');
 require_once ('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
@@ -72,22 +73,24 @@ if(isset($_POST['grabarSubirInformeFinal']) and $_POST['grabarSubirInformeFinal'
     $idSolicitud = intval($_POST['idSolicitud']);
     $solicitud->setIdSolicitud($idSolicitud);
 
-    $tipo = $solicitudDAO->getTipoSolicitudDAO($solicitud);
+    $tipoSolicitud = $solicitudDAO->getTipoSolicitudDAO($solicitud);
+    if ('Ensayo de laboratorio' == $tipoSolicitud){
+        $tipo = 'EnsayoLaboratorio';
+    } else {
+        $tipo = 'TrabajoCampo';
+    }
     $codigoProyecto = $solicitudDAO->getCodigoProyectoSolicitudDAO($solicitud);
 
-    $direccion = $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/';
+    $direccion = $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/';
 
-    $nombreArchivo = $_FILES['archivo']['name'];
-    $nombreTemporalArchivo = $_FILES['archivo']['tmp_name'];
-    $tipoArchivo = $_FILES['archivo']['type'];
+    $nombreArchivo = $_POST['archivo'];
+    $nombreTemporalArchivo = $_POST['archivo'];
 
     if (file_exists($direccion)) {
-        $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     } else {
-        mkdir('../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/', 0777, true);
-        $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
+        mkdir('Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/', 0777, true);
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     }

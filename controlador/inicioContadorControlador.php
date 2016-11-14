@@ -62,7 +62,7 @@ if(isset($_POST['grabarS']) and $_POST['grabarS'] == 'si') {
     $registro->registrar($_SESSION['idUsuario'], $_POST['nombreP'], $_POST['ubicacionP'], $_POST['proyecto'], $_POST['responsable']);
     
     // A qui un mensaje desplegable para confirmar registro exit;
-    header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
+ //   header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
 }
 //******************************* Registro de un cliente para un proyecto EL *******************************************
 $formularioRegistroClienteEL = false;

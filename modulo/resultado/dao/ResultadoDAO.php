@@ -29,7 +29,7 @@ SQL;
         $resultado = pg_query($sql);
 
         while ($fila = pg_fetch_object($resultado)) {
-            $listaResultado[] = $fila->idsolicitud;
+            $listaResultado[] = $fila->idresultado;
             $listaResultado[] = $fila->nombre_archivo;
             $listaResultado[] = $fila->descripcion;
         }

@@ -32,13 +32,12 @@ class ServicioRegistroResultado
     {
         $idResultado = $this->resultadoDAO->getIdResultadoParaInsertarDAO() + 1;
 
-        
         $resultado = new ResultadoModelo();
         $resultado->setIdResultado($idResultado);
         $resultado->setSolicitudIdSolicitud($idSolicitud);
         $resultado->setNombreArchivo($nombreArchivo);
         $resultado->setDescripcion($descripcion);
-        if ('Ensayo laboratorio' == $tipo) {
+        if ('Ensayo de laboratorio' == $tipo) {
             $resultado->setInformeFinal('true');
             $resultado->setResultadoProyecto('false');
         } else {
