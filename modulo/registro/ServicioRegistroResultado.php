@@ -37,7 +37,7 @@ class ServicioRegistroResultado
         $resultado->setSolicitudIdSolicitud($idSolicitud);
         $resultado->setNombreArchivo($nombreArchivo);
         $resultado->setDescripcion($descripcion);
-        if ('Ensayo de laboratorio' == $tipo) {
+        if ('InformeFinal' == $tipo) {
             $resultado->setInformeFinal('true');
             $resultado->setResultadoProyecto('false');
         } else {

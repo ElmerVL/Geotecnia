@@ -11,6 +11,40 @@ class EnsayoLaboratorioDAO extends Conexion
  *
  * @return array $ensayoLaboratorio
  */
+    public function getEnsayoLaboratorioHabilitadoDAO()
+    {
+        $ensayoLaboratorio = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
+FROM solicitud, ensayo_laboratorio 
+WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud
+AND solicitud.habilitado = 'true'
+ORDER BY idsolicitud DESC;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $ensayoLaboratorio[] = $fila->idsolicitud;
+            $ensayoLaboratorio[] = $fila->codigo;
+            $ensayoLaboratorio[] = $fila->nombre;
+            $ensayoLaboratorio[] = $fila->tipo;
+            $ensayoLaboratorio[] = $fila->ubicacion;
+            $ensayoLaboratorio[] = $fila->responsable;
+            $ensayoLaboratorio[] = $fila->fecha;
+        }
+
+        return $ensayoLaboratorio;
+    }
+
+    /**
+     * Función para obtener los proyectos de tipo ensayo de laboratorio
+     * a partir de la tabla solicitud y ensayo_laboratorio.
+     *
+     * @return array $ensayoLaboratorio
+     */
     public function getEnsayoLaboratorioDAO()
     {
         $ensayoLaboratorio = array();

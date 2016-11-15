@@ -26,18 +26,20 @@ $listaBitacoraUltimasDiez = $bitacoraDAO->getBitacoraUltimasDiez();
 
 $ensayoLaboratorioDAO =  new EnsayoLaboratorioDAO();
 $listaProyectoEL = $ensayoLaboratorioDAO->getEnsayoLaboratorioDAO();
+$listaProyectoELHabilitado = $ensayoLaboratorioDAO->getEnsayoLaboratorioHabilitadoDAO();
 $listaProyectoELSinMuestra = $ensayoLaboratorioDAO->getEnsayoLaboratorioSinMuestraDAO();
 $listaProyectoELSinEnsayo = $ensayoLaboratorioDAO->getEnsayoLaboratorioSinEnsayoDAO();
 $listaSeguimientoEL = $ensayoLaboratorioDAO->getSeguimientoEnsayoLaboratorioDAO();
 
 $trabajoCampoDAO =  new TrabajoCampoDAO();
 $listaProyectoTC = $trabajoCampoDAO->getTrabajoCampoDAO();
+$listaProyectoTCHabilitado = $trabajoCampoDAO->getTrabajoCampoHabilitadoDAO();
 $listaProyectoTCSinAlcance = $trabajoCampoDAO->getTrabajoCampoSinAlcanceDAO();
 $listaProyectoTCConAlcance = $trabajoCampoDAO->getTrabajoCampoConAlcanceDAO();
 $listaSeguimientoTC = $trabajoCampoDAO->getSeguimientoTrabajoCampoDAO();
 
 $solicitudDAO = new SolicitudDAO();
-$listaSolicitud = $solicitudDAO->getSolicitudDAO();
+$listaSolicitud = $solicitudDAO->getSolicitudHabilitadoDAO();
 
 $resultadoDAO = new ResultadoDAO();
 
@@ -50,9 +52,9 @@ $muestraDAO = new MuestraDAO();
 
 $alcanceDAO = new AlcanceDAO();
 
+//******************************* Informe final ************************************************************************
 $informeFinal = false;
 
-//******************************* Informe final ************************************************************************
 if(isset($_POST['grabarInformeFinal']) and $_POST['grabarInformeFinal'] == 'si') {
     if(empty($_POST['proyecto'])) {
         // A qui un mensaje desplegable para este control
@@ -63,7 +65,7 @@ if(isset($_POST['grabarInformeFinal']) and $_POST['grabarInformeFinal'] == 'si')
     $resultado = new ResultadoModelo();
     $resultado->setSolicitudIdSolicitud($idSolicitud);
     
-    $listaResultado = $resultadoDAO->getResultadoDAO($resultado);
+    $listaInformeFinal = $resultadoDAO->getResultadoInformeFinalDAO($resultado);
 
     $informeFinal = true;
 }
@@ -74,29 +76,31 @@ if(isset($_POST['grabarSubirInformeFinal']) and $_POST['grabarSubirInformeFinal'
     $solicitud->setIdSolicitud($idSolicitud);
 
     $tipoSolicitud = $solicitudDAO->getTipoSolicitudDAO($solicitud);
-    if ('Ensayo de laboratorio' == $tipoSolicitud){
-        $tipo = 'EnsayoLaboratorio';
+    if ('Ensayo de laboratorio' == $tipoSolicitud) { 
+        $tipo = 'EnsayoLaboratorio'; 
     } else {
         $tipo = 'TrabajoCampo';
     }
     $codigoProyecto = $solicitudDAO->getCodigoProyectoSolicitudDAO($solicitud);
 
-    $direccion = $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/';
+    $direccion = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/';
 
-    $nombreArchivo = $_POST['archivo'];
-    $nombreTemporalArchivo = $_POST['archivo'];
+    $nombreArchivo = $_FILES['archivo']['name'];
+    $nombreTemporalArchivo = $_FILES['archivo']['tmp_name'];
 
     if (file_exists($direccion)) {
+        $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     } else {
+        $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
         mkdir('Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/', 0777, true);
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     }
 
     $registro = new ServicioRegistroResultado($resultadoDAO, $solicitudDAO);
-    $registro->registrar($nombreArchivo, $idSolicitud, $_POST['descripcion'], $tipo);
+    $registro->registrar($nombreArchivo, $idSolicitud, $_POST['descripcion'], 'InformeFinal');
 
     // A qui un mensaje desplegable para confirmar registro exit;
     header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
@@ -169,7 +173,7 @@ if(isset($_POST['grabarRegistroMuestra']) and $_POST['grabarRegistroMuestra'] ==
     // A qui un mensaje desplegable para este control
     header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
 }
-//******************************* Registro de resultados para un ensayo de laboratorio *********************************
+//******************************* Registro de resultados parciales para un ensayo de laboratorio ***********************
 $resultadoEL = false;
 
 if(isset($_POST['grabarResultadoEL']) and $_POST['grabarResultadoEL'] == 'si') {
@@ -182,7 +186,7 @@ if(isset($_POST['grabarResultadoEL']) and $_POST['grabarResultadoEL'] == 'si') {
     $resultado = new ResultadoModelo();
     $resultado->setSolicitudIdSolicitud($idSolicitud);
 
-    $listaResultado = $resultadoDAO->getResultadoDAO($resultado);
+    $listaResultadoParcial = $resultadoDAO->getResultadoParcialDAO($resultado);
 
     $resultadoEL = true;
 }
@@ -192,33 +196,34 @@ if(isset($_POST['grabarSubirResultadoEL']) and $_POST['grabarSubirResultadoEL'] 
     $idSolicitud = intval($_POST['idSolicitud']);
     $solicitud->setIdSolicitud($idSolicitud);
 
-    $tipo = $solicitudDAO->getTipoSolicitudDAO($solicitud);
+    $tipoSolicitud = $solicitudDAO->getTipoSolicitudDAO($solicitud);
     $codigoProyecto = $solicitudDAO->getCodigoProyectoSolicitudDAO($solicitud);
+    $tipo = 'EnsayoLaboratorio';
 
-    $direccion = $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/';
+    $direccion = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/';
 
     $nombreArchivo = $_FILES['archivo']['name'];
     $nombreTemporalArchivo = $_FILES['archivo']['tmp_name'];
-    $tipoArchivo = $_FILES['archivo']['type'];
 
     if (file_exists($direccion)) {
-        $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
+        $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/'.$nombreArchivo;
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     } else {
-        mkdir('../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/', 0777, true);
-        $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
+        $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/'.$nombreArchivo;
+        mkdir('Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/', 0777, true);
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     }
 
     $registro = new ServicioRegistroResultado($resultadoDAO, $solicitudDAO);
-    $registro->registrar($nombreArchivo, $idSolicitud, $_POST['descripcion'], $tipo);
+    $registro->registrar($nombreArchivo, $idSolicitud, $_POST['descripcion'], 'ResultadoParcial');
 
     // A qui un mensaje desplegable para confirmar registro exit;
     header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
 }
-//******************************* Registro de alcance para un trabajo de campo ******************************************
+
+//******************************* Registro de alcance para un trabajo de campo *****************************************
 $alcanceTC = false;
 
 if(isset($_POST['grabarAlcanceTC']) and $_POST['grabarAlcanceTC'] == 'si') {
@@ -374,6 +379,7 @@ if(isset($_POST['grabarRegistroEditarAlcanceTC']) and $_POST['grabarRegistroEdit
     // A qui un mensaje desplegable para este control
     header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
 }
+
 //******************************* Ver alcance en .pdf ******************************************************************
 if(isset($_POST['grabarVerAlcanceTC']) and $_POST['grabarVerAlcanceTC'] == 'si') {
     if(empty($_POST['proyectoTC'])) {
@@ -385,7 +391,8 @@ if(isset($_POST['grabarVerAlcanceTC']) and $_POST['grabarVerAlcanceTC'] == 'si')
     $pdf = new ServicioPDFAlcance($alcanceDAO);
     $pdf->crearPDF($idTrabajoCampo);
 }
-//******************************* Registro de resultados para un trabajo de campo **************************************
+
+//******************************* Registro de resultados parciale para un trabajo de campo *****************************
 $resultadoTC = false;
 
 if(isset($_POST['grabarResultadoTC']) and $_POST['grabarResultadoTC'] == 'si') {
@@ -398,7 +405,7 @@ if(isset($_POST['grabarResultadoTC']) and $_POST['grabarResultadoTC'] == 'si') {
     $resultado = new ResultadoModelo();
     $resultado->setSolicitudIdSolicitud($idSolicitud);
 
-    $listaResultado = $resultadoDAO->getResultadoDAO($resultado);
+    $listaResultadoParcial = $resultadoDAO->getResultadoParcialDAO($resultado);
 
     $resultadoTC = true;
 }
@@ -408,28 +415,28 @@ if(isset($_POST['grabarSubirResultadoTC']) and $_POST['grabarSubirResultadoTC'] 
     $idSolicitud = intval($_POST['idSolicitud']);
     $solicitud->setIdSolicitud($idSolicitud);
 
-    $tipo = $solicitudDAO->getTipoSolicitudDAO($solicitud);
+    $tipoSolicitud = $solicitudDAO->getTipoSolicitudDAO($solicitud);
     $codigoProyecto = $solicitudDAO->getCodigoProyectoSolicitudDAO($solicitud);
+    $tipo = 'TrabajoCampo';
 
-    $direccion = $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/';
+    $direccion = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/';
 
     $nombreArchivo = $_FILES['archivo']['name'];
     $nombreTemporalArchivo = $_FILES['archivo']['tmp_name'];
-    $tipoArchivo = $_FILES['archivo']['type'];
 
     if (file_exists($direccion)) {
-        $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
+        $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/'.$nombreArchivo;
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     } else {
-        mkdir('../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/', 0777, true);
-        $destino = '../Archivos/'.$tipo.'/'.$codigoProyecto.'/InformeFinal/'.$nombreArchivo;
+        $destino = 'Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/'.$nombreArchivo;
+        mkdir('Archivos/'.$tipo.'/'.$codigoProyecto.'/ResultadoParcial/', 0777, true);
         copy($nombreTemporalArchivo, $destino);
         move_uploaded_file($nombreTemporalArchivo, $destino);
     }
 
     $registro = new ServicioRegistroResultado($resultadoDAO, $solicitudDAO);
-    $registro->registrar($nombreArchivo, $idSolicitud, $_POST['descripcion'], $tipo);
+    $registro->registrar($nombreArchivo, $idSolicitud, $_POST['descripcion'], 'ResultadoParcial');
 
     // A qui un mensaje desplegable para confirmar registro exit;
     header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;

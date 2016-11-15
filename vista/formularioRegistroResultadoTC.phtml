@@ -3,9 +3,9 @@
         <div class="form-group">
             <label>Proyecto:</label>
             <select class="form-control" name="proyectoTC">
-                <?php for ($i = 0; $i < sizeof($listaProyectoTC); $i = $i + 7) {?>
-                    <option value="<?php echo $listaProyectoTC[$i]; ?>">
-                        <?php echo $listaProyectoTC[$i + 2].' - '.$listaProyectoTC[$i + 1]; ?>
+                <?php for ($i = 0; $i < sizeof($listaProyectoTCHabilitado); $i = $i + 7) {?>
+                    <option value="<?php echo $listaProyectoTCHabilitado[$i]; ?>">
+                        <?php echo $listaProyectoTCHabilitado[$i + 2].' - '.$listaProyectoTCHabilitado[$i + 1]; ?>
                     </option>
                 <?php } ?>
             </select>

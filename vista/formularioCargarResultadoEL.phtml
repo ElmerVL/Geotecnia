@@ -1,8 +1,8 @@
 <h2>Resultados cargados:</h2>
-<?php include_once ('tablaInformeFinal.phtml');?>
+<?php include_once ('tablaResultadoParcial.phtml');?>
 <h2>Formulario para subir resultados:</h2>
 <div id="admin_wrapper">
-    <form action="" method="post" name="formSubirResultadoEL">
+    <form action="" method="post" name="formSubirResultadoEL" enctype="multipart/form-data">
         <div class="form-group">
             <input type="hidden" class="form-control" name="idSolicitud" value="<?php echo $idSolicitud; ?>"/>
         </div>

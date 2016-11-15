@@ -185,6 +185,19 @@
                     <li>
                         <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Resultados parciales<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroResultadoEL">Registro de resultados (Ensayo de laboratorio)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroResultadoTC">Registro de resultados (Trabajo de campo)</a>
+                            </li>
+                        </ul>
+                    </li>
                 <?php }?>
                 <?php if ($_SESSION['idRol'] == 6) {?>
                     <li>
@@ -192,6 +205,19 @@
                     </li>
                     <li>
                         <a href="#" data-toggle="modal" data-target="#ventanaWorkflow">Workflow</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Resultados parciales<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroResultadoEL">Registro de resultados (Ensayo de laboratorio)</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#ventanaRegistroResultadoTC">Registro de resultados (Trabajo de campo)</a>
+                            </li>
+                        </ul>
                     </li>
                 <?php }?>
                 <li><a href="<?php echo Conexion::ruta(); ?>?accion=terminarSesion">Terminar Sesion</a></li>

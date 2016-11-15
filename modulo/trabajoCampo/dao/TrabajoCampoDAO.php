@@ -6,6 +6,40 @@
 class TrabajoCampoDAO extends Conexion
 {
     /**
+ *  Función para obtener los proyectos de tipo trabajo de campo
+ * a partir de la tabla solicitud y trabajo_campo.
+ *
+ * @return array $trabajoCampo
+ */
+    public function getTrabajoCampoHabilitadoDAO()
+    {
+        $trabajoCampo = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
+FROM solicitud, trabajo_campo 
+WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud
+AND solicitud.habilitado = 'true'
+ORDER BY idsolicitud DESC
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $trabajoCampo[] = $fila->idsolicitud;
+            $trabajoCampo[] = $fila->codigo;
+            $trabajoCampo[] = $fila->nombre;
+            $trabajoCampo[] = $fila->tipo;
+            $trabajoCampo[] = $fila->ubicacion;
+            $trabajoCampo[] = $fila->responsable;
+            $trabajoCampo[] = $fila->fecha;
+        }
+
+        return $trabajoCampo;
+    }
+
+    /**
      *  Función para obtener los proyectos de tipo trabajo de campo
      * a partir de la tabla solicitud y trabajo_campo.
      *
@@ -38,6 +72,9 @@ SQL;
         return $trabajoCampo;
     }
 
+    /**
+     * @return array
+     */
     public function getTrabajoCampoSinAlcanceDAO()
     {
         $trabajoCampo = array();

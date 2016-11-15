@@ -12,6 +12,40 @@ class SolicitudDAO extends Conexion
      *
      * @return array $solicitud
      */
+    public function getSolicitudSinHabilitarDAO()
+    {
+        $solicitud = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha, habilitado
+FROM solicitud  
+ORDER BY idsolicitud DESC;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $solicitud[] = $fila->idsolicitud;
+            $solicitud[] = $fila->codigo;
+            $solicitud[] = $fila->nombre;
+            $solicitud[] = $fila->tipo;
+            $solicitud[] = $fila->ubicacion;
+            $solicitud[] = $fila->responsable;
+            $solicitud[] = $fila->fecha;
+            $solicitud[] = $fila->habilitado;
+        }
+
+        pg_close();
+
+        return $solicitud;
+    }
+
+    /**
+     * Función para obtener las solicitudes registradas en la tabla solicitud.
+     *
+     * @return array $solicitud
+     */
     public function getSolicitudDAO()
     {
         $solicitud = array();
@@ -21,6 +55,41 @@ class SolicitudDAO extends Conexion
         $sql = <<<SQL
 SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha, habilitado
 FROM solicitud 
+ORDER BY idsolicitud DESC;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $solicitud[] = $fila->idsolicitud;
+            $solicitud[] = $fila->codigo;
+            $solicitud[] = $fila->nombre;
+            $solicitud[] = $fila->tipo;
+            $solicitud[] = $fila->ubicacion;
+            $solicitud[] = $fila->responsable;
+            $solicitud[] = $fila->fecha;
+            $solicitud[] = $fila->habilitado;
+        }
+
+        pg_close();
+
+        return $solicitud;
+    }
+
+    /**
+     * Función para obtener las solicitudes registradas en la tabla solicitud.
+     *
+     * @return array $solicitud
+     */
+    public function getSolicitudHabilitadoDAO()
+    {
+        $solicitud = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha, habilitado
+FROM solicitud 
+WHERE habilitado = 'true' 
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -260,7 +329,12 @@ FROM solicitud
 WHERE idsolicitud = '$idSolicitud';
 SQL;
 
-        pg_query($sql);
+        $resultado = pg_query($sql);
+
+        $fila = pg_fetch_object($resultado);
+        $tipo = $fila->tipo;
+
+        return $tipo;
     }
 
     /**
@@ -280,7 +354,12 @@ FROM solicitud
 WHERE idsolicitud = '$idSolicitud';
 SQL;
 
-        pg_query($sql);
+        $resultado = pg_query($sql);
+
+        $fila = pg_fetch_object($resultado);
+        $codigoProyecto = $fila->codigo_proyecto;
+
+        return $codigoProyecto;
     }
 
     /**
@@ -322,8 +401,8 @@ SQL;
         $resultado = pg_query($sql);
         $fila = pg_fetch_object($resultado);
         $cantidadFila = $fila->count;
-        $cantidadFila = str_pad($cantidadFila, 3, "0", STR_PAD_LEFT);
-        $codigoProyecto = "PS-".($cantidadFila + 1)."_".date("y");
+        $cantidadFila = str_pad($cantidadFila + 1, 3, "0", STR_PAD_LEFT);
+        $codigoProyecto = "PS-".$cantidadFila."_".date("y");
         return $codigoProyecto;
     }
 
