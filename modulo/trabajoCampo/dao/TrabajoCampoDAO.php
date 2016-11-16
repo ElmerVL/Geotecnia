@@ -73,6 +73,35 @@ SQL;
     }
 
     /**
+     *
+     *
+     * @param int $idSolicitud
+     *
+     * @return TrabajoCampoModelo $trabajoCampo
+     */
+    public function getTrabajoCampoPorIdSolicitud($idSolicitud)
+    {
+        $trabajoCampo = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT *
+FROM trabajo_campo 
+WHERE solicitud_idsolicitud = $idSolicitud;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $trabajoCampo = new TrabajoCampoModelo();
+            $trabajoCampo->setSolicitudIdSolicitud($fila->idsolicitud);
+            $trabajoCampo->setCodTrabajoCampo($fila->codigo);
+        }
+
+        return $trabajoCampo;
+    }
+
+    /**
      * @return array
      */
     public function getTrabajoCampoSinAlcanceDAO()

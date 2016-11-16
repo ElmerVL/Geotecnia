@@ -66,4 +66,27 @@ SQL;
 
         pg_close();
     }
+
+    /**
+     *
+     */
+    public function obtenerTiempoTotalDeEnsayos($idSolicitud)
+    {
+        $detalleEnsayo = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT sum(tiempo_total)
+FROM detalle_ensayos
+WHERE ensayo_laboratorio_solicitud_idsolicitud = $idSolicitud;
+SQL;
+        $resultado = pg_query($sql);
+
+        $tiempoTotal = pg_fetch_object($resultado);
+
+        pg_close();
+
+        return intval($tiempoTotal);
+    }
 }

@@ -8,10 +8,10 @@ class CalendarioModelo
     /** @var int $idCalendario */
     private $idCalendario;
 
-    /** @var DateTime $fechaFin */
+    /** @var string $fechaFin */
     private $fechaFin;
 
-    /** @var DateTime $fechaInicio */
+    /** @var string $fechaInicio */
     private $fechaInicio;
 
     /** @var int $solicitudDirectorIdDirector */
@@ -46,7 +46,7 @@ class CalendarioModelo
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getFechaFin()
     {
@@ -54,7 +54,7 @@ class CalendarioModelo
     }
 
     /**
-     * @param DateTime $fechaFin
+     * @param string $fechaFin
      */
     public function setFechaFin($fechaFin)
     {
@@ -62,7 +62,7 @@ class CalendarioModelo
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
     public function getFechaInicio()
     {
@@ -70,7 +70,7 @@ class CalendarioModelo
     }
 
     /**
-     * @param DateTime $fechaInicio
+     * @param string $fechaInicio
      */
     public function setFechaInicio($fechaInicio)
     {
