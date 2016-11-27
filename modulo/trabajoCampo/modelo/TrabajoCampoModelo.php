@@ -14,6 +14,24 @@ class TrabajoCampoModelo
     /** @var string $alcanceAprobado */
     private $alcanceAprobado;
 
+    private $codTrabajoCampo;
+
+    /**
+     * @return mixed
+     */
+    public function getCodTrabajoCampo()
+    {
+        return $this->codTrabajoCampo;
+    }
+
+    /**
+     * @param mixed $codTrabajoCampo
+     */
+    public function setCodTrabajoCampo($codTrabajoCampo)
+    {
+        $this->codTrabajoCampo = $codTrabajoCampo;
+    }
+
     /**
      * @return int
      */
