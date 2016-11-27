@@ -18,6 +18,7 @@ require_once ('modulo/solicitud/modelo/SolicitudModelo.php');
 require_once ('modulo/resultado/modelo/ResultadoModelo.php');
 require_once ('modulo/alcance/modelo/AlcanceModelo.php');
 require_once ('modulo/registro/ServicioRegistroAlcance.php');
+require_once ('modulo/registro/ServicioRegistroMuestra.php');
 require_once ('modulo/pdf/ServicioPDFAlcance.php');
 
 
@@ -122,24 +123,43 @@ if(isset($_POST['grabarDetalleEnsayo']) and $_POST['grabarDetalleEnsayo'] == 'si
     }
 }
 
-if(isset($_POST['grabarRegistroSueloRoca']) and $_POST['grabarRegistroSueloRoca'] == 'si') {
+if(isset($_POST['grabarRegistroSuelo']) and $_POST['grabarRegistroSuelo'] == 'si') {
     $registro = new ServicioRegistroSueloRoca($ensayoDAO, $ensayoLaboratorioDAO, $detalleEnsayoDAO);
 
     $listaCodigoEnsayo = array();
 
     if(!(empty($_POST['ensayo']))){
         foreach($_POST['ensayo'] as $ensayo){
-            $listaCodigoEnsayo[]=$ensayo;
+            $listaCodigoEnsayo[] = $ensayo;
         }
     }
 
     for ($i = 0; $i < sizeof($listaCodigoEnsayo); $i++) {
         $codigoEnsayo = $listaCodigoEnsayo[$i];
-        $cantidadEnsayo = $_POST['cantidad'.$codigoEnsayo];
-        
-        $registro->registrar($_POST['idEnsayoLaboratorio'], $codigoEnsayo, $cantidadEnsayo);
+        $cantidadEnsayo = $_POST["cantidad$codigoEnsayo"];
+
+        $registro->registrar(intval($_POST['idEnsayoLaboratorio']), $codigoEnsayo, $cantidadEnsayo);
     }
 }
+
+if(isset($_POST['grabarRegistroRoca']) and $_POST['grabarRegistroRoca'] == 'si') {
+    $registro = new ServicioRegistroSueloRoca($ensayoDAO, $ensayoLaboratorioDAO, $detalleEnsayoDAO);
+
+    $listaCodigoEnsayo = array();
+    if(!(empty($_POST['ensayo']))){
+        foreach($_POST['ensayo'] as $ensayo){
+            $listaCodigoEnsayo[] = $ensayo;
+        }
+    }
+
+    for ($i = 0; $i < sizeof($listaCodigoEnsayo); $i++) {
+        $codigoEnsayo = $listaCodigoEnsayo[$i];
+        $cantidadEnsayo = $_POST["cantidad$codigoEnsayo"];
+
+        $registro->registrar(intval($_POST['idEnsayoLaboratorio']), $codigoEnsayo, $cantidadEnsayo);
+    }
+}
+
 //******************************* Registro muestra *********************************************************************
 $muestra = false;
 
@@ -157,11 +177,12 @@ if(isset($_POST['grabarRegistroMuestra']) and $_POST['grabarRegistroMuestra'] ==
     if(empty($_POST['ubicacionGeneral']) or empty($_POST['ubicacionEspecifica'])
        or empty($_POST['profundidad']) or empty($_POST['puntoExtraccion'])) {
         // A qui un mensaje desplegable para este control
+        $muestra = true;
         header('Location: '.Conexion::ruta().'?accion=inicioIngeniero'); exit;
     }
 
     $registro = new ServicioRegistroMuestra($muestraDAO, $ensayoLaboratorioDAO, $bitacoraDAO);
-    $registro->registrar($_POST['idEnsayoLaboratorio'],
+    $registro->registrar(intval($_POST['idEnsayoLaboratorio']),
                          $_POST['tipoMuestra'],
                          $_POST['ubicacionGeneral'],
                          $_POST['ubicacionEspecifica'],

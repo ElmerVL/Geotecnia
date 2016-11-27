@@ -13,7 +13,7 @@ class FormularioELDAO extends Conexion
     public function insertarFormularioELDAO(FormularioELModelo $formularioEL)
     {
         $clienteIdCliente = $formularioEL->getClienteIdCliente();
-        $eLSolicitudIdSolicitud = $formularioEL->getELSolicitudIdSolicitud();
+        $eLSolicitudIdSolicitud = $formularioEL->getEnsayoLaboratorioSolicitudIdSolicitud();
         $formularioRegistrado = $formularioEL->getFormularioRegistrado();
 
         parent::conectar();

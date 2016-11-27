@@ -20,7 +20,33 @@ if(!isset($_SESSION['idUsuario']))
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <?php include_once ('calendario.phtml'); ?>
+                    <?php if (false == $informeFinal and false == $resultadoEL and false == $resultadoTC and ' ' == $tipoEnsayo and false == $muestra and false == $alcanceTC and false == $editarAlcanceTC) {?>
+                        <?php include_once ('calendario.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $informeFinal) {?>
+                        <?php include_once ('formularioCargarInformeFinal.phtml'); ?>
+                    <?php } ?>
+                     <?php if (true == $resultadoEL) {?>
+                        <?php include_once('formularioCargarResultadoEL.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $resultadoTC) {?>
+                        <?php include_once('formularioCargarResultadoTC.phtml'); ?>
+                    <?php } ?>
+                    <?php if ('Suelo' == $tipoEnsayo) {?>
+                        <?php include_once('formularioRegistroTipoSueloEnsayo.phtml'); ?>
+                    <?php } ?>
+                    <?php if ('Roca' == $tipoEnsayo) {?>
+                        <?php include_once('formularioRegistroTipoRocaEnsayo.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $muestra) {?>
+                        <?php include_once('formularioRegistroMuestra.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $alcanceTC) {?>
+                        <?php include_once('formularioRegistroAlcanceTC.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $editarAlcanceTC) {?>
+                        <?php include_once('formularioRegistroEditadoAlcanceTC.phtml'); ?>
+                    <?php } ?>
                     <?php include_once ('workflow.phtml'); ?>
                     <?php include_once ('proyecto.phtml'); ?>
                     <?php include_once  ('informeFinal.phtml'); ?>
@@ -28,33 +54,7 @@ if(!isset($_SESSION['idUsuario']))
                 </div>
                 <div class="">
                     <div class="col-md-4" style="margin-top: 10%">
-                        <?php if (false == $informeFinal and ' ' == $tipoEnsayo and false == $muestra and false == $resultadoEL and false == $alcanceTC and false == $editarAlcanceTC and false == $resultadoTC) {?>
-                            <?php include_once ('ultimasDiez.phtml')?>
-                        <?php } ?>
-                        <?php if (true == $informeFinal) {?>
-                            <?php include_once ('formularioCargarInformeFinal.phtml'); ?>
-                        <?php } ?>
-                        <?php if ('Suelo' == $tipoEnsayo) {?>
-                            <?php include_once('formularioRegistroTipoSueloEnsayo.phtml'); ?>
-                        <?php } ?>
-                        <?php if ('Roca' == $tipoEnsayo) {?>
-                            <?php include_once('formularioRegistroTipoRocaEnsayo.phtml'); ?>
-                        <?php } ?>
-                        <?php if (true == $muestra) {?>
-                            <?php include_once('formularioRegistroMuestra.phtml'); ?>
-                        <?php } ?>
-                        <?php if (true == $resultadoEL) {?>
-                            <?php include_once('formularioCargarResultadoEL.phtml'); ?>
-                        <?php } ?>
-                        <?php if (true == $alcanceTC) {?>
-                            <?php include_once('formularioRegistroAlcanceTC.phtml'); ?>
-                        <?php } ?>
-                        <?php if (true == $editarAlcanceTC) {?>
-                            <?php include_once('formularioRegistroEditadoAlcanceTC.phtml'); ?>
-                        <?php } ?>
-                        <?php if (true == $resultadoTC) {?>
-                            <?php include_once('formularioCargarResultadoTC.phtml'); ?>
-                        <?php } ?>
+                        <?php include_once ('ultimasDiez.phtml')?>
                     </div>
                 </div>
             </div>

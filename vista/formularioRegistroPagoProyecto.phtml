@@ -5,23 +5,23 @@
             <input type="hidden" class="form-control" name="idSolicitud" value="<?php echo $idSolicitud; ?>"/>
         </div>
         <div class="form-group">
-            <label>Nombre del proyecto:</label>
+            <label>Nombre del proyecto:</label><br>
             <label><?php echo $listaDetalleFormulario[0]; ?></label>
         </div>
         <div class="form-group">
-            <label>Facturación a nombre de:</label>
+            <label>Facturación a nombre de:</label><br>
             <label><?php echo $listaDetalleFormulario[1]; ?></label>
         </div>
         <div class="form-group">
-            <label>N° de NIT o N° de CI:</label>
+            <label>N° de NIT o N° de CI:</label><br>
             <label><?php echo $listaDetalleFormulario[2]; ?></label>
         </div>
         <div class="form-group">
-            <label>Nombre de la persona de contacto:</label>
+            <label>Nombre de la persona de contacto:</label><br>
             <label><?php echo $listaDetalleFormulario[3]; ?></label>
         </div>
         <div class="form-group">
-            <label>Fecha de la solicitud:</label>
+            <label>Fecha de la solicitud:</label><br>
             <?php
             $dia = date("d", strtotime($listaDetalleFormulario[4]));
             $mes = date("F", strtotime($listaDetalleFormulario[4]));

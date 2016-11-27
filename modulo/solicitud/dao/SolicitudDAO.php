@@ -158,7 +158,7 @@ SQL;
         $sql = <<<SQL
 SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio
-WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud AND ensayo_registrado = 'true' 
+WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud AND registro_pago = 'false' 
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -191,7 +191,7 @@ SQL;
         $sql = <<<SQL
 SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, trabajo_campo
-WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud AND alcance_creado = 'true' 
+WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud AND registro_pago = 'false'  
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);

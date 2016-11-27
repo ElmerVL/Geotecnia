@@ -54,6 +54,8 @@ SQL;
         $tiempoTotal = $detalleEnsayo->getTiempoTotal();
         $tiempoUnitario = $detalleEnsayo->getTiempoUnitario();
 
+        echo '   $tiempoUnitario: '.$tiempoUnitario;
+
         parent::conectar();
 
         $sql = <<<SQL

@@ -83,6 +83,7 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio 
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND ensayo_laboratorio.muestra_registrada = 'false'
+AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -111,6 +112,7 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio 
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND ensayo_laboratorio.ensayo_registrado = 'false'
+AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -180,6 +182,7 @@ ensayo_registrado, anticipo_pagado, saldo_pagado, informe_entregado
 FROM solicitud, ensayo_laboratorio, solicitud_pago
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND idsolicitud = solicitud_pago.solicitud_idsolicitud
+AND solicitud.habilitado = 'true'
 ORDER BY fecha DESC;
 SQL;
         $resultado = pg_query($sql);

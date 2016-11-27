@@ -87,13 +87,14 @@ if(isset($_POST['grabarRCEL']) and $_POST['grabarRCEL'] == 'si') {
         or empty($_POST['ciContacto']) or empty($_POST['telefonoFijo']) or empty($_POST['telefonoCelular'])
         or empty($_POST['correo']) or empty($_POST['direccionFiscal'])) {
         // A qui un mensaje desplegable para este control
+        $formularioRegistroClienteEL = true;
         header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
     }
 
     $clienteDAO = new ClienteDAO();
 
     $registro = new ServicioRegistroCliente($clienteDAO, $formularioELDAO, $formularioTCDAO, $solicitudDAO);
-    $registro->registrar($_POST['idEnsayoLaboratorio'],
+    $registro->registrar(intval($_POST['idEnsayoLaboratorio']),
         $_POST['nombreFactura'],
         $_POST['tipoCliente'],
         $_POST['nombreFactura'],
@@ -130,13 +131,14 @@ if(isset($_POST['grabarRCTC']) and $_POST['grabarRCTC'] == 'si') {
         or empty($_POST['ciContacto']) or empty($_POST['telefonoFijo']) or empty($_POST['telefonoCelular'])
         or empty($_POST['correo']) or empty($_POST['direccionFiscal'])) {
         // A qui un mensaje desplegable para este control
+        $formularioRegistroClienteEG = true;
         header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
     }
 
     $clienteDAO = new ClienteDAO();
 
     $registro = new ServicioRegistroCliente($clienteDAO, $formularioELDAO, $formularioTCDAO, $solicitudDAO);
-    $registro->registrar($_POST['idEnsayoLaboratorio'],
+    $registro->registrar(intval($_POST['idEnsayoLaboratorio']),
                          $_POST['nombreFactura'],
                          $_POST['tipoCliente'],
                          $_POST['nombreFactura'],

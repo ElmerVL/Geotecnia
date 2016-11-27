@@ -20,21 +20,21 @@ if(!isset($_SESSION['idUsuario']))
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <?php include_once ('calendario.phtml');?>
+                    <?php if (false == $resultadoEL and false == $resultadoTC) {?>
+                        <?php include_once ('calendario.phtml');?>
+                    <?php } ?>
+                    <?php if (true == $resultadoEL) {?>
+                        <?php include_once('formularioCargarResultadoEL.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $resultadoTC) {?>
+                        <?php include_once('formularioCargarResultadoTC.phtml'); ?>
+                    <?php } ?>
                     <?php include_once ('workflow.phtml'); ?>
                     <?php include_once ('resultadoParcial.phtml'); ?>
                 </div>
                 <div class="center gap">
                     <div class="col-md-4" style="margin-top: 10%">
-                        <?php if (false == $resultadoEL and false == $resultadoTC) {?>
-                            <?php include_once ('ultimasDiez.phtml')?>
-                        <?php } ?>
-                        <?php if (true == $resultadoEL) {?>
-                            <?php include_once('formularioCargarResultadoEL.phtml'); ?>
-                        <?php } ?>
-                        <?php if (true == $resultadoTC) {?>
-                            <?php include_once('formularioCargarResultadoTC.phtml'); ?>
-                        <?php } ?>
+                        <?php include_once ('ultimasDiez.phtml')?>
                     </div>
                 </div>
             </div>

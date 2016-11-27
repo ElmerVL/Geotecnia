@@ -1,7 +1,8 @@
 <?php
 
 require_once('modulo/muestra/modelo/MuestraModelo.php');
-require_once('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorio.php');
+require_once('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorioModelo.php');
+require_once ('modulo/registro/ServicioRegistroBitacora.php');
 
 /**
  * Class ServicioRegistroMuestra
@@ -74,7 +75,7 @@ class ServicioRegistroMuestra
         $this->muestraDAO->insertarMuestraDAO($muestra);
         
         $ensayoLaboratorio =  new EnsayoLaboratorioModelo();
-        $ensayoLaboratorio->setSolicitudIdSolicitud($$idEnsayoLaboratorio);
+        $ensayoLaboratorio->setSolicitudIdSolicitud($idEnsayoLaboratorio);
         $ensayoLaboratorio->setMuestraRegistrada('true');
         
         $this->ensayoLaboratorioDAO->setCampoMuestraRegistradaEnsayoLaboratorioDAO($ensayoLaboratorio);

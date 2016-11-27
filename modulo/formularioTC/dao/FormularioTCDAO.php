@@ -13,7 +13,7 @@ class FormularioTCDAO extends Conexion
     public function insertarFormularioTCDAO(FormularioTCModelo $formularioTC)
     {
         $clienteIdCliente = $formularioTC->getClienteIdCliente();
-        $tCSolicitudIdSolicitud = $formularioTC->getTCSolicitudIdSolicitud();
+        $tCSolicitudIdSolicitud = $formularioTC->getTrabajoCampoSolicitudIdSolicitud();
         $formularioRegistrado = $formularioTC->getFormularioRegistrado();
 
         parent::conectar();

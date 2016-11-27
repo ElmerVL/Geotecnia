@@ -30,11 +30,8 @@ class ServicioRegistroSueloRoca
      * @param EnsayoLaboratorioDAO $ensayoLaboratorio
      * @param DetalleEnsayoDAO $detalleEnsayo
      */
-    public function __construct(
-        EnsayoDAO $ensayo,
-        EnsayoLaboratorioDAO $ensayoLaboratorio,
-        DetalleEnsayoDAO $detalleEnsayo
-    ) {
+    public function __construct(EnsayoDAO $ensayo, EnsayoLaboratorioDAO $ensayoLaboratorio, DetalleEnsayoDAO $detalleEnsayo)
+    {
         $this->ensayoDAO = $ensayo;
         $this->ensayoLaboratorioDAO = $ensayoLaboratorio;
         $this->detalleEnsayoDAO = $detalleEnsayo;
@@ -53,9 +50,9 @@ class ServicioRegistroSueloRoca
         $idEnsayo = $this->ensayoDAO->getIdEnsayoDAO($ensayo);
 
         if (10 <= $cantidadEnsayo) {
-            $precioUnitario = $this->ensayoDAO->getPrecioUnitarioDAO($ensayo);
-        } else {
             $precioUnitario = $this->ensayoDAO->getPrecioDiesMuestraDAO($ensayo);
+        } else {
+            $precioUnitario = $this->ensayoDAO->getPrecioUnitarioDAO($ensayo);
         }
 
         $precioTotal = $precioUnitario * $cantidadEnsayo;

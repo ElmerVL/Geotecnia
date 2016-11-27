@@ -49,7 +49,7 @@ class ServicioRegistroCliente
     }
 
     /**
-     * @param int $idEnsayoLaboratorio
+     * @param int $idSolicitud
      * @param string $nombreFactura
      * @param string $tipoCliente
      * @param string $nombreFactura
@@ -62,7 +62,7 @@ class ServicioRegistroCliente
      * @param string $direccionFiscal
      */
     public function registrar(
-        $idEnsayoLaboratorio,
+        $idSolicitud,
         $nombreFactura,
         $tipoCliente,
         $nombreFactura,
@@ -91,24 +91,24 @@ class ServicioRegistroCliente
         $this->clienteDAO->insertarClienteDAO($cliente);
 
         $solicitud =  new SolicitudModelo();
-        $solicitud->setIdSolicitud($idEnsayoLaboratorio);
+        $solicitud->setIdSolicitud($idSolicitud);
         $solicitud->setRegistroCliente('true');
         
         $this->solicitudDAO->setRegistroClienteSolicitudDAO($solicitud);
 
         $tipoSolicitud = $this->solicitudDAO->getTipoSolicitudDAO($solicitud);
 
-        if ('Ensayo Laboratorio' === $tipoSolicitud) {
+        if ('Ensayo de laboratorio' === $tipoSolicitud) {
             $formularioEL = new FormularioELModelo();
             $formularioEL->setClienteIdCliente($idCliente);
-            $formularioEL->setELSolicitudIdSolicitud($idEnsayoLaboratorio);
+            $formularioEL->setEnsayoLaboratorioSolicitudIdSolicitud($idSolicitud);
             $formularioEL->setFormularioRegistrado('false');
 
             $this->formularioELDAO->insertarFormularioELDAO($formularioEL);
         } else {
             $formularioTC = new FormularioTCModelo();
             $formularioTC->setClienteIdCliente($idCliente);
-            $formularioTC->setTCSolicitudIdSolicitud($idEnsayoLaboratorio);
+            $formularioTC->setTrabajoCampoSolicitudIdSolicitud($idSolicitud);
             $formularioTC->setFormularioRegistrado('false');
 
             $this->formularioTCDAO->insertarFormularioTCDAO($formularioTC);

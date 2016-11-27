@@ -13,23 +13,21 @@ class EnsayoDAO extends Conexion
      */
     public function getIdEnsayoDAO(EnsayoModelo $ensayo)
     {
-        $idEnsayo = array();
         $codigo = $ensayo->getCodigo();
 
         parent::conectar();
 
         $sql = <<<SQL
-SELECT idEnsayo
+SELECT idensayo
 FROM ensayo
 WHERE codigo = '$codigo';
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_object($resultado)) {
-            $idEnsayo[] = $fila->idEnsayo;
-        }
+        $fila = pg_fetch_object($resultado);
+        $idEnsayo = $fila->idensayo;
 
-        return $idEnsayo[0];
+        return $idEnsayo;
     }
 
     /**
@@ -40,7 +38,6 @@ SQL;
      */
     public function getPrecioUnitarioDAO(EnsayoModelo $ensayo)
     {
-        $precioUnitario = array();
         $codigo = $ensayo->getCodigo();
 
         parent::conectar();
@@ -52,11 +49,10 @@ WHERE codigo = '$codigo';
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_object($resultado)) {
-            $precioUnitario[] = $fila->precio_unitario;
-        }
+        $fila = pg_fetch_object($resultado);
+        $precioUnitario = $fila->precio_unitario;
 
-        return $precioUnitario[0];
+        return $precioUnitario;
     }
 
     /**
@@ -67,7 +63,6 @@ SQL;
      */
     public function getPrecioDiesMuestraDAO(EnsayoModelo $ensayo)
     {
-        $precioDiesMuestra = array();
         $codigo = $ensayo->getCodigo();
 
         parent::conectar();
@@ -79,11 +74,10 @@ WHERE codigo = '$codigo';
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_object($resultado)) {
-            $precioDiesMuestra[] = $fila->precio_dies_muestra;
-        }
+        $fila = pg_fetch_object($resultado);
+        $precioDiesMuestra = $fila->precio_dies_muestra;
 
-        return $precioDiesMuestra[0];
+        return $precioDiesMuestra;
     }
 
     /**
@@ -94,7 +88,6 @@ SQL;
      */
     public function getDuracionDAO(EnsayoModelo $ensayo)
     {
-        $duracion = array();
         $codigo = $ensayo->getCodigo();
 
         parent::conectar();
@@ -106,10 +99,9 @@ WHERE codigo = '$codigo';
 SQL;
         $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_object($resultado)) {
-            $duracion[] = $fila->duracion;
-        }
+        $fila = pg_fetch_object($resultado);
+        $duracion = $fila->duracion;
 
-        return $duracion[0];
+        return $duracion;
     }
 }

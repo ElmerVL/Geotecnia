@@ -86,7 +86,8 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, trabajo_campo 
 WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud 
 AND trabajo_campo.alcance_creado = 'false' 
-AND trabajo_campo.alcance_aprobado = 'false'  
+AND trabajo_campo.alcance_aprobado = 'false'
+AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC
 SQL;
         $resultado = pg_query($sql);
@@ -115,7 +116,8 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, trabajo_campo 
 WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud 
 AND trabajo_campo.alcance_creado = 'true' 
-AND trabajo_campo.alcance_aprobado = 'true'  
+AND trabajo_campo.alcance_aprobado = 'true' 
+AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC
 SQL;
         $resultado = pg_query($sql);
@@ -185,6 +187,7 @@ anticipo_pagado, saldo_pagado, informe_entregado
 FROM solicitud, trabajo_campo, solicitud_pago
 WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud 
 AND idsolicitud = solicitud_pago.solicitud_idsolicitud
+AND solicitud.habilitado = 'true'
 ORDER BY fecha DESC
 SQL;
         $resultado = pg_query($sql);
