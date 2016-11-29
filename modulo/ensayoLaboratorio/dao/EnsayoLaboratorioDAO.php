@@ -83,7 +83,6 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio 
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND ensayo_laboratorio.muestra_registrada = 'false'
-AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -112,7 +111,34 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio 
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND ensayo_laboratorio.ensayo_registrado = 'false'
-AND solicitud.habilitado = 'true'
+ORDER BY idsolicitud DESC;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $ensayoLaboratorio[] = $fila->idsolicitud;
+            $ensayoLaboratorio[] = $fila->codigo;
+            $ensayoLaboratorio[] = $fila->nombre;
+            $ensayoLaboratorio[] = $fila->tipo;
+            $ensayoLaboratorio[] = $fila->ubicacion;
+            $ensayoLaboratorio[] = $fila->responsable;
+            $ensayoLaboratorio[] = $fila->fecha;
+        }
+
+        return $ensayoLaboratorio;
+    }
+
+    public function getEnsayoLaboratorioConEnsayoDAO()
+    {
+        $ensayoLaboratorio = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
+FROM solicitud, ensayo_laboratorio 
+WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
+AND ensayo_laboratorio.ensayo_registrado = 'true'
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -296,6 +322,27 @@ SQL;
         $sql = <<<SQL
 UPDATE public.ensayo_laboratorio
 SET muestra_registrada = '$muestraRegistrada' 
+WHERE solicitud_idsolicitud = '$solicitudIdSolicitud';
+SQL;
+
+        pg_query($sql);
+
+        pg_close();
+    }
+
+    /**
+     * @param EnsayoLaboratorioModelo $ensayoLaboratorio
+     */
+    public function setCampoEnsayoRegistradoEnsayoLaboratorioDAO(EnsayoLaboratorioModelo $ensayoLaboratorio)
+    {
+        $solicitudIdSolicitud = $ensayoLaboratorio->getSolicitudIdSolicitud();
+        $ensayoRegistrado = $ensayoLaboratorio->getEnsayoRegistrado();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+UPDATE public.ensayo_laboratorio
+SET ensayo_registrado = '$ensayoRegistrado' 
 WHERE solicitud_idsolicitud = '$solicitudIdSolicitud';
 SQL;
 

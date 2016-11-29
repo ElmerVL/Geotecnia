@@ -5,8 +5,6 @@
  */
 class DetalleEnsayoDAO extends Conexion
 {
-
-
     /**
      * @return array $detalleEnsayo
      */
@@ -21,6 +19,37 @@ SELECT ensayo_laboratorio_solicitud_idsolicitud, codigo, tipo, categoria,
 descripcion, cantidad_ensayo, precio_total, detalle_ensayo.precio_unitario, tiempo_total
 FROM detalle_ensayo, ensayo
 WHERE detalle_ensayo.ensayo_idensayo = ensayo.idensayo;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $detalleEnsayo[] = $fila->ensayo_laboratorio_solicitud_idsolicitud;
+            $detalleEnsayo[] = $fila->codigo;
+            $detalleEnsayo[] = $fila->tipo;
+            $detalleEnsayo[] = $fila->categoria;
+            $detalleEnsayo[] = $fila->descripcion;
+            $detalleEnsayo[] = $fila->cantidad_ensayo;
+            $detalleEnsayo[] = $fila->precio_total;
+            $detalleEnsayo[] = $fila->precio_unitario;
+            $detalleEnsayo[] = $fila->tiempo_total;
+        }
+
+        return $detalleEnsayo;
+    }
+    /**
+     * @return array $detalleEnsayo
+     */
+    public function getDetalleEnsayos($idSolicitud)
+    {
+        $detalleEnsayo = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT ensayo_laboratorio_solicitud_idsolicitud, codigo, tipo, categoria, 
+descripcion, cantidad_ensayo, precio_total, detalle_ensayo.precio_unitario, tiempo_total
+FROM detalle_ensayo, ensayo
+WHERE detalle_ensayo.ensayo_idensayo = ensayo.idensayo AND ensayo_laboratorio_solicitud_idsolicitud = '{$idSolicitud}';
 SQL;
         $resultado = pg_query($sql);
 

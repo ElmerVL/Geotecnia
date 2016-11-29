@@ -39,16 +39,20 @@ SQL;
         parent::conectar();
 
         $sql = <<<SQL
-SELECT nombre, nombre_factura, nit_ci, nombre_contacto, fecha, precio_total, cliente.tipo, anticipo_pagado,
-saldo_pagado, solicitud.tipo
-FROM public.formulario_el, public.cliente, public.ensayo_laboratorio, public.solicitud, public.detalle_ensayo,
-public.solicitud_pago
-WHERE formulario_el.cliente_idcliente = cliente.idcliente 
+SELECT nombre, nombre_factura, nit_ci, nombre_contacto, fecha, sum(precio_total), 
+cliente_bitacora.tipo as tipo_cliente, solicitud.tipo, cliente_bitacora.telefono_fijo,
+cliente_bitacora.telefono_celular, cliente_bitacora.correo,
+cliente_bitacora.direccion_fiscal, cliente_bitacora.ci_contacto, solicitud.codigo_proyecto
+FROM public.formulario_el, public.cliente_bitacora, public.ensayo_laboratorio, public.solicitud ,public.detalle_ensayo
+WHERE formulario_el.ensayo_laboratorio_solicitud_idsolicitud = {$ensayoLaboratorioSolicitudIdSolicitud}
+AND formulario_el.cliente_idcliente = cliente_bitacora.idcliente 
 AND formulario_el.ensayo_laboratorio_solicitud_idsolicitud = ensayo_laboratorio.solicitud_idsolicitud
 AND ensayo_laboratorio.solicitud_idsolicitud = solicitud.idsolicitud
-AND ensayo_laboratorio.solicitud_idsolicitud = detalle_ensayo.ensayo_laboratorio_solicitud_idsolicitud 
-AND solicitud.idsolicitud = solicitud_pago.solicitud_idsolicitud 
-AND formulario_el.ensayo_laboratorio_solicitud_idsolicitud = '$ensayoLaboratorioSolicitudIdSolicitud';
+AND ensayo_laboratorio.solicitud_idsolicitud = detalle_ensayo.ensayo_laboratorio_solicitud_idsolicitud
+GROUP BY nombre, nombre_factura, nit_ci, nombre_contacto, fecha, cliente_bitacora.tipo, solicitud.tipo,
+cliente_bitacora.telefono_fijo,
+cliente_bitacora.telefono_celular, cliente_bitacora.correo,
+cliente_bitacora.direccion_fiscal, cliente_bitacora.ci_contacto, solicitud.codigo_proyecto
 SQL;
         $resultado = pg_query($sql);
 
@@ -57,12 +61,14 @@ SQL;
             $detalleFormularioEL[] = $fila->nombre_factura;
             $detalleFormularioEL[] = $fila->nit_ci;
             $detalleFormularioEL[] = $fila->nombre_contacto;
+            $detalleFormularioEL[] = $fila->telefono_fijo;
+            $detalleFormularioEL[] = $fila->telefono_celular;
+            $detalleFormularioEL[] = $fila->correo;
+            $detalleFormularioEL[] = $fila->direccion_fiscal;
             $detalleFormularioEL[] = $fila->fecha;
-            $detalleFormularioEL[] = $fila->precio_total;
-            $detalleFormularioEL[] = $fila->tipo;
-            $detalleFormularioEL[] = $fila->anticipo_pagado;
-            $detalleFormularioEL[] = $fila->saldo_pagado;
-            $detalleFormularioEL[] = $fila->tipo;
+            $detalleFormularioEL[] = $fila->sum;
+            $detalleFormularioEL[] = $fila->tipo_cliente;
+            $detalleFormularioEL[] = $fila->codigo_proyecto;
         }
 
         return $detalleFormularioEL;

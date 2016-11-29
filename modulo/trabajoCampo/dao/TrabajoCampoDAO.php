@@ -116,7 +116,6 @@ FROM solicitud, trabajo_campo
 WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud 
 AND trabajo_campo.alcance_creado = 'false' 
 AND trabajo_campo.alcance_aprobado = 'false'
-AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC
 SQL;
         $resultado = pg_query($sql);
@@ -146,7 +145,6 @@ FROM solicitud, trabajo_campo
 WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud 
 AND trabajo_campo.alcance_creado = 'true' 
 AND trabajo_campo.alcance_aprobado = 'true' 
-AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC
 SQL;
         $resultado = pg_query($sql);
