@@ -1,0 +1,193 @@
+
+<h2>Informacion del proyecto:</h2>
+<h3>Nombre del proyecto:</h3>
+<?php echo $proyectoTC[2]; ?>
+<h3>Ubicacion:</h3>
+<?php echo $proyectoTC[4]; ?>
+<h3>Tipo de proyecto:</h3>
+<?php echo $proyectoTC[3]; ?>
+<h3>Responsable:</h3>
+<?php echo $proyectoTC[5]; ?>
+<h3>Fecha:</h3>
+<?php
+$dia = date("d", strtotime($proyectoTC[6]));
+$mes = date("F", strtotime($proyectoTC[6]));
+if ($mes == "January") { $mes = "Enero"; }
+if ($mes == "February") { $mes = "Febrero"; }
+if ($mes == "March") { $mes = "Marzo"; }
+if ($mes == "April") { $mes = "Abril"; }
+if ($mes == "May") { $mes = "Mayo"; }
+if ($mes == "June") { $mes = "Junio"; }
+if ($mes == "July") {$mes = "Julio"; }
+if ($mes == "August") { $mes = "Agosto"; }
+if ($mes == "September") { $mes = "Septiembre"; }
+if ($mes == "October") { $mes = "Octubre"; }
+if ($mes == "November") { $mes = "Noviembre"; }
+if ($mes == "December") { $mes = "Diciembre"; }
+$anio = date("Y", strtotime($proyectoTC[6]));
+?>
+<?php echo $dia." de ".$mes.", ".$anio ?>
+<br>
+<br>
+<?php if (0 != sizeof($alcanceRegistrado)) {?>
+    <div align="center">
+        <input type="button" data-toggle="modal" data-target="#ventanaAlcance" value="ver alcance"  class="btn btn-default" />
+    </div>
+    <div class="modal fade" id="ventanaAlcance" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Alcance</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="admin_wrapper">
+                        <form action="" method="post" name="formVerDocumento">
+                            <h4>1. Antecedente</h4>
+                            <?php echo $alcanceRegistrado[1]; ?>
+                            <h4>2. Objetivo</h4>
+                            <?php echo $alcanceRegistrado[2]; ?>
+                            <h4>3. Trabajo a realizar</h4>
+                            <?php if ("NINGUNO" != $alcanceRegistrado[3]) {?>
+                            <h4>3.1. Trabajo de campo</h4>
+                            <?php echo $alcanceRegistrado[3]; ?>
+                            <?php }?>
+                            <?php if ("NINGUNO" != $alcanceRegistrado[4]) {?>
+                            <h4>3.2. Trabajo de gabinete</h4>
+                            <?php echo $alcanceRegistrado[4]; ?>
+                            <?php }?>
+                            <?php if ("NINGUNO" != $alcanceRegistrado[5]) {?>
+                            <h4>3.3. Trabajo de laboratorio</h4>
+                            <?php echo $alcanceRegistrado[5]; ?>
+                            <?php }?>
+                            <h4>4. Inicio y duracion</h4>
+                            <?php echo "El inicio de los trabajos de campo será programado de acuerdo a la 
+                            disponibilidad de personal y equipo del Laboratorio de Geotecnia. El estudio tendrá una 
+                            duración de $alcanceRegistrado[6] calendario después de haber iniciado el trabajo de campo."; ?>
+                            <h4>5. Precio del estudio</h4>
+                            <?php echo "El precio total del trabajo descrito es de Bs.$alcanceRegistrado[7] que incluye los gastos 
+                            de movilización, desmovilización, instalación del equipo, suministro de materiales y 
+                            herramientas. El precio estipulado incluye los impuestos de ley."; ?>
+                            <h4>6. Forma de pago</h4>
+                            <?php echo $alcanceRegistrado[8]; ?>
+                            <h4>7. Requerimientos adicionales</h4>
+                            <?php echo $alcanceRegistrado[9]; ?>
+                            <div class="form-group">
+                                <input type = "hidden" class = "form-control" name = "idTC" />
+                            </div>
+                            <div class="form-group" align="center">
+                                <input type="hidden" name="formVerDocumento" value="si" />
+                                <input type="button" value="Ver documento"  class="btn btn-default" onclick="document.formVerDocumento.submit();"/>
+                            </div>
+                            <br>
+                            <h4>OBSERVACIONES.</h4>
+                            <?php echo $alcanceRegistrado[10]; ?>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div align="center">
+        <input type="button" data-toggle="modal" data-target="#ventanaRegistraCliente" value="Registrar cliente"  class="btn btn-default" />
+    </div>
+    <div class="modal fade" id="ventanaRegistraCliente" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Formulario</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="admin_wrapper">
+                        <h2>Formulario de registro del cliente:</h2>
+                        <div id="admin_wrapper">
+                            <form action="" method="post" name="formRegistroClienteTC">
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="idTrabajoCampo" value="<?php echo $proyectoTC[0]; ?>"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre del proyecto:</label>
+                                    <input type="text" class="form-control" name="nombrePro" value="<?php echo $proyectoTC[2]; ?>" disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo de institucion:</label>
+                                    <select class="form-control" name="tipoCliente">
+                                        <option value="Privada">Privada</option>
+                                        <option value="Estatal">Estatal</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Facturación a nombre de:</label>
+                                    <input type = "text" class = "form-control" name = "nombreFactura" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>N° de NIT o N° de CI:</label>
+                                    <input type = "number" class = "form-control" name = "nitCI" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre de la persona de contacto:</label>
+                                    <input type = "text" class = "form-control" name = "nombreContacto" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>CI de la persona de contacto:</label>
+                                    <input type = "number" class = "form-control" name = "ciContacto" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>N° de telefono fijo:</label>
+                                    <input type = "number" class = "form-control" name = "telefonoFijo" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>N° de telefono celular:</label>
+                                    <input type = "number" class = "form-control" name = "telefonoCelular" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo electrónico de contacto:</label>
+                                    <input type = "email" class = "form-control" name = "correo" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Direccion fiscal:</label>
+                                    <input type = "email" class = "form-control" name = "direccionFiscal" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha de la solicitud:</label>
+                                    <?php
+                                    $dia = date("d", strtotime($proyectoTC[6]));
+                                    $mes = date("F", strtotime($proyectoTC[6]));
+                                    if ($mes == "January") { $mes = "Enero"; }
+                                    if ($mes == "February") { $mes = "Febrero"; }
+                                    if ($mes == "March") { $mes = "Marzo"; }
+                                    if ($mes == "April") { $mes = "Abril"; }
+                                    if ($mes == "May") { $mes = "Mayo"; }
+                                    if ($mes == "June") { $mes = "Junio"; }
+                                    if ($mes == "July") {$mes = "Julio"; }
+                                    if ($mes == "August") { $mes = "Agosto"; }
+                                    if ($mes == "September") { $mes = "Septiembre"; }
+                                    if ($mes == "October") { $mes = "Octubre"; }
+                                    if ($mes == "November") { $mes = "Noviembre"; }
+                                    if ($mes == "December") { $mes = "Diciembre"; }
+                                    $anio = date("Y", strtotime($proyectoTC[6]));
+                                    ?>
+                                    <input type="text" class="form-control" name="nombrePro" value="<?php echo $dia . " de " . $mes . ", " . $anio ?>" disabled/>
+                                </div>
+                                <p>
+                                    <input type="hidden" name="grabarFormRegistroClienteTC" value="si" />
+                                    <input type="button" value="Registrar cliente"  class="btn btn-default" onclick="document.formRegistroClienteTC.submit();"/>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } else {?>
+    <p class="bg-danger">No existe alcance</p>
+<?php }?>

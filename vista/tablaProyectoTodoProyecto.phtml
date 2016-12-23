@@ -1,3 +1,4 @@
+
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -10,6 +11,7 @@
         </thead>
         <tbody>
         <?php for ($i = 0; $i < sizeof($listaProyectoEL); $i = $i + 7) {?>
+        <form action="" method="post" name="formInformacionProyecto<?php echo $listaProyectoEL[$i]; ?>">
             <tr>
                 <td>
                     <a class="btn-default" role="button" data-toggle="collapse"
@@ -41,6 +43,13 @@
                             $anio = date("Y", strtotime($listaProyectoEL[$i + 6]));
                             ?>
                             <?php echo $dia." de ".$mes.", ".$anio ?>
+
+                            <div align="center">
+                                <input type="hidden" name="idSolicitud" value="<?php echo $listaProyectoEL[$i]; ?>" />
+                                <input type="hidden" name="grabarVerInformacionProyecto" value="si" />
+                                <input type="button" value="Ver informacion completa"  class="btn btn-primary"
+                                       onclick="document.formInformacionProyecto<?php echo $listaProyectoEL[$i]; ?>.submit();"/>
+                            </div>
                         </div>
                     </div>
                 </td>
@@ -48,8 +57,10 @@
                 <td><?php echo $listaProyectoEL[$i + 2]; ?></td>
                 <td><?php echo $listaProyectoEL[$i + 3]; ?></td>
             </tr>
+        </form>
         <?php } ?>
         <?php for ($i = 0; $i < sizeof($listaProyectoTC); $i = $i + 7) {?>
+        <form action="" method="post" name="formInformacionProyecto<?php echo $listaProyectoTC[$i]; ?>">
             <tr>
                 <td>
                     <a class="btn-default" role="button" data-toggle="collapse"
@@ -81,6 +92,13 @@
                             $anio = date("Y", strtotime($listaProyectoTC[$i + 6]));
                             ?>
                             <?php echo $dia." de ".$mes.", ".$anio ?>
+
+                            <div align="center">
+                                <input type="hidden" name="idSolicitud" value="<?php echo $listaProyectoTC[$i]; ?>" />
+                                <input type="hidden" name="grabarVerInformacionProyecto" value="si" />
+                                <input type="button" value="Ver informacion completa"  class="btn btn-primary"
+                                       onclick="document.formInformacionProyecto<?php echo $listaProyectoTC[$i]; ?>.submit();"/>
+                            </div>
                         </div>
                     </div>
                 </td>
@@ -88,6 +106,7 @@
                 <td><?php echo $listaProyectoTC[$i + 2]; ?></td>
                 <td><?php echo $listaProyectoTC[$i + 3]; ?></td>
             </tr>
+        </form>
         <?php } ?>
         </tbody>
     </table>

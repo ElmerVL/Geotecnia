@@ -19,7 +19,9 @@ if(!isset($_SESSION['idUsuario']))
         <section class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <?php if (false == $formularioRegistroClienteEL and false == $formularioRegistroClienteEG and false == $formularioRegistroPago) {?>
+                    <?php if (false == $formularioRegistroClienteEL and false == $formularioRegistroClienteEG 
+                        and false == $formularioRegistroPago and false == $informacionCompletaProyectoEL 
+                        and false == $informacionCompletaProyectoTC) {?>
                         <?php include_once ('calendario.phtml'); ?>
                     <?php } if (true == $formularioRegistroClienteEL) {?>
                         <?php include_once ('formularioRegistroClienteEL.phtml'); ?>
@@ -29,6 +31,12 @@ if(!isset($_SESSION['idUsuario']))
                     <?php } ?>
                     <?php if (true == $formularioRegistroPago) {?>
                         <?php include_once ('formularioRegistroPagoProyecto.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $informacionCompletaProyectoEL) {?>
+                        <?php include_once ('informacionCompletaProyectoEL.phtml'); ?>
+                    <?php } ?>
+                    <?php if (true == $informacionCompletaProyectoTC) {?>
+                        <?php include_once ('informacionCompletaProyectoTC.phtml'); ?>
                     <?php } ?>
                     <?php include_once ('workflow.phtml'); ?>
                     <?php include_once ('proyecto.phtml'); ?>

@@ -1,0 +1,165 @@
+
+<h2>Informacion del proyecto:</h2>
+<h3>Nombre del proyecto:</h3>
+<?php echo $proyectoEL[2]; ?>
+<h3>Ubicacion:</h3>
+<?php echo $proyectoEL[4]; ?>
+<h3>Tipo de proyecto:</h3>
+<?php echo $proyectoEL[3]; ?>
+<h3>Responsable:</h3>
+<?php echo $proyectoEL[5]; ?>
+<h3>Fecha:</h3>
+<?php
+$dia = date("d", strtotime($proyectoEL[6]));
+$mes = date("F", strtotime($proyectoEL[6]));
+if ($mes == "January") { $mes = "Enero"; }
+if ($mes == "February") { $mes = "Febrero"; }
+if ($mes == "March") { $mes = "Marzo"; }
+if ($mes == "April") { $mes = "Abril"; }
+if ($mes == "May") { $mes = "Mayo"; }
+if ($mes == "June") { $mes = "Junio"; }
+if ($mes == "July") {$mes = "Julio"; }
+if ($mes == "August") { $mes = "Agosto"; }
+if ($mes == "September") { $mes = "Septiembre"; }
+if ($mes == "October") { $mes = "Octubre"; }
+if ($mes == "November") { $mes = "Noviembre"; }
+if ($mes == "December") { $mes = "Diciembre"; }
+$anio = date("Y", strtotime($proyectoEL[6]));
+?>
+<?php echo $dia." de ".$mes.", ".$anio ?>
+<br>
+<br>
+<div class="table-responsive">
+    <h2>Informacion de ensayos registrados:</h2>
+    <table class="table">
+        <thead>
+        <tr class="success">
+            <th>Codigo</th>
+            <th>Tipo</th>
+            <th>Categoría</th>
+            <th>Nombre del ensayo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php for ($i = 0; $i < sizeof($listEnsayosRegistrados); $i = $i + 5) {?>
+            <tr>
+                <td><?php echo $listEnsayosRegistrados[$i + 1]; ?></td>
+                <td><?php echo $listEnsayosRegistrados[$i + 2]; ?></td>
+                <td><?php echo $listEnsayosRegistrados[$i + 3]; ?></td>
+                <td><?php echo $listEnsayosRegistrados[$i + 4]; ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+<br>
+    <div align="center">
+        <input type="button" data-toggle="modal" data-target="#ventanaRegistraClienteEl" value="Registrar cliente"  class="btn btn-default" />
+    </div>
+    <div class="modal fade" id="ventanaRegistraClienteEl" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Formulario</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="admin_wrapper">
+                        <h2>Formulario de registro del cliente:</h2>
+                        <div id="admin_wrapper">
+                            <form action="" method="post" name="formRegistroClienteEL">
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="idEnsayoLaboratorio" value="<?php echo $proyectoEL[0]; ?>"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre del proyecto:</label>
+                                    <input type="text" class="form-control" name="nombrePro" value="<?php echo $proyectoEL[2]; ?>" disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo de institucion:</label>
+                                    <select class="form-control" name="tipoCliente">
+                                        <option value="Privada">Privada</option>
+                                        <option value="Estatal">Estatal</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Facturación a nombre de:</label>
+                                    <input type = "text" class = "form-control" name = "nombreFactura" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>N° de NIT o N° de CI:</label>
+                                    <input type = "number" class = "form-control" name = "nitCI" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre de la persona de contacto:</label>
+                                    <input type = "text" class = "form-control" name = "nombreContacto" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>CI de la persona de contacto:</label>
+                                    <input type = "number" class = "form-control" name = "ciContacto" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>N° de telefono fijo:</label>
+                                    <input type = "number" class = "form-control" name = "telefonoFijo" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>N° de telefono celular:</label>
+                                    <input type = "number" class = "form-control" name = "telefonoCelular" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Correo electrónico de contacto:</label>
+                                    <input type = "email" class = "form-control" name = "correo" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Direccion fiscal:</label>
+                                    <input type = "email" class = "form-control" name = "direccionFiscal" placeholder = ""/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha de la solicitud:</label>
+                                    <?php
+                                    $dia = date("d", strtotime($proyectoEL[6]));
+                                    $mes = date("F", strtotime($proyectoEL[6]));
+                                    if ($mes == "January") { $mes = "Enero"; }
+                                    if ($mes == "February") { $mes = "Febrero"; }
+                                    if ($mes == "March") { $mes = "Marzo"; }
+                                    if ($mes == "April") { $mes = "Abril"; }
+                                    if ($mes == "May") { $mes = "Mayo"; }
+                                    if ($mes == "June") { $mes = "Junio"; }
+                                    if ($mes == "July") {$mes = "Julio"; }
+                                    if ($mes == "August") { $mes = "Agosto"; }
+                                    if ($mes == "September") { $mes = "Septiembre"; }
+                                    if ($mes == "October") { $mes = "Octubre"; }
+                                    if ($mes == "November") { $mes = "Noviembre"; }
+                                    if ($mes == "December") { $mes = "Diciembre"; }
+                                    $anio = date("Y", strtotime($proyectoEL[6]));
+                                    ?>
+                                    <input type="text" class="form-control" name="nombrePro" value="<?php echo $dia . " de " . $mes . ", " . $anio ?>" disabled/>
+                                </div>
+                                <p>
+                                    <input type="hidden" name="grabarFormRegistroClienteEL" value="si" />
+                                    <input type="button" value="Registrar cliente"  class="btn btn-default" onclick="document.formRegistroClienteEL.submit();"/>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<h2>Informacion de muestras registradas:</h2>
+<?php if (0 != sizeof($muestraRegistrada)) {?>
+    <?php echo $muestraRegistrada[1]; ?>
+    <h3>Ubicacion general:</h3>
+    <?php echo $muestraRegistrada[2]; ?>
+    <h3>Ubicacion especifica</h3>
+    <?php echo $muestraRegistrada[3]; ?>
+    <h3>Fecha de extraccion de la muestra</h3>
+    <?php echo $muestraRegistrada[4]; ?>
+<?php } else {?>
+    <p class="bg-danger">No existe muestra</p>
+<?php }?>

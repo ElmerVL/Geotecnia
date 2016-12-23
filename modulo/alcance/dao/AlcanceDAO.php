@@ -122,4 +122,42 @@ SQL;
         pg_close();
         return $alcanceModelo;
     }
+
+    /**
+     * @param AlcanceModelo $alcance
+     * @return array
+     */
+    public function getAlcanceDAO(AlcanceModelo $alcance)
+    {
+        $alcanceRegistrada = array();
+        $idTrabajoCampo = $alcance->getTrabajoCampoSolicitudIdSolicitud();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idalcance, antecedente, objetivo, trabajo_campo, trabajo_gabinete, trabajo_laboratorio, 
+duracion, precio, forma_pago, requerimiento_adicional, observacion, conobservacion
+FROM trabajo_campo, alcance
+WHERE trabajo_campo.solicitud_idsolicitud = alcance.trabajo_campo_solicitud_idsolicitud
+AND alcance.trabajo_campo_solicitud_idsolicitud = '$idTrabajoCampo';
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $alcanceRegistrada[] = $fila->idalcance;
+            $alcanceRegistrada[] = $fila->antecedente;
+            $alcanceRegistrada[] = $fila->objetivo;
+            $alcanceRegistrada[] = $fila->trabajo_campo;
+            $alcanceRegistrada[] = $fila->trabajo_gabinete;
+            $alcanceRegistrada[] = $fila->trabajo_laboratorio;
+            $alcanceRegistrada[] = $fila->duracion;
+            $alcanceRegistrada[] = $fila->precio;
+            $alcanceRegistrada[] = $fila->forma_pago;
+            $alcanceRegistrada[] = $fila->requerimiento_adicional;
+            $alcanceRegistrada[] = $fila->observacion;
+            $alcanceRegistrada[] = $fila->conobservacion;
+        }
+
+        return $alcanceRegistrada;
+    }
 }

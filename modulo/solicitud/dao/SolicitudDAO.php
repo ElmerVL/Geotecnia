@@ -513,4 +513,74 @@ SQL;
 
         return $fecha[0];
     }
+
+    /**
+     * Función para obtener los proyectos de tipo ensayo de laboratorio
+     * a partir de la tabla solicitud y ensayo_laboratorio.
+     *
+     * @param SolicitudModelo $solicitud
+     * @return array $ensayoLaboratorio
+     */
+    public function getEnsayoLaboratorioDAO(SolicitudModelo $solicitud)
+    {
+        $ensayoLaboratorio = array();
+        $idSolicitud = $solicitud->getIdSolicitud();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
+FROM solicitud, ensayo_laboratorio 
+WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud
+AND idsolicitud = '$idSolicitud';
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $ensayoLaboratorio[] = $fila->idsolicitud;
+            $ensayoLaboratorio[] = $fila->codigo;
+            $ensayoLaboratorio[] = $fila->nombre;
+            $ensayoLaboratorio[] = $fila->tipo;
+            $ensayoLaboratorio[] = $fila->ubicacion;
+            $ensayoLaboratorio[] = $fila->responsable;
+            $ensayoLaboratorio[] = $fila->fecha;
+        }
+
+        return $ensayoLaboratorio;
+    }
+
+    /**
+     *  Función para obtener los proyectos de tipo trabajo de campo
+     * a partir de la tabla solicitud y trabajo_campo.
+     *
+     * @param SolicitudModelo $solicitud
+     * @return array $trabajoCampo
+     */
+    public function getTrabajoCampoDAO(SolicitudModelo $solicitud)
+    {
+        $trabajoCampo = array();
+        $idSolicitud = $solicitud->getIdSolicitud();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
+FROM solicitud, trabajo_campo 
+WHERE idsolicitud = trabajo_campo.solicitud_idsolicitud
+AND idsolicitud = '$idSolicitud';
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $trabajoCampo[] = $fila->idsolicitud;
+            $trabajoCampo[] = $fila->codigo;
+            $trabajoCampo[] = $fila->nombre;
+            $trabajoCampo[] = $fila->tipo;
+            $trabajoCampo[] = $fila->ubicacion;
+            $trabajoCampo[] = $fila->responsable;
+            $trabajoCampo[] = $fila->fecha;
+        }
+
+        return $trabajoCampo;
+    }
 }

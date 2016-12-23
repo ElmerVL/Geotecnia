@@ -83,4 +83,34 @@ SQL;
 
         return $cantidadMuestra;
     }
+
+    /**
+     * @param MuestraModelo $muestra
+     * @return array
+     */
+    public function getMuestraDAO(MuestraModelo $muestra)
+    {
+        $muestraRegistrada = array();
+        $idEnsayoLaboratorio = $muestra->getEnsayoLaboratorioSolicitudIdSolicitud();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idmuestra, codigo, ubicacion_general, ubicacion_especifica, fecha_toma_muestra
+FROM ensayo_laboratorio, muestra
+WHERE ensayo_laboratorio.solicitud_idsolicitud = muestra.ensayo_laboratorio_solicitud_idsolicitud
+AND ensayo_laboratorio.solicitud_idsolicitud = '$idEnsayoLaboratorio';
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $muestraRegistrada[] = $fila->idmuestra;
+            $muestraRegistrada[] = $fila->codigo;
+            $muestraRegistrada[] = $fila->ubicacion_general;
+            $muestraRegistrada[] = $fila->ubicacion_especifica;
+            $muestraRegistrada[] = $fila->fecha_toma_muestra;
+        }
+
+        return $muestraRegistrada;
+    }
 }

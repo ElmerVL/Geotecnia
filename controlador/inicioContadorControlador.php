@@ -16,7 +16,11 @@ require_once ('modulo/formularioTC/dao/FormularioTCDAO.php');
 require_once ('modulo/solicitudPago/dao/SolicitudPagoDAO.php');
 require_once ('modulo/pago/dao/PagoDAO.php');
 require_once ('modulo/bitacora/dao/BitacoraDAO.php');
+require_once ('modulo/muestra/dao/MuestraDAO.php');
+require_once ('modulo/alcance/dao/AlcanceDAO.php');
 
+require_once ('modulo/alcance/modelo/AlcanceModelo.php');
+require_once ('modulo/muestra/modelo/MuestraModelo.php');
 require_once ('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorioModelo.php');
 require_once ('modulo/trabajoCampo/modelo/TrabajoCampoModelo.php');
 require_once ('modulo/solicitud/modelo/SolicitudModelo.php');
@@ -199,6 +203,104 @@ if(isset($_POST['grabarRegistroPago']) and $_POST['grabarRegistroPago'] == 'si')
                          $_POST['numeroSaldo80'],
                          $_POST['facturaSaldo20']);
 
+    // A qui un mensaje desplegable para confirmar registro exit;
+    header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
+}
+
+//******************************* Ver Informacion completa de proyectos ************************************************
+$informacionCompletaProyectoEL = false;
+$informacionCompletaProyectoTC = false;
+
+if(isset($_POST['grabarVerInformacionProyecto']) and $_POST['grabarVerInformacionProyecto'] == 'si') {
+
+    $solicitud = new SolicitudModelo();
+    $idSolicitud = intval($_POST['idSolicitud']);
+
+    $solicitud->setIdSolicitud($idSolicitud);
+
+    $tipoSolicitud = $solicitudDAO->getTipoSolicitudDAO($solicitud);
+
+    if ("Ensayo de laboratorio" == $tipoSolicitud) {
+        $proyectoEL = $solicitudDAO->getEnsayoLaboratorioDAO($solicitud);
+
+        $ensayoLaboratorio = new EnsayoLaboratorioModelo();
+        $ensayoLaboratorio->setSolicitudIdSolicitud($idSolicitud);
+
+        $listEnsayosRegistrados =  $ensayoLaboratorioDAO->getTodoEnsayoRegistradoDAO($ensayoLaboratorio);
+
+        $muestra = new MuestraModelo();
+        $muestra->setEnsayoLaboratorioSolicitudIdSolicitud($idSolicitud);
+
+        $muestraDAO = new MuestraDAO();
+        $muestraRegistrada =$muestraDAO->getMuestraDAO($muestra);
+
+        $informacionCompletaProyectoEL = true;
+    } else {
+        $proyectoTC = $solicitudDAO->getTrabajoCampoDAO($solicitud);
+
+        $trabajoCampo = new TrabajoCampoModelo();
+        $trabajoCampo->setSolicitudIdSolicitud($idSolicitud);
+
+        $alcance = new AlcanceModelo();
+        $alcance->setTrabajoCampoSolicitudIdSolicitud($idSolicitud);
+
+        $alcanceDAO = new AlcanceDAO();
+        $alcanceRegistrado =$alcanceDAO->getAlcanceDAO($alcance);
+
+        $informacionCompletaProyectoTC = true;
+    }
+}
+//******************************* Registro de un cliente para un proyecto EL *******************************************
+if(isset($_POST['grabarFormRegistroClienteEL']) and $_POST['grabarFormRegistroClienteEL'] == 'si') {
+    if(empty($_POST['nombreFactura']) or empty($_POST['nitCI']) or empty($_POST['nombreContacto'])
+        or empty($_POST['ciContacto']) or empty($_POST['telefonoFijo']) or empty($_POST['telefonoCelular'])
+        or empty($_POST['correo']) or empty($_POST['direccionFiscal'])) {
+        // A qui un mensaje desplegable para este control
+        $formularioRegistroClienteEL = true;
+        header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
+    }
+
+    $clienteDAO = new ClienteDAO();
+
+    $registro = new ServicioRegistroCliente($clienteDAO, $formularioELDAO, $formularioTCDAO, $solicitudDAO);
+    $registro->registrar(intval($_POST['idEnsayoLaboratorio']),
+        $_POST['nombreFactura'],
+        $_POST['tipoCliente'],
+        $_POST['nombreFactura'],
+        $_POST['nitCI'],
+        $_POST['nombreContacto'],
+        $_POST['ciContacto'],
+        $_POST['telefonoFijo'],
+        $_POST['telefonoCelular'],
+        $_POST['correo'],
+        $_POST['direccionFiscal']);
+    // A qui un mensaje desplegable para confirmar registro exit;
+    header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
+}
+//******************************* Registro de un cliente para un proyecto TC *******************************************
+if(isset($_POST['grabarFormRegistroClienteTC']) and $_POST['grabarFormRegistroClienteTC'] == 'si') {
+    if(empty($_POST['nombreFactura']) or empty($_POST['nitCI']) or empty($_POST['nombreContacto'])
+        or empty($_POST['ciContacto']) or empty($_POST['telefonoFijo']) or empty($_POST['telefonoCelular'])
+        or empty($_POST['correo']) or empty($_POST['direccionFiscal'])) {
+        // A qui un mensaje desplegable para este control
+        $formularioRegistroClienteEG = true;
+        header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
+    }
+
+    $clienteDAO = new ClienteDAO();
+
+    $registro = new ServicioRegistroCliente($clienteDAO, $formularioELDAO, $formularioTCDAO, $solicitudDAO);
+    $registro->registrar(intval($_POST['idTrabajoCampo']),
+        $_POST['nombreFactura'],
+        $_POST['tipoCliente'],
+        $_POST['nombreFactura'],
+        $_POST['nitCI'],
+        $_POST['nombreContacto'],
+        $_POST['ciContacto'],
+        $_POST['telefonoFijo'],
+        $_POST['telefonoCelular'],
+        $_POST['correo'],
+        $_POST['direccionFiscal']);
     // A qui un mensaje desplegable para confirmar registro exit;
     header('Location: '.Conexion::ruta().'?accion=inicioContador'); exit;
 }
