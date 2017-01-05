@@ -1,5 +1,5 @@
 <?php
-
+require_once ('modulo/ensayo/modelo/EnsayoModelo.php');
 /**
  * Class EnsayoDAO
  */
@@ -103,5 +103,41 @@ SQL;
         $duracion = $fila->duracion;
 
         return $duracion;
+    }
+
+
+    /**
+     * @param string $categoria
+     * @return EnsayoModelo[]
+     */
+    public function obtenerEnsayosPorCategoria($categoria)
+    {
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT *
+FROM ensayo
+WHERE categoria = '$categoria';
+SQL;
+
+        $resultado = pg_query($sql);
+
+        $listaEnsayos = [];
+        while ($fila = pg_fetch_object($resultado)) {
+            $ensayo = new EnsayoModelo();
+            $ensayo->setIdEnsayo($fila->idensayo);
+            $ensayo->setCodigo($fila->codigo);
+            $ensayo->setTipo($fila->tipo);
+            $ensayo->setCategoria($fila->categoria);
+            $ensayo->setDescripcion($fila->descripcion);
+            $ensayo->setUnidad($fila->unidad);
+            $ensayo->setPrecioUnitario($fila->precio_unitario);
+            $ensayo->setPrecioDiezMuestra($fila->precio_dies_muestra);
+            $ensayo->setDuracion($fila->duracion);
+
+            $listaEnsayos[] = $ensayo;
+        }
+
+        return $listaEnsayos;
     }
 }

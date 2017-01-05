@@ -3,6 +3,8 @@
 require_once('modulo/cliente/modelo/ClienteModelo.php');
 require_once('modulo/formularioEL/modelo/FormularioELModelo.php');
 require_once('modulo/formularioTC/modelo/FormularioTCModelo.php');
+require_once('modulo/detalleEnsayo/dao/DetalleEnsayoDAO.php');
+require_once('modulo/pdf/cuantias/PdfCuantiasServicio.php');
 
 /**
  * Class ServicioRegistroClienteEL
@@ -99,6 +101,7 @@ class ServicioRegistroCliente
         $tipoSolicitud = $this->solicitudDAO->getTipoSolicitudDAO($solicitud);
 
         if ('Ensayo de laboratorio' === $tipoSolicitud) {
+            $intTipoProyecto = 1;
             $formularioEL = new FormularioELModelo();
             $formularioEL->setClienteIdCliente($idCliente);
             $formularioEL->setEnsayoLaboratorioSolicitudIdSolicitud($idSolicitud);
@@ -106,6 +109,7 @@ class ServicioRegistroCliente
 
             $this->formularioELDAO->insertarFormularioELDAO($formularioEL);
         } else {
+            $intTipoProyecto = 2;
             $formularioTC = new FormularioTCModelo();
             $formularioTC->setClienteIdCliente($idCliente);
             $formularioTC->setTrabajoCampoSolicitudIdSolicitud($idSolicitud);
@@ -113,5 +117,8 @@ class ServicioRegistroCliente
 
             $this->formularioTCDAO->insertarFormularioTCDAO($formularioTC);
         }
+
+        $cuantias = new PdfCuantiasServicio();
+        $cuantias->imprimir_formulario($idSolicitud, $intTipoProyecto, $idCliente);
     }
 }

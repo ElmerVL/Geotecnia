@@ -26,7 +26,7 @@ class ClienteDAO extends Conexion
         parent::conectar();
 
         $sql = <<<SQL
-INSERT INTO public.cliente(idcliente, nombre_factura, nit_ci, nombre_contacto, telefono_fijo, 
+INSERT INTO public.cliente_bitacora(idcliente, nombre_factura, nit_ci, nombre_contacto, telefono_fijo, 
                            telefono_celular, direccion_fiscal, correo, tipo, ci_contacto)
 VALUES ('$idCliente', '$nombreFactura', '$nitCI', '$nombreContacto', '$telefonoFijo', '$telefonoCelular',
 '$direccionFiscal', '$correo', '$tipoCliente', '$ciContacto');
@@ -48,7 +48,7 @@ SQL;
 
         $sql = <<<SQL
 SELECT count(*) 
-FROM cliente;
+FROM cliente_bitacora;
 SQL;
         $resultado = pg_query($sql);
 

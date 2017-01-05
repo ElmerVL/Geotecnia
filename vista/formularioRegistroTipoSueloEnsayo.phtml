@@ -1,3 +1,7 @@
+<?php
+require_once ('modulo/ensayo/dao/EnsayoDAO.php');
+$ensayoDao = new EnsayoDAO();
+?>
 <h2>Formulario de registro un ensayo de tipo suelo:</h2>
 <div id="admin_wrapper">
     <form action="" method="post" name="formRegistroSuelo">
@@ -5,331 +9,183 @@
             <input type="hidden" class="form-control" name="idEnsayoLaboratorio" value="<?php echo $idEnsayoSolicitud; ?>"/>
         </div>
         <label>Parametros de deformación en condición no drenada:</label>
+        <?php
+        $ensayos = $ensayoDao->obtenerEnsayosPorCategoria('Param. de resistencia CND');
+        ?>
         <div class="table-responsive">
-            <table>
+            <table style="max-width: 90%;">
                 <thead>
                 <tr>
-                    <th width="35%"></th>
-                    <th width="20%"></th>
-                    <th width="45%"></th>
+                    <th width="15%">Cantidad</th>
+                    <th width="20%">Codigo</th>
+                    <th width="60%">Nombre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS25">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
+                <?php
+                foreach ($ensayos as $ensayo) {
+                    ?>
+                    <tr>
+                        <td style="padding-right: 3%;">
+                            <input type="number" class="form-control" name="cantidad<?php echo $ensayo->getCodigo()?>" min = 1>
+                        </td>
+                        <td>
                             <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS25">[LS25]
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="<?php echo $ensayo->getCodigo()?>">[<?php echo $ensayo->getCodigo()?>]
                             </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Corte directo</h5>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <h5><?php echo $ensayo->getDescripcion()?></h5>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+        <label>Parametros hidráulicos:</label>
+        <?php
+        $ensayos = $ensayoDao->obtenerEnsayosPorCategoria('Parametros hidraulicos');
+        ?>
+        <div class="table-responsive">
+            <table style="max-width: 90%;">
+                <thead>
                 <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS25a">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS25a">[LS25a]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Corte directo con partículas de sobre tamaño</h5>
-                    </td>
+                    <th width="15%">Cantidad</th>
+                    <th width="20%">Codigo</th>
+                    <th width="60%">Nombre</th>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS26">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
+                </thead>
+                <tbody>
+                <?php
+                foreach ($ensayos as $ensayo) {
+                    ?>
+                    <tr>
+                        <td style="padding-right: 3%;">
+                            <input type="number" class="form-control" name="cantidad<?php echo $ensayo->getCodigo()?>" min = 1>
+                        </td>
+                        <td>
                             <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS26">[LS26]
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="<?php echo $ensayo->getCodigo()?>">[<?php echo $ensayo->getCodigo()?>]
                             </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Triaxial CD</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS27">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS27">[LS27]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Triaxial CU</h5>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <h5><?php echo $ensayo->getDescripcion()?></h5>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
         </div>
         <label>Suelos no saturados:</label>
+        <?php
+        $ensayos = $ensayoDao->obtenerEnsayosPorCategoria('Suelos no saturados');
+        ?>
         <div class="table-responsive">
-            <table>
+            <table style="max-width: 90%;">
                 <thead>
                 <tr>
-                    <th width="35%"></th>
-                    <th width="20%"></th>
-                    <th width="45%"></th>
+                    <th width="15%">Cantidad</th>
+                    <th width="20%">Codigo</th>
+                    <th width="60%">Nombre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS31">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
+                <?php
+                foreach ($ensayos as $ensayo) {
+                    ?>
+                    <tr>
+                        <td style="padding-right: 3%;">
+                            <input type="number" class="form-control" name="cantidad<?php echo $ensayo->getCodigo()?>" min = 1>
+                        </td>
+                        <td>
                             <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS31">[LS31]
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="<?php echo $ensayo->getCodigo()?>">[<?php echo $ensayo->getCodigo()?>]
                             </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Papel filtro</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS32">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS32">[LS32]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Placa de presion</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS33">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS33">[LS33]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Triaxial modificado</h5>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <h5><?php echo $ensayo->getDescripcion()?></h5>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
         </div>
         <label>Suelos especiales:</label>
+        <?php
+        $ensayos = $ensayoDao->obtenerEnsayosPorCategoria('Suelos especiales');
+        ?>
         <div class="table-responsive">
-            <table>
+            <table style="max-width: 90%;">
                 <thead>
                 <tr>
-                    <th width="35%"></th>
-                    <th width="20%"></th>
-                    <th width="45%"></th>
+                    <th width="15%">Cantidad</th>
+                    <th width="20%">Codigo</th>
+                    <th width="60%">Nombre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS34">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
+                <?php
+                foreach ($ensayos as $ensayo) {
+                    ?>
+                    <tr>
+                        <td style="padding-right: 3%;">
+                            <input type="number" class="form-control" name="cantidad<?php echo $ensayo->getCodigo()?>" min = 1>
+                        </td>
+                        <td>
                             <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS34">[LS34]
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="<?php echo $ensayo->getCodigo()?>">[<?php echo $ensayo->getCodigo()?>]
                             </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Erosion interna</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS35">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS35">[LS35]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Ensayo químico de fracciones de suelo</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS36">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS36">[LS36]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Doble hidrometria</h5>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <h5><?php echo $ensayo->getDescripcion()?></h5>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
         </div>
         <label>Resistencia de agregados:</label>
+        <?php
+        $ensayos = $ensayoDao->obtenerEnsayosPorCategoria('Resistencia de agregados');
+        ?>
         <div class="table-responsive">
-            <table>
+            <table style="max-width: 90%;">
                 <thead>
                 <tr>
-                    <th width="35%"></th>
-                    <th width="20%"></th>
-                    <th width="45%"></th>
+                    <th width="15%">Cantidad</th>
+                    <th width="20%">Codigo</th>
+                    <th width="60%">Nombre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS37">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
+                <?php
+                foreach ($ensayos as $ensayo) {
+                    ?>
+                    <tr>
+                        <td style="padding-right: 3%;">
+                            <input type="number" class="form-control" name="cantidad<?php echo $ensayo->getCodigo()?>" min = 1>
+                        </td>
+                        <td>
                             <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS37">[LS37]
+                                <input name="ensayo[]" class="form-group" type="checkbox" value="<?php echo $ensayo->getCodigo()?>">[<?php echo $ensayo->getCodigo()?>]
                             </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Abrasion de los angeles agregados</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS38">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS38">[LS38]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Ensayo de sulfato de sodio en agregados	</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" name="cantidadLS39">
-                                <?php for ($i = 1; $i <= 50; $i++) {?>
-                                    <option class="form-group" value="<?php  echo $i; ?>"><?php  echo $i; ?></option>
-                                <?php }?>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label class="checkbox">
-                                <input name="ensayo[]" class="form-group" type="checkbox" value="LS39">[LS39]
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <h5>Ensayo de relacion CBR</h5>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <h5><?php echo $ensayo->getDescripcion()?></h5>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
         </div>

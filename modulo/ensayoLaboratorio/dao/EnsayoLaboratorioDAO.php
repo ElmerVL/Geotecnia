@@ -72,9 +72,6 @@ SQL;
         return $ensayoLaboratorio;
     }
 
-    /**
-     * @return array
-     */
     public function getEnsayoLaboratorioSinMuestraDAO()
     {
         $ensayoLaboratorio = array();
@@ -86,7 +83,6 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio 
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND ensayo_laboratorio.muestra_registrada = 'false'
-AND solicitud.habilitado = 'true'
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -104,9 +100,6 @@ SQL;
         return $ensayoLaboratorio;
     }
 
-    /**
-     * @return array
-     */
     public function getEnsayoLaboratorioSinEnsayoDAO()
     {
         $ensayoLaboratorio = array();
@@ -118,7 +111,34 @@ SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
 FROM solicitud, ensayo_laboratorio 
 WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
 AND ensayo_laboratorio.ensayo_registrado = 'false'
-AND solicitud.habilitado = 'true'
+ORDER BY idsolicitud DESC;
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $ensayoLaboratorio[] = $fila->idsolicitud;
+            $ensayoLaboratorio[] = $fila->codigo;
+            $ensayoLaboratorio[] = $fila->nombre;
+            $ensayoLaboratorio[] = $fila->tipo;
+            $ensayoLaboratorio[] = $fila->ubicacion;
+            $ensayoLaboratorio[] = $fila->responsable;
+            $ensayoLaboratorio[] = $fila->fecha;
+        }
+
+        return $ensayoLaboratorio;
+    }
+
+    public function getEnsayoLaboratorioConEnsayoDAO()
+    {
+        $ensayoLaboratorio = array();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idsolicitud, codigo, nombre, tipo, ubicacion, responsable, fecha
+FROM solicitud, ensayo_laboratorio 
+WHERE idsolicitud = ensayo_laboratorio.solicitud_idsolicitud 
+AND ensayo_laboratorio.ensayo_registrado = 'true'
 ORDER BY idsolicitud DESC;
 SQL;
         $resultado = pg_query($sql);
@@ -312,32 +332,22 @@ SQL;
 
     /**
      * @param EnsayoLaboratorioModelo $ensayoLaboratorio
-     * @return array
      */
-    public function getTodoEnsayoRegistradoDAO(EnsayoLaboratorioModelo $ensayoLaboratorio)
+    public function setCampoEnsayoRegistradoEnsayoLaboratorioDAO(EnsayoLaboratorioModelo $ensayoLaboratorio)
     {
-        $listEnsayosRegistrados = array();
-        $idEnsayoLaboratorio = $ensayoLaboratorio->getSolicitudIdSolicitud();
+        $solicitudIdSolicitud = $ensayoLaboratorio->getSolicitudIdSolicitud();
+        $ensayoRegistrado = $ensayoLaboratorio->getEnsayoRegistrado();
 
         parent::conectar();
 
         $sql = <<<SQL
-SELECT idensayo, codigo, tipo, categoria, descripcion
-FROM ensayo_laboratorio, detalle_ensayo, ensayo
-WHERE ensayo_laboratorio.solicitud_idsolicitud = detalle_ensayo.ensayo_laboratorio_solicitud_idsolicitud 
-AND ensayo.idensayo = detalle_ensayo.ensayo_idensayo
-AND ensayo_laboratorio.solicitud_idsolicitud = '$idEnsayoLaboratorio';
+UPDATE public.ensayo_laboratorio
+SET ensayo_registrado = '$ensayoRegistrado' 
+WHERE solicitud_idsolicitud = '$solicitudIdSolicitud';
 SQL;
-        $resultado = pg_query($sql);
 
-        while ($fila = pg_fetch_object($resultado)) {
-            $listEnsayosRegistrados[] = $fila->idensayo;
-            $listEnsayosRegistrados[] = $fila->codigo;
-            $listEnsayosRegistrados[] = $fila->tipo;
-            $listEnsayosRegistrados[] = $fila->categoria;
-            $listEnsayosRegistrados[] = $fila->descripcion;
-        }
+        pg_query($sql);
 
-        return $listEnsayosRegistrados;
+        pg_close();
     }
 }

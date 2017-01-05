@@ -30,6 +30,7 @@ $listaProyectoEL = $ensayoLaboratorioDAO->getEnsayoLaboratorioDAO();
 $listaProyectoELHabilitado = $ensayoLaboratorioDAO->getEnsayoLaboratorioHabilitadoDAO();
 $listaProyectoELSinMuestra = $ensayoLaboratorioDAO->getEnsayoLaboratorioSinMuestraDAO();
 $listaProyectoELSinEnsayo = $ensayoLaboratorioDAO->getEnsayoLaboratorioSinEnsayoDAO();
+$listaProyectoELConEnsayo = $ensayoLaboratorioDAO->getEnsayoLaboratorioConEnsayoDAO();
 $listaSeguimientoEL = $ensayoLaboratorioDAO->getSeguimientoEnsayoLaboratorioDAO();
 
 $trabajoCampoDAO =  new TrabajoCampoDAO();

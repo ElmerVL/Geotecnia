@@ -2,6 +2,7 @@
 
 require_once('modulo/ensayo/modelo/EnsayoModelo.php');
 require_once('modulo/detalleEnsayo/modelo/DetalleEnsayoModelo.php');
+require_once('modulo/ensayoLaboratorio/modelo/EnsayoLaboratorioModelo.php');
 
 /**
  * Class ServicioRegistroSuelo
@@ -71,5 +72,11 @@ class ServicioRegistroSueloRoca
         $detalleEnsayo->setTiempoUnitario($tiempoUnitario);
 
         $this->detalleEnsayoDAO->insertarDetalleEnsayo($detalleEnsayo);
+
+        $ensayoLaboratorio =  new EnsayoLaboratorioModelo();
+        $ensayoLaboratorio->setSolicitudIdSolicitud($idEnsayoLaboratorio);
+        $ensayoLaboratorio->setEnsayoRegistrado('true');
+
+        $this->ensayoLaboratorioDAO->setCampoEnsayoRegistradoEnsayoLaboratorioDAO($ensayoLaboratorio);
     }
 }
