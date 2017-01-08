@@ -6,453 +6,555 @@
 -- -------------------------------------------------------------------------
 -- Table: usuario
 -- -------------------------------------------------------------------------
-CREATE TABLE "usuario" (
-  "idusuario" bigserial NOT NULL,
-  "login" VARCHAR(255) NOT NULL,
-  "password" VARCHAR(255) NOT NULL,
-  "habilitado" BOOLEAN NOT NULL,
-  "nombre" VARCHAR(255) NOT NULL,
-  "apellido" VARCHAR(255) NOT NULL,
-  PRIMARY KEY ("idusuario")
-);
+CREATE TABLE public.usuario
+(
+    idusuario bigint NOT NULL DEFAULT nextval('usuario_idusuario_seq'::regclass),
+    login character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    password character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    habilitado boolean NOT NULL,
+    nombre character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    apellido character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    CONSTRAINT usuario_pkey PRIMARY KEY (idusuario)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.usuario
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: tecnico
 -- -------------------------------------------------------------------------
-CREATE TABLE "tecnico" (
-  "usuario_idusuario" INTEGER NOT NULL,
-  PRIMARY KEY ("usuario_idusuario")
-);
+CREATE TABLE public.solicitud_usuario
+(
+    solicitud_idsolicitud integer NOT NULL,
+    usuario_idusuario integer NOT NULL,
+    CONSTRAINT solicitud_usuario_pkey PRIMARY KEY (solicitud_idsolicitud, usuario_idusuario),
+    CONSTRAINT solicitud_usuario_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT solicitud_usuario_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.solicitud_usuario
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: auxiliar
 -- -------------------------------------------------------------------------
-CREATE TABLE "auxiliar" (
-  "usuario_idusuario" INTEGER NOT NULL,
-  PRIMARY KEY ("usuario_idusuario")
-);
+CREATE TABLE public.auxiliar
+(
+    usuario_idusuario integer NOT NULL,
+    CONSTRAINT auxiliar_pkey PRIMARY KEY (usuario_idusuario),
+    CONSTRAINT auxiliar_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.auxiliar
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: director
 -- -------------------------------------------------------------------------
-CREATE TABLE "director" (
-  "usuario_idusuario" INTEGER NOT NULL,
-  "encurso" BOOLEAN NOT NULL,
-  PRIMARY KEY ("usuario_idusuario")
-);
+CREATE TABLE public.director
+(
+    usuario_idusuario integer NOT NULL,
+    encurso boolean NOT NULL,
+    CONSTRAINT director_pkey PRIMARY KEY (usuario_idusuario),
+    CONSTRAINT director_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.director
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: contador
 -- -------------------------------------------------------------------------
-CREATE TABLE "contador" (
-  "usuario_idusuario" INTEGER NOT NULL,
-  PRIMARY KEY ("usuario_idusuario")
-);
+CREATE TABLE public.contador
+(
+    usuario_idusuario integer NOT NULL,
+    CONSTRAINT contador_pkey PRIMARY KEY (usuario_idusuario),
+    CONSTRAINT contador_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.contador
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: ingeniero
 -- -------------------------------------------------------------------------
-CREATE TABLE "ingeniero" (
-  "usuario_idusuario" INTEGER NOT NULL,
-  "cargo" VARCHAR(255) NOT NULL,
-  PRIMARY KEY ("usuario_idusuario")
-);
+CREATE TABLE public.ingeniero
+(
+    usuario_idusuario integer NOT NULL,
+    cargo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    CONSTRAINT ingeniero_pkey PRIMARY KEY (usuario_idusuario),
+    CONSTRAINT ingeniero_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.ingeniero
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: usuario_rol
 -- -------------------------------------------------------------------------
-CREATE TABLE "usuario_rol" (
-  "usuario_idusuario" INTEGER NOT NULL,
-  "rol_idrol" INTEGER NOT NULL,
-  PRIMARY KEY ("usuario_idusuario", "rol_idrol")
-);
+CREATE TABLE public.usuario_rol
+(
+    usuario_idusuario integer NOT NULL,
+    rol_idrol integer NOT NULL,
+    CONSTRAINT usuario_rol_pkey PRIMARY KEY (rol_idrol, usuario_idusuario),
+    CONSTRAINT usuario_rol_rol_idrol_fkey FOREIGN KEY (rol_idrol)
+        REFERENCES public.rol (idrol) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT usuario_rol_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.usuario_rol
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: rol
 -- -------------------------------------------------------------------------
-CREATE TABLE "rol" (
-  "idrol" bigserial NOT NULL,
-  "descripcion" VARCHAR(255) NOT NULL,
-  PRIMARY KEY ("idrol")
-);
+CREATE TABLE public.rol
+(
+    idrol bigint NOT NULL DEFAULT nextval('rol_idrol_seq'::regclass),
+    descripcion character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    CONSTRAINT rol_pkey PRIMARY KEY (idrol)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.rol
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: solicitud_usuario
 -- -------------------------------------------------------------------------
-CREATE TABLE "solicitud_usuario" (
-  "solicitud_idsolicitud" INTEGER NOT NULL,
-  "usuario_idusuario" INTEGER NOT NULL,
-  PRIMARY KEY ("solicitud_idsolicitud", "usuario_idusuario")
-);
+CREATE TABLE public.solicitud_usuario
+(
+    solicitud_idsolicitud integer NOT NULL,
+    usuario_idusuario integer NOT NULL,
+    CONSTRAINT solicitud_usuario_pkey PRIMARY KEY (solicitud_idsolicitud, usuario_idusuario),
+    CONSTRAINT solicitud_usuario_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT solicitud_usuario_usuario_idusuario_fkey FOREIGN KEY (usuario_idusuario)
+        REFERENCES public.usuario (idusuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.solicitud_usuario
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: solicitud
 -- -------------------------------------------------------------------------
-CREATE TABLE "solicitud" (
-  "idsolicitud" bigserial NOT NULL,
-  "nombre" VARCHAR(255) NOT NULL,
-  "fecha" DATE NOT NULL,
-  "ubicacion" VARCHAR(255) NOT NULL,
-  "tipo" VARCHAR(255) NOT NULL,
-  "codigo" VARCHAR(255) NOT NULL,
-  "codigo_proyecto" VARCHAR(255) NOT NULL,	
-  "habilitado" BOOLEAN NOT NULL,
-  "responsable" VARCHAR(255) NOT NULL,
-  "informe_entregado" BOOLEAN NOT NULL,
-  "informe_aprobado" BOOLEAN  NOT NULL,
-  "registro_cliente" BOOLEAN NOT NULL,
-  "registro_pago" BOOLEAN  NOT NULL,
-  PRIMARY KEY ("idsolicitud")
-);
+CREATE TABLE public.solicitud
+(
+    idsolicitud bigint NOT NULL DEFAULT nextval('solicitud_idsolicitud_seq'::regclass),
+    nombre character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    fecha date NOT NULL,
+    ubicacion character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    tipo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    codigo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    codigo_proyecto character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    habilitado boolean NOT NULL,
+    responsable character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    informe_entregado boolean NOT NULL,
+    informe_aprobado boolean NOT NULL,
+    registro_cliente boolean NOT NULL,
+    registro_pago boolean NOT NULL,
+    CONSTRAINT solicitud_pkey PRIMARY KEY (idsolicitud)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.solicitud
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: solicitud_pago
 -- -------------------------------------------------------------------------
-CREATE TABLE "solicitud_pago" (
-  "pago_idpago" INTEGER NOT NULL,
-  "solicitud_idsolicitud" INTEGER NOT NULL,
-  "porcentaje_anticipo" INTEGER NOT NULL,
-  "anticipo_pagado" BOOLEAN NOT NULL,
-  "porcentaje_saldo" INTEGER NOT NULL,
-  "saldo_pagado" BOOLEAN NOT NULL,
-  PRIMARY KEY ("pago_idpago", "solicitud_idsolicitud")
-);
+CREATE TABLE public.solicitud_pago
+(
+    pago_idpago integer NOT NULL,
+    solicitud_idsolicitud integer NOT NULL,
+    porcentaje_anticipo integer NOT NULL,
+    anticipo_pagado boolean NOT NULL,
+    porcentaje_saldo integer NOT NULL,
+    saldo_pagado boolean NOT NULL,
+    CONSTRAINT solicitud_pago_pkey PRIMARY KEY (pago_idpago, solicitud_idsolicitud),
+    CONSTRAINT solicitud_pago_pago_idpago_fkey FOREIGN KEY (pago_idpago)
+        REFERENCES public.pago (idpago) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT solicitud_pago_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.solicitud_pago
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: pago
 -- -------------------------------------------------------------------------
-CREATE TABLE "pago" (
-  "idpago" bigserial NOT NULL,
-  "numero_pago" INTEGER NOT NULL,
-  "numero_factura" INTEGER NOT NULL,
-  "porcentaje_pago" INTEGER NOT NULL,
-  "monto_pago" INTEGER NOT NULL,
-  PRIMARY KEY ("idpago")
-);
+CREATE TABLE public.pago
+(
+    idpago bigint NOT NULL DEFAULT nextval('pago_idpago_seq'::regclass),
+    numero_pago integer NOT NULL,
+    numero_factura integer NOT NULL,
+    porcentaje_pago integer NOT NULL,
+    monto_pago integer NOT NULL,
+    CONSTRAINT pago_pkey PRIMARY KEY (idpago)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.pago
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: resultado
 -- -------------------------------------------------------------------------
-CREATE TABLE "resultado" (
-  "idresultado" bigserial NOT NULL,
-  "solicitud_idsolicitud" INTEGER NOT NULL,
-  "nombre_archivo" VARCHAR(255) NOT NULL,
-  "descripcion" VARCHAR(255) NULL,
-  "informe_final" BOOLEAN NOT NULL,
-  "resultado_proyecto" BOOLEAN NOT NULL,
-  PRIMARY KEY ("idresultado", "solicitud_idsolicitud")
-);
--- -------------------------------------------------------------------------
+CREATE TABLE public.resultado
+(
+    idresultado bigint NOT NULL DEFAULT nextval('resultado_idresultado_seq'::regclass),
+    solicitud_idsolicitud integer NOT NULL,
+    nombre_archivo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    descripcion character varying(255) COLLATE "default".pg_catalog,
+    informe_final boolean NOT NULL,
+    resultado_proyecto boolean NOT NULL,
+    CONSTRAINT resultado_pkey PRIMARY KEY (idresultado, solicitud_idsolicitud),
+    CONSTRAINT resultado_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.resultado
+    OWNER to postgres;-- -------------------------------------------------------------------------
 -- Table: trabajo_campo
 -- -------------------------------------------------------------------------
-CREATE TABLE "trabajo_campo" (
-  "solicitud_idsolicitud" INTEGER NOT NULL,
-  "alcance_creado" BOOLEAN NOT NULL,
-  "alcance_aprobado" BOOLEAN NOT NULL,
-  PRIMARY KEY ("solicitud_idsolicitud")
-);
+CREATE TABLE public.trabajo_campo
+(
+    solicitud_idsolicitud integer NOT NULL,
+    alcance_creado boolean NOT NULL,
+    alcance_aprobado boolean NOT NULL,
+    CONSTRAINT trabajo_campo_pkey PRIMARY KEY (solicitud_idsolicitud),
+    CONSTRAINT trabajo_campo_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.trabajo_campo
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: ensayo_laboratorio
 -- -------------------------------------------------------------------------
-CREATE TABLE "ensayo_laboratorio" (
-  "solicitud_idsolicitud" INTEGER NOT NULL,
-  "muestra_registrada" BOOLEAN NOT NULL,
-  "ensayo_registrado" BOOLEAN NOT NULL,
-  PRIMARY KEY ("solicitud_idsolicitud")
-);
+CREATE TABLE public.ensayo_laboratorio
+(
+    solicitud_idsolicitud integer NOT NULL,
+    muestra_registrada boolean NOT NULL,
+    ensayo_registrado boolean NOT NULL,
+    CONSTRAINT ensayo_laboratorio_pkey PRIMARY KEY (solicitud_idsolicitud),
+    CONSTRAINT ensayo_laboratorio_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.ensayo_laboratorio
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: alcance
 -- -------------------------------------------------------------------------
-CREATE TABLE "alcance" (
-  "idalcance" bigserial NOT NULL,
-  "trabajo_campo_solicitud_idsolicitud" INTEGER NOT NULL,
-  "antecedente" VARCHAR(255) NOT NULL,
-  "objetivo" VARCHAR(255) NOT NULL,
-  "trabajo_campo" VARCHAR(255) NOT NULL,
-  "trabajo_gabinete" VARCHAR(255) NOT NULL,
-  "trabajo_laboratorio" VARCHAR(255) NOT NULL,
-  "duracion" INTEGER NOT NULL,
-  "precio" DECIMAL NOT NULL,
-  "forma_pago" VARCHAR(255) NOT NULL,
-  "requerimiento_adicional" VARCHAR(255) NOT NULL,
-  "observacion" VARCHAR(255) NOT NULL,
-  "conobservacion" BOOLEAN NOT NULL,
-  PRIMARY KEY ("idalcance", "trabajo_campo_solicitud_idsolicitud")
-);
+CREATE TABLE public.alcance
+(
+    idalcance bigint NOT NULL DEFAULT nextval('alcance_idalcance_seq'::regclass),
+    trabajo_campo_solicitud_idsolicitud integer NOT NULL,
+    antecedente character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    objetivo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    trabajo_campo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    trabajo_gabinete character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    trabajo_laboratorio character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    duracion integer NOT NULL,
+    precio numeric NOT NULL,
+    forma_pago character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    requerimiento_adicional character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    observacion character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    conobservacion boolean NOT NULL,
+    CONSTRAINT alcance_pkey PRIMARY KEY (idalcance, trabajo_campo_solicitud_idsolicitud),
+    CONSTRAINT alcance_trabajo_campo_solicitud_idsolicitud_fkey FOREIGN KEY (trabajo_campo_solicitud_idsolicitud)
+        REFERENCES public.trabajo_campo (solicitud_idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.alcance
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: formulario_tc
 -- -------------------------------------------------------------------------
-CREATE TABLE "formulario_tc" (
-  "cliente_idcliente" INTEGER NOT NULL,
-  "trabajo_campo_solicitud_idsolicitud" INTEGER NOT NULL,
-  "formulario_registrado" BOOLEAN NOT NULL,
-  PRIMARY KEY ("cliente_idcliente", "trabajo_campo_solicitud_idsolicitud")
-);
+CREATE TABLE public.formulario_tc
+(
+    cliente_idcliente integer NOT NULL,
+    trabajo_campo_solicitud_idsolicitud integer NOT NULL,
+    formulario_registrado boolean NOT NULL,
+    CONSTRAINT formulario_tc_pkey PRIMARY KEY (cliente_idcliente, trabajo_campo_solicitud_idsolicitud),
+    CONSTRAINT formulario_tc_cliente_idcliente_fkey FOREIGN KEY (cliente_idcliente)
+        REFERENCES public.cliente (idcliente) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT formulario_tc_trabajo_campo_solicitud_idsolicitud_fkey FOREIGN KEY (trabajo_campo_solicitud_idsolicitud)
+        REFERENCES public.trabajo_campo (solicitud_idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.formulario_tc
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: cliente
 -- -------------------------------------------------------------------------
-CREATE TABLE "cliente" (
-  "idcliente" bigserial NOT NULL,
-  "nombre_factura" VARCHAR(255) NOT NULL,
-  "nit_ci" BIGINT NOT NULL,
-  "nombre_contacto" VARCHAR(255) NOT NULL,
-  "telefono_fijo" INTEGER NOT NULL,
-  "telefono_celular" INTEGER NOT NULL,
-  "direccion_fiscal" VARCHAR(255) NOT NULL,
-  "correo" VARCHAR(255) NOT NULL,
-  "tipo" VARCHAR(255) NOT NULL,
-  "ci_contacto" VARCHAR(255) NOT NULL,
-  PRIMARY KEY ("idcliente")
-);
+CREATE TABLE public.cliente
+(
+    idcliente bigint NOT NULL DEFAULT nextval('cliente_idcliente_seq'::regclass),
+    nombre_factura character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    nit_ci bigint NOT NULL,
+    nombre_contacto character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    telefono_fijo integer NOT NULL,
+    telefono_celular integer NOT NULL,
+    direccion_fiscal character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    correo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    tipo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    ci_contacto character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    CONSTRAINT cliente_pkey PRIMARY KEY (idcliente)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.cliente
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: formulario_el
 -- -------------------------------------------------------------------------
-CREATE TABLE "formulario_el" (
-  "cliente_idcliente" INTEGER NOT NULL,
-  "ensayo_laboratorio_solicitud_idsolicitud" INTEGER NOT NULL,
-  "formulario_registrado" BOOLEAN NOT NULL,
-  PRIMARY KEY ("cliente_idcliente", "ensayo_laboratorio_solicitud_idsolicitud")
-);
+CREATE TABLE public.formulario_el
+(
+    cliente_idcliente integer NOT NULL,
+    ensayo_laboratorio_solicitud_idsolicitud integer NOT NULL,
+    formulario_registrado boolean NOT NULL,
+    CONSTRAINT formulario_el_pkey PRIMARY KEY (cliente_idcliente, ensayo_laboratorio_solicitud_idsolicitud),
+    CONSTRAINT formulario_el_cliente_idcliente_fkey FOREIGN KEY (cliente_idcliente)
+        REFERENCES public.cliente (idcliente) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT formulario_el_ensayo_laboratorio_solicitud_idsolicitud_fkey FOREIGN KEY (ensayo_laboratorio_solicitud_idsolicitud)
+        REFERENCES public.ensayo_laboratorio (solicitud_idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.formulario_el
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: detalle_ensayo
 -- -------------------------------------------------------------------------
-CREATE TABLE "detalle_ensayo" (
-  "ensayo_idensayo" INTEGER NOT NULL,
-  "ensayo_laboratorio_solicitud_idsolicitud" INTEGER NOT NULL,
-  "cantidad_ensayo" INTEGER NOT NULL,
-  "precio_total" DECIMAL NOT NULL,
-  "precio_unitario" DECIMAL NOT NULL,
-  "tiempo_total" INTEGER NOT NULL,
-  "tiempo_unidad" INTEGER NOT NULL,
-  PRIMARY KEY ("ensayo_idensayo", "ensayo_laboratorio_solicitud_idsolicitud")
-);
+CREATE TABLE public.detalle_ensayo
+(
+    ensayo_idensayo integer NOT NULL,
+    ensayo_laboratorio_solicitud_idsolicitud integer NOT NULL,
+    cantidad_ensayo integer NOT NULL,
+    precio_total numeric NOT NULL,
+    precio_unitario numeric NOT NULL,
+    tiempo_total integer NOT NULL,
+    tiempo_unidad integer NOT NULL,
+    CONSTRAINT detalle_ensayo_pkey PRIMARY KEY (ensayo_idensayo, ensayo_laboratorio_solicitud_idsolicitud),
+    CONSTRAINT detalle_ensayo_ensayo_idensayo_fkey FOREIGN KEY (ensayo_idensayo)
+        REFERENCES public.ensayo (idensayo) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT detalle_ensayo_ensayo_laboratorio_solicitud_idsolicitud_fkey FOREIGN KEY (ensayo_laboratorio_solicitud_idsolicitud)
+        REFERENCES public.ensayo_laboratorio (solicitud_idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.detalle_ensayo
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: ensayo
 -- -------------------------------------------------------------------------
-CREATE TABLE "ensayo" (
-  "idensayo" bigserial NOT NULL,
-  "codigo" VARCHAR(255) NOT NULL,
-  "tipo" VARCHAR(255) NOT NULL,
-  "categoria" VARCHAR(255) NOT NULL,
-  "descripcion" VARCHAR(255) NOT NULL,
-  "unidad" VARCHAR(255) NOT NULL,
-  "precio_unitario" DECIMAL NOT NULL,
-  "precio_dies_muestra" DECIMAL NOT NULL,
-  "duracion" INTEGER NULL,
-  PRIMARY KEY ("idensayo")
-);
+CREATE TABLE public.ensayo
+(
+    idensayo bigint NOT NULL DEFAULT nextval('ensayo_idensayo_seq'::regclass),
+    codigo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    tipo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    categoria character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    descripcion character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    unidad character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    precio_unitario numeric NOT NULL,
+    precio_dies_muestra numeric NOT NULL,
+    duracion integer,
+    CONSTRAINT ensayo_pkey PRIMARY KEY (idensayo)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.ensayo
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: muestra
 -- -------------------------------------------------------------------------
-CREATE TABLE "muestra" (
-  "idmuestra" bigserial NOT NULL,
-  "ensayo_laboratorio_solicitud_idsolicitud" INTEGER NOT NULL,
-  "ubicacion_general" VARCHAR(255) NOT NULL,
-  "ubicacion_especifica" VARCHAR(255) NOT NULL,
-  "profundidad" DECIMAL NOT NULL,
-  "fecha_toma_muestra" DATE NOT NULL,
-  "metodo_extraccion" VARCHAR(255) NOT NULL,
-  "punto" INTEGER NOT NULL,
-  "tipo" VARCHAR(255) NOT NULL,
-  "descripcion" VARCHAR(255) NOT NULL,
-  "codigo" VARCHAR(255) NOT NULL,
-  PRIMARY KEY ("idmuestra", "ensayo_laboratorio_solicitud_idsolicitud")
-);
+CREATE TABLE public.muestra
+(
+    idmuestra bigint NOT NULL DEFAULT nextval('muestra_idmuestra_seq'::regclass),
+    ensayo_laboratorio_solicitud_idsolicitud integer NOT NULL,
+    ubicacion_general character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    ubicacion_especifica character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    profundidad numeric NOT NULL,
+    fecha_toma_muestra date NOT NULL,
+    metodo_extraccion character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    punto character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    tipo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    descripcion character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    codigo character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    CONSTRAINT muestra_pkey PRIMARY KEY (ensayo_laboratorio_solicitud_idsolicitud, idmuestra),
+    CONSTRAINT muestra_ensayo_laboratorio_solicitud_idsolicitud_fkey FOREIGN KEY (ensayo_laboratorio_solicitud_idsolicitud)
+        REFERENCES public.ensayo_laboratorio (solicitud_idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.muestra
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: calendario
 -- -------------------------------------------------------------------------
-CREATE TABLE "calendario" (
-  "idcalendario" bigserial NOT NULL,
-  "solicitud_idsolicitud" INTEGER NOT NULL,
-  "fecha_inicial" DATE NOT NULL,
-  "fecha_final" DATE NOT NULL,
-  PRIMARY KEY ("idcalendario", "solicitud_idsolicitud")
-);
+CREATE TABLE public.calendario
+(
+    idcalendario bigint NOT NULL DEFAULT nextval('calendario_idcalendario_seq'::regclass),
+    solicitud_idsolicitud integer NOT NULL,
+    fecha_inicial date NOT NULL,
+    fecha_final date NOT NULL,
+    CONSTRAINT calendario_pkey PRIMARY KEY (idcalendario, solicitud_idsolicitud),
+    CONSTRAINT calendario_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
+ALTER TABLE public.calendario
+    OWNER to postgres;
 -- -------------------------------------------------------------------------
 -- Table: bitacora
 -- -------------------------------------------------------------------------
-CREATE TABLE "bitacora" (
-  "idbitacora" bigserial NOT NULL,
-  "ensayo_laboratorio_solicitud_idsolicitud" INTEGER NOT NULL,
-  "actividad" VARCHAR(255) NOT NULL,
-  "fecha" DATE NOT NULL,
-  PRIMARY KEY ("idbitacora", "ensayo_laboratorio_solicitud_idsolicitud")
-);
+CREATE TABLE public.bitacora
+(
+    idbitacora bigint NOT NULL DEFAULT nextval('bitacora_idbitacora_seq'::regclass),
+    solicitud_idsolicitud integer NOT NULL,
+    actividad character varying(255) COLLATE "default".pg_catalog NOT NULL,
+    fecha_bitacora date NOT NULL,
+    CONSTRAINT bitacora_pkey PRIMARY KEY (idbitacora, solicitud_idsolicitud),
+    CONSTRAINT bitacora_solicitud_idsolicitud_fkey FOREIGN KEY (solicitud_idsolicitud)
+        REFERENCES public.solicitud (idsolicitud) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
--- -------------------------------------------------------------------------
--- Relations for table: tecnico
--- -------------------------------------------------------------------------
-ALTER TABLE "tecnico" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: auxiliar
--- -------------------------------------------------------------------------
-ALTER TABLE "auxiliar" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: director
--- -------------------------------------------------------------------------
-ALTER TABLE "director" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: contador
--- -------------------------------------------------------------------------
-ALTER TABLE "contador" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: ingeniero
--- -------------------------------------------------------------------------
-ALTER TABLE "ingeniero" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: usuario_rol
--- -------------------------------------------------------------------------
-ALTER TABLE "usuario_rol" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-ALTER TABLE "usuario_rol" ADD FOREIGN KEY ("rol_idrol") 
-    REFERENCES "rol" ("idrol")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: solicitud_usuario
--- -------------------------------------------------------------------------
-ALTER TABLE "solicitud_usuario" ADD FOREIGN KEY ("solicitud_idsolicitud") 
-    REFERENCES "solicitud" ("idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-ALTER TABLE "solicitud_usuario" ADD FOREIGN KEY ("usuario_idusuario") 
-    REFERENCES "usuario" ("idusuario")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: solicitud_pago
--- -------------------------------------------------------------------------
-ALTER TABLE "solicitud_pago" ADD FOREIGN KEY ("pago_idpago") 
-    REFERENCES "pago" ("idpago")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-ALTER TABLE "solicitud_pago" ADD FOREIGN KEY ("solicitud_idsolicitud") 
-    REFERENCES "solicitud" ("idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: trabajo_campo
--- -------------------------------------------------------------------------
-ALTER TABLE "trabajo_campo" ADD FOREIGN KEY ("solicitud_idsolicitud") 
-    REFERENCES "solicitud" ("idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: ensayo_laboratorio
--- -------------------------------------------------------------------------
-ALTER TABLE "ensayo_laboratorio" ADD FOREIGN KEY ("solicitud_idsolicitud") 
-    REFERENCES "solicitud" ("idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: alcance
--- -------------------------------------------------------------------------
-ALTER TABLE "alcance" ADD FOREIGN KEY ("trabajo_campo_solicitud_idsolicitud") 
-    REFERENCES "trabajo_campo" ("solicitud_idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: formulario_tc
--- -------------------------------------------------------------------------
-ALTER TABLE "formulario_tc" ADD FOREIGN KEY ("cliente_idcliente") 
-    REFERENCES "cliente" ("idcliente")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-ALTER TABLE "formulario_tc" ADD FOREIGN KEY ("trabajo_campo_solicitud_idsolicitud") 
-    REFERENCES "trabajo_campo" ("solicitud_idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: formulario_el
--- -------------------------------------------------------------------------
-ALTER TABLE "formulario_el" ADD FOREIGN KEY ("cliente_idcliente") 
-    REFERENCES "cliente" ("idcliente")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-ALTER TABLE "formulario_el" ADD FOREIGN KEY ("ensayo_laboratorio_solicitud_idsolicitud") 
-    REFERENCES "ensayo_laboratorio" ("solicitud_idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: detalle_ensayo
--- -------------------------------------------------------------------------
-ALTER TABLE "detalle_ensayo" ADD FOREIGN KEY ("ensayo_idensayo") 
-    REFERENCES "ensayo" ("idensayo")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-ALTER TABLE "detalle_ensayo" ADD FOREIGN KEY ("ensayo_laboratorio_solicitud_idsolicitud") 
-    REFERENCES "ensayo_laboratorio" ("solicitud_idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: muestra
--- -------------------------------------------------------------------------
-ALTER TABLE "muestra" ADD FOREIGN KEY ("ensayo_laboratorio_solicitud_idsolicitud") 
-    REFERENCES "ensayo_laboratorio" ("solicitud_idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: calendario
--- -------------------------------------------------------------------------
-ALTER TABLE "calendario" ADD FOREIGN KEY ("solicitud_idsolicitud") 
-    REFERENCES "solicitud" ("idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: bitacora
--- -------------------------------------------------------------------------
-ALTER TABLE "bitacora" ADD FOREIGN KEY ("ensayo_laboratorio_solicitud_idsolicitud") 
-    REFERENCES "ensayo_laboratorio" ("solicitud_idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
-
--- -------------------------------------------------------------------------
--- Relations for table: resultado
--- -------------------------------------------------------------------------
-ALTER TABLE "resultado" ADD FOREIGN KEY ("solicitud_idsolicitud") 
-    REFERENCES "solicitud" ("idsolicitud")
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION;
+ALTER TABLE public.bitacora
+    OWNER to postgres;

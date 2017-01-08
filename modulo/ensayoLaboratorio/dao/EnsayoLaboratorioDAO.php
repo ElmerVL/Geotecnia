@@ -350,4 +350,35 @@ SQL;
 
         pg_close();
     }
+
+    /**
+     * @param EnsayoLaboratorioModelo $ensayoLaboratorio
+     * @return array
+     */
+    public function getTodoEnsayoRegistradoDAO(EnsayoLaboratorioModelo $ensayoLaboratorio)
+    {
+        $listEnsayosRegistrados = array();
+        $idEnsayoLaboratorio = $ensayoLaboratorio->getSolicitudIdSolicitud();
+
+        parent::conectar();
+
+        $sql = <<<SQL
+SELECT idensayo, codigo, tipo, categoria, descripcion
+FROM ensayo_laboratorio, detalle_ensayo, ensayo
+WHERE ensayo_laboratorio.solicitud_idsolicitud = detalle_ensayo.ensayo_laboratorio_solicitud_idsolicitud 
+AND ensayo.idensayo = detalle_ensayo.ensayo_idensayo
+AND ensayo_laboratorio.solicitud_idsolicitud = '$idEnsayoLaboratorio';
+SQL;
+        $resultado = pg_query($sql);
+
+        while ($fila = pg_fetch_object($resultado)) {
+            $listEnsayosRegistrados[] = $fila->idensayo;
+            $listEnsayosRegistrados[] = $fila->codigo;
+            $listEnsayosRegistrados[] = $fila->tipo;
+            $listEnsayosRegistrados[] = $fila->categoria;
+            $listEnsayosRegistrados[] = $fila->descripcion;
+        }
+
+        return $listEnsayosRegistrados;
+    }
 }
